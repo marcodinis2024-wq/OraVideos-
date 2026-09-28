@@ -13,9 +13,11 @@ async function page(b, dsf = 1) { const p = await b.newPage({ viewport: { width:
     for (const t of ts) { await p.evaluate(t => window.__render(t), t); await p.screenshot({ path: path.join(OUT, `still_${t.toFixed(1).padStart(4, '0')}.jpg`), type: 'jpeg', quality: 70 }); }
   } else if (mode === 'video') {
     const p = await page(b); const fps = 25, N = Math.round(46 * fps);
-    const ff = spawn(FFMPEG, ['-y', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libvpx', '-b:v', '8M', '-qmin', '4', '-qmax', '30', '-deadline', 'good', '-cpu-used', '4', '-an', path.join(OUT, 'ORA-animatic-9x16-sem-som.webm')], { stdio: ['pipe', 'ignore', 'inherit'] });
-    for (let i = 0; i < N; i++) { await p.evaluate(t => window.__render(t), i / fps); const buf = await p.screenshot({ type: 'jpeg', quality: 88 }); if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r)); if (i % 100 === 0) console.log('frame', i, '/', N); }
-    ff.stdin.end(); await new Promise(r => ff.on('close', r));
+    const raw = path.join(OUT, '_frames.mjpeg'); const fd = fs.openSync(raw, 'w');
+    for (let i = 0; i < N; i++) { await p.evaluate(t => window.__render(t), i / fps); fs.writeSync(fd, await p.screenshot({ type: 'jpeg', quality: 88 })); if (i % 100 === 0) console.log('frame', i, '/', N); }
+    fs.closeSync(fd);
+    const ff = spawn(FFMPEG, ['-y', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', raw, '-c:v', 'libvpx', '-b:v', '8M', '-qmin', '4', '-qmax', '30', '-deadline', 'good', '-cpu-used', '4', '-an', path.join(OUT, 'ORA-animatic-9x16-sem-som.webm')], { stdio: ['ignore', 'ignore', 'inherit'] });
+    await new Promise(r => ff.on('close', r)); fs.unlinkSync(raw);
   } else if (mode === 'audio') {
     const p = await page(b); const b64 = await p.evaluate(() => window.__renderAudio()); fs.writeFileSync(path.join(OUT, 'ORA-animatic-banda-sonora.wav'), Buffer.from(b64, 'base64'));
   } else if (mode === 'standalone') {
