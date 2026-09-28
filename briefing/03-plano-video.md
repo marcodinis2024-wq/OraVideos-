@@ -168,6 +168,11 @@ Filmar em 4K 25 fps (ou 50 fps para câmara lenta), em perfil plano/log para gra
 - [x] Logótipos de clientes recebidos: Kommerling, Labar, Trelas Soltas, CãolorRun (`assets/clientes/`) → SF-E
 - [ ] Logótipo CãolorRun **'26** (o recebido é da edição '24; o criativo de 2026 usa "'26")
 - [ ] Autorização de uso dos logótipos de clientes
-- [ ] Momentos-chave do Reel POV (timestamps ou capturas)
+- [x] Momentos-chave do Reel POV (capturas recebidas):
+  1. **Plano rasteiro do labrador colorido a caminhar para a câmara** no meio da multidão. É o plano de abertura da cena 6: energia e movimento.
+  2. **Participante a fotografar um cão pintado de rosa** com o telemóvel. É o "momento partilhável" e ilustra o alcance orgânico.
+  3. **Duas participantes a rir no chão com o cão, com o texto "POV: vieste passear o cão e voltaste todo colorido"**. É o gancho do criativo e o plano que fica dentro do telemóvel com os contadores.
+  - Uso na cena 6: sequência 1 → 3 → 2 (≈ 1,2 s cada, corte na batida), depois congela no 3 dentro do telemóvel enquanto os números sobem.
+  - ⚠️ Aparecem caras de participantes: confirmar que o cliente tem autorização de imagem para reutilização promocional.
 - [ ] Decisão: com ou sem voz-off no master 9:16?
 - [ ] Música: temos conta Artlist/Epidemic, ou escolho referências para aprovação?
