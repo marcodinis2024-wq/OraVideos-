@@ -176,3 +176,26 @@ Filmar em 4K 25 fps (ou 50 fps para câmara lenta), em perfil plano/log para gra
   - ⚠️ Aparecem caras de participantes: confirmar que o cliente tem autorização de imagem para reutilização promocional.
 - [ ] Decisão: com ou sem voz-off no master 9:16?
 - [ ] Música: temos conta Artlist/Epidemic, ou escolho referências para aprovação?
+
+## 10. Animatic v1 (28 set 2026)
+
+Fonte: `design/animatic/animatic.html` · Ferramentas: `design/animatic/tools.js`
+
+| Saída | Como gerar | Conteúdo |
+|---|---|---|
+| `dist/ORA-animatic.html` | `node tools.js standalone` | Página autónoma: animação + música + SFX + voz-guia (TTS do browser) em sincronia, com scrubber |
+| `dist/ORA-animatic-9x16-sem-som.webm` | `node tools.js video` | Vídeo 1080×1920, 25 fps, 46 s, legendas queimadas |
+| `dist/ORA-animatic-banda-sonora.wav` | `node tools.js audio` | Música + SFX sincronizados (48 kHz, estéreo), com ducking nos trechos de voz |
+| `dist/still_*.jpg` | `node tools.js stills 1,6.5,…` | Fotogramas-chave para revisão |
+
+`dist/` fica fora do Git porque inclui as fontes Rawson embebidas.
+
+**Linha de tempo final (46 s, 120 BPM):** gancho 0–5 s → drop e placa 5–9 s → 4 serviços 9–17 s → ciclo de trabalho 17–23 s → CãolorRun 23–33 s → Labar 33–38,5 s → clientes 38,5–41 s → "Está na ORA." 41–46 s (hit final aos 43,5 s).
+
+**Música:** placeholder sintetizado (pop/funk, 120 BPM, progressão I–V–vi–IV). Na versão final será substituída por uma faixa licenciada com o mesmo BPM, para manter os cortes na batida.
+**SFX:** tique-taque, riser, glitch, tape-stop, boom (drop), whoosh (wipes e cortes), pop (entradas), clicks (contadores), ding (fecho do ciclo), cha-ching (receita), hit final.
+**Voz:** a voz-guia é TTS pt-PT do browser e serve só para timing. Na versão final será uma locução profissional PT-PT com o mesmo guião (ver `CAPS` no HTML).
+
+**A substituir na versão final:**
+- Montagem da cena 6 (23–26 s): planos do Reel POV (labrador → risos com o cão → fotografia do cão rosa), no lugar dos criativos estáticos.
+- Logótipo CãolorRun '26 (`assets/clientes/caolorrun-26.png`).
