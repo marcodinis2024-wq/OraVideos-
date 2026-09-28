@@ -144,8 +144,10 @@ h1,h2{font-weight:900;line-height:.92;letter-spacing:-.01em}
 #cap.lite span{background:rgba(255,255,255,.92);color:var(--navy)}
 
 /* player UI */
-#ui{position:fixed;left:0;right:0;bottom:0;padding:12px 16px;background:rgba(11,15,24,.85);display:flex;gap:12px;align-items:center;font:500 14px system-ui,sans-serif;color:#cfd6e4;z-index:10}
-#ui button{background:var(--yellow);color:var(--navy);border:0;border-radius:999px;font-weight:700;padding:8px 16px;cursor:pointer;font-size:14px}
+#ui{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(11,15,24,.85);display:flex;gap:12px;align-items:center;font:500 14px system-ui,sans-serif;color:#cfd6e4;z-index:10}
+#ui button{background:var(--yellow);color:var(--navy);border:0;border-radius:999px;font-weight:700;padding:12px 18px;cursor:pointer;font-size:16px;white-space:nowrap}
+#ui button:focus-visible,#start:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media (max-width:520px){#ui{flex-wrap:wrap}#ui input[type=range]{order:3;flex-basis:100%}}
 #ui input[type=range]{flex:1}
 #ui label{display:flex;gap:6px;align-items:center;white-space:nowrap}
 #start{position:fixed;inset:0;display:grid;place-items:center;background:rgba(11,15,24,.6);z-index:20;cursor:pointer}
@@ -577,7 +579,7 @@ function makeAudio(ctx, dest, T0, from, withMusic = true) {
 /* ---------- player ---------- */
 const params = new URLSearchParams(location.search);
 let CAPTIONS = params.get('captions') !== '0';
-function fit() { const s = Math.min(innerWidth / 1080, (innerHeight - (document.body.classList.contains('export') ? 0 : 56)) / 1920); const w = $('#wrap'); w.style.transform = `scale(${s}) translate(-50%,-50%)`; w.style.left = '50%'; w.style.top = document.body.classList.contains('export') ? '50%' : `calc(50% - 28px)`; }
+function fit() { const uiH = document.body.classList.contains('export') ? 0 : ($('#ui').offsetHeight || 56); const s = Math.min(innerWidth / 1080, (innerHeight - uiH) / 1920); const w = $('#wrap'); w.style.transform = `scale(${s}) translate(-50%,-50%)`; w.style.left = '50%'; w.style.top = `calc(50% - ${uiH / 2}px)`; }
 if (params.get('export')) { document.body.classList.add('export'); }
 addEventListener('resize', fit); fit();
 window.__render = render; render(0);

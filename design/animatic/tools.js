@@ -25,6 +25,11 @@ async function page(b, dsf = 1) { const p = await b.newPage({ viewport: { width:
     const mime = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', otf: 'font/otf', ttf: 'font/ttf' };
     html = html.replace(/\.\.\/\.\.\/(assets\/[^)"']+)/g, (m, rel) => { const f = path.join(ROOT, rel); return `data:${mime[path.extname(f).slice(1)]};base64,` + fs.readFileSync(f).toString('base64'); });
     fs.writeFileSync(path.join(OUT, 'ORA-animatic.html'), html); console.log('standalone', (html.length / 1e6).toFixed(1), 'MB');
+    // Artifact variant: the publisher adds its own doctype/html/head/body skeleton
+    const title = '<title>Animatic ORA</title>\n';
+    const art = title + html.replace(/<!doctype html>\s*<html[^>]*>\s*<head>/i, '').replace(/<meta[^>]*>\s*/gi, '').replace(/<title>.*?<\/title>\s*/i, '')
+      .replace(/<\/head>\s*<body>/i, '').replace(/<\/body>\s*<\/html>\s*$/i, '');
+    fs.writeFileSync(path.join(OUT, 'animatic-ora-artifact.html'), art); console.log('artifact', (art.length / 1e6).toFixed(1), 'MB');
   }
   await b.close();
 })();
