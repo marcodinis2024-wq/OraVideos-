@@ -165,7 +165,9 @@ Filmar em 4K 25 fps (ou 50 fps para câmara lenta), em perfil plano/log para gra
 - [x] Styleframes v1 (`design/styleframes/SF-A…D.png`)
 - [ ] HEX oficial do amarelo (a fotografia dá um amarelo sombreado)
 - [ ] Autorização da Trelas Soltas e da Labar para usar nomes e números (ou versão anónima: "evento em Leiria" / "empresa B2B")
-- [ ] Logótipos de clientes autorizados para a cena 8
+- [x] Logótipos de clientes recebidos: Kommerling, Labar, Trelas Soltas, CãolorRun (`assets/clientes/`) → SF-E
+- [ ] Logótipo CãolorRun **'26** (o recebido é da edição '24; o criativo de 2026 usa "'26")
+- [ ] Autorização de uso dos logótipos de clientes
 - [ ] Momentos-chave do Reel POV (timestamps ou capturas)
 - [ ] Decisão: com ou sem voz-off no master 9:16?
 - [ ] Música: temos conta Artlist/Epidemic, ou escolho referências para aprovação?
