@@ -31,7 +31,7 @@ body{color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-2%,4%)}80%{transform:translate(5%,1%)}100%{transform:translate(0,0)}}
 #flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:58}
 #finger{position:absolute;left:0;top:0;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:rgba(255,255,255,.28);border:2px solid rgba(255,255,255,.55);box-shadow:0 0 0 1px rgba(0,0,0,.15),0 4px 14px rgba(0,0,0,.3);z-index:70;opacity:0;pointer-events:none}
-#cap{position:absolute;left:18px;right:18px;top:17%;display:flex;justify-content:center;z-index:65;pointer-events:none}
+#cap{position:absolute;left:18px;right:18px;top:33%;display:flex;justify-content:center;z-index:65;pointer-events:none}
 #cap span{background:#fff;color:#000;font:800 19px/1.25 var(--ui);padding:9px 14px;border-radius:10px;text-align:center;max-width:320px;box-shadow:0 8px 30px rgba(0,0,0,.35);animation:capIn .35s cubic-bezier(.2,1.4,.4,1) both}
 #cap span.dark{background:#111;color:#fff}
 @keyframes capIn{from{opacity:0;transform:scale(.8) rotate(-2deg)}}
@@ -194,7 +194,7 @@ body{color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased}
 .cta .msg{font:500 17px/1.35 var(--brand);margin-top:18px;max-width:24ch}
 .cta .btn{align-self:flex-start;margin-top:22px;padding:15px 22px;border-radius:999px;background:var(--navy);color:#fff;font:900 16px var(--brand)}
 .cta .hdl{font:500 14px var(--brand);margin-top:14px;opacity:.85}
-.fic{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:10px;color:rgba(255,255,255,.45);z-index:66;letter-spacing:.04em}
+.fic{position:absolute;left:0;right:0;top:50px;text-align:center;font-size:10px;color:rgba(255,255,255,.45);z-index:66;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -289,23 +289,23 @@ function chatScene({ name, sub, av }) {
   const api = {
     async them(text, opts = {}) {
       const ty = document.createElement('div'); ty.className = 'typing'; ty.innerHTML = '<i></i><i></i><i></i>'; msgs.appendChild(ty); trim();
-      await sleep(opts.fast ? 380 : Math.min(1300, 420 + text.length * 18)); ty.remove();
+      await sleep(opts.fast ? 300 : Math.min(900, 300 + text.length * 12)); ty.remove();
       const b = document.createElement('div'); b.className = 'b in' + (/^\p{Extended_Pictographic}+$/u.test(text.replace(/\s/g, '')) && text.length < 9 ? ' big' : ''); b.textContent = text; msgs.appendChild(b); trim(); SFX.recv();
-      await sleep(opts.hold ?? Math.min(1300, 380 + text.length * 17));
+      await sleep(opts.hold ?? Math.min(950, 260 + text.length * 12));
     },
     async me(text) {
       kb.classList.add('on'); await sleep(260); trim(); field.innerHTML = '<span class="t"></span><span class="caret"></span>'; const tx = field.firstChild; sendB.classList.add('hot');
-      for (const ch of text) { tx.textContent += ch; const k = keyOf(ch); if (k) { k.classList.add('hit'); setTimeout(() => k.classList.remove('hit'), 70); } if (ch !== ' ') SFX.key(); await sleep(ch === ' ' ? 45 : 34); }
+      for (const ch of text) { tx.textContent += ch; const k = keyOf(ch); if (k) { k.classList.add('hit'); setTimeout(() => k.classList.remove('hit'), 70); } if (ch !== ' ') SFX.key(); await sleep(ch === ' ' ? 36 : 27); }
       await sleep(150); await tapEl(sendB); field.innerHTML = ''; sendB.classList.remove('hot'); kb.classList.remove('on');
       msgs.querySelectorAll('.rcpt').forEach(r => r.remove());
       const b = document.createElement('div'); b.className = 'b out' + (/^\p{Extended_Pictographic}+$/u.test(text.replace(/\s/g, '')) && text.length < 9 ? ' big' : ''); b.textContent = text; msgs.appendChild(b);
       const r = document.createElement('div'); r.className = 'rcpt'; r.textContent = 'Entregue'; msgs.appendChild(r); trim(); SFX.send();
-      await sleep(420); r.textContent = 'Lida'; await sleep(250);
+      await sleep(300); r.textContent = 'Lida'; await sleep(150);
     },
     link() { const l = document.createElement('div'); l.className = 'link'; l.innerHTML = `<div class="im" style="background-image:url(../../assets/estudio/placa-ora-amarela.jpg);background-position:center 60%"></div><div class="m"><b>Estúdio ORA</b><span>ora.com.pt · design com estratégia</span></div>`; msgs.appendChild(l); trim(); SFX.recv(); },
     async choose(q, opts, pick) {
       dock.innerHTML = `<div class="chips"><div class="q">${q}</div>${opts.map((o, i) => `<button class="chip${o.cls ? ' ' + o.cls : ''}" data-i="${i}">${o.label}</button>`).join('')}</div>`; trim(); SFX.pop(520);
-      await sleep(900); const btn = dock.querySelectorAll('.chip')[pick]; await tapEl(btn); await sleep(150); dock.innerHTML = ''; return opts[pick];
+      await sleep(700); const btn = dock.querySelectorAll('.chip')[pick]; await tapEl(btn); await sleep(150); dock.innerHTML = ''; return opts[pick];
     },
   };
   return api;
@@ -321,11 +321,11 @@ function profileScene(posts, followers, grid) {
 }
 function countTo(el, from, to, ms) { const t0 = performance.now(); return new Promise(r => { const f = () => { const q = Math.min(1, (performance.now() - t0) / ms); const e = 1 - Math.pow(1 - q, 3); el.textContent = Math.round(from + (to - from) * e).toLocaleString('pt-PT').replace(/\s/g, '.'); q < 1 ? requestAnimationFrame(f) : r(); }; f(); }); }
 const cellBad = (i, l) => `<div class="cell">${BADPHOTO(i)}<span class="lk">♥ ${l}</span></div>`;
-async function verdict(el, big, small) { await sleep(350); const c = el.querySelector('.comments'); if (c) c.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }); el.insertAdjacentHTML('beforeend', `<div class="verdict">${big}<small>${small}</small></div>`); SFX.womp(); shake(); await sleep(2300); }
+async function verdict(el, big, small) { await sleep(350); const c = el.querySelector('.comments'); if (c) c.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 300, fill: 'forwards' }); el.insertAdjacentHTML('beforeend', `<div class="verdict">${big}<small>${small}</small></div>`); SFX.womp(); shake(); await sleep(1800); }
 async function failPost() {
   const el = profileScene(3, 41, [0, 1, 2].map(i => cellBad(i, [3, 2, 4][i]))); SFX.whoosh(); await sleep(600);
   const g = $('.grid', el), cp = $('.cp', el), cf = $('.cf', el);
-  for (let i = 3; i < 15; i++) { g.insertAdjacentHTML('afterbegin', cellBad(i, [2, 1, 3, 2, 0, 1][i % 6])); cp.textContent = i + 1; SFX.pop(400 + i * 20); if (i === 9) cf.textContent = 43; await sleep(170); }
+  for (let i = 3; i < 15; i++) { g.insertAdjacentHTML('afterbegin', cellBad(i, [2, 1, 3, 2, 0, 1][i % 6])); cp.textContent = i + 1; SFX.pop(400 + i * 20); if (i === 9) cf.textContent = 43; await sleep(120); }
   await verdict(el, '15 posts. 0 vendas.', 'a publicar todos os dias para o vazio');
 }
 async function failBots() {
@@ -346,12 +346,12 @@ async function stepBrand() {
   set(90); SFX.whoosh(); await sleep(700);
   const r = ba.getBoundingClientRect(); const y = r.top + r.height / 2; await fingerTo(r.left + r.width * .9, y, 380); await press(90);
   const t0 = performance.now(), D = 1300; SFX.swipe(); await new Promise(res => { const f = () => { const q = Math.min(1, (performance.now() - t0) / D), e = q < .5 ? 4 * q * q * q : 1 - Math.pow(-2 * q + 2, 3) / 2, v = 90 - 86 * e; set(v); $('#finger').style.transform = `translate(${r.left + r.width * v / 100}px,${y}px)`; fx0 = r.left + r.width * v / 100; q < 1 ? requestAnimationFrame(f) : res(); }; f(); });
-  SFX.ding(); fingerOff(); await sleep(1500);
+  SFX.ding(); fingerOff(); await sleep(1000);
 }
 async function stepContent() {
   const el = stepScene('Conteúdo', 'Um feed com estratégia, não ao calhas.', `<div class="feedGrid"></div>`); const g = $('.feedGrid', el);
-  for (let i = 0; i < 9; i++) { g.insertAdjacentHTML('beforeend', `<div class="cell">${GOODPHOTO(i)}</div>`); SFX.pop(500 + i * 40); await sleep(150); }
-  await sleep(1500);
+  for (let i = 0; i < 9; i++) { g.insertAdjacentHTML('beforeend', `<div class="cell">${GOODPHOTO(i)}</div>`); SFX.pop(500 + i * 40); await sleep(110); }
+  await sleep(1000);
 }
 async function stepAds() {
   const el = stepScene('Anúncios', 'Para quem compra. Não para toda a gente.', `<div class="dash2"><div class="ttl">Público</div><div class="row"><span>25–40 anos</span><span>Leiria + Coimbra</span><span>decoração</span><span>presentes</span><span>casa</span></div>
@@ -362,18 +362,18 @@ async function stepAds() {
   fingerOff(); hold.style.transform = ''; hold.querySelector('span').innerHTML = 'no ar ✓'; hold.style.background = '#0033A3'; SFX.launch(); flash(.35); shake();
   const pts = [[0, 112], [40, 104], [80, 98], [120, 84], [160, 70], [200, 52], [240, 34], [300, 10]];
   const t1 = performance.now(); await new Promise(res => { const f = () => { const q = Math.min(1, (performance.now() - t1) / 1200), cut = q * 300, v = []; for (let i = 0; i < pts.length; i++) { if (pts[i][0] <= cut) v.push(pts[i]); else { const [a, b] = pts[i - 1]; v.push([cut, b + (pts[i][1] - b) * (cut - a) / (pts[i][0] - a)]); break; } } const d = v.map((p, i) => (i ? 'L' : 'M') + p[0] + ' ' + p[1]).join(' '); $('.ln', el).setAttribute('d', d); $('.ar', el).setAttribute('d', d + ` L${cut} 120 L0 120 Z`); q < 1 ? requestAnimationFrame(f) : res(); }; f(); });
-  await sleep(1300);
+  await sleep(900);
 }
 async function stepShop() {
   const el = stepScene('Loja online', 'Uma casa pensada para vender.', `<div class="shop"><div class="nav">Lume<span class="cart">🛍<b>0</b></span></div><div class="hero" style="background:url(${U}vela-frasco-acesa.jpg) center 60%/cover"></div>
     <div class="info"><div><b>Vela Âmbar</b><span>cera de soja · 40 h · 24,90 €</span></div><div class="buy">Adicionar</div></div></div>`);
   await sleep(1000); await tapEl($('.buy', el)); const b = $('.cart b', el); b.textContent = '1'; b.animate([{ transform: 'scale(1.8)' }, { transform: 'scale(1)' }], { duration: 400, easing: 'cubic-bezier(.2,1.6,.4,1)' }); SFX.cash();
-  $('.buy', el).textContent = 'No carrinho ✓'; await sleep(1500);
+  $('.buy', el).textContent = 'No carrinho ✓'; await sleep(1000);
 }
 
 /* ---------- the film ---------- */
 async function film() {
-  music('night');
+  music('night'); setTimeout(() => $('#fic').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }), 4200);
   // 1 · lock 02:47
   const wall = `<div class="wall" style="background:url(${U}velas-fundo-preto.jpg) center/cover;filter:blur(1px) brightness(.85)"></div><div class="wall" style="background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.1) 40%,rgba(0,0,0,.35))"></div>`;
   const lock = scene('lock', `${wall}<div class="t"><div class="d">quinta-feira, 28 de setembro</div><div class="h">02:47</div></div><div class="nstack"></div><div class="unlock"><span>⌃ desliza para abrir</span><div class="pill"></div></div>`);
@@ -393,10 +393,9 @@ async function film() {
   await bia.me('a minha mãe, a minha tia e um bot');
   await bia.them('ahahahah não 😭'); await bia.them('as tuas velas são literalmente as mais bonitas que já vi');
   await bia.me('então porque é que ninguém compra 😭');
-  await bia.them('e agora? qual é o plano?');
   const OPTS = [{ id: 'post', label: '📸 Publicar todos os dias' }, { id: 'give', label: '🎁 Fazer um sorteio' }, { id: 'bots', label: '🤖 Comprar seguidores' }];
   cap('plano B, C e D 👇', 1800);
-  await bia.choose('o que faz a Inês?', OPTS, 0); await bia.me('vou publicar todos os dias. alguém há de ver');
+  await bia.choose('o que faz a Inês?', OPTS, 0);
   SFX.glitch(); await failPost();
   bia = chatScene({ name: 'Bia 💅', sub: 'online', av: AV_BIA });
   await bia.them('amiga estás a gritar para o vazio 😭'); await bia.me('ok. e se eu comprar seguidores? 👀');
@@ -411,12 +410,10 @@ async function film() {
   const ora = chatScene({ name: 'Estúdio ORA', sub: 'Leiria · costuma responder em minutos', av: AV_ORA });
   await ora.me('olá! tenho uma marca de velas e ninguém compra 🫠');
   await ora.them('Olá, Inês! Ninguém compra ou ninguém vê? 👀');
-  await ora.them('Três perguntas e já te dizemos por onde começar.');
   let a = await ora.choose('1/3 · Quem compra as tuas velas?', [{ label: 'Toda a gente!' }, { label: 'Pessoas 25–40 que gostam de casa e oferecem presentes' }], 0);
   await ora.me(a.label); await ora.them('Quando falas para toda a gente, não falas com ninguém 😉');
   a = await ora.choose('2/3 · O que queres primeiro?', [{ label: 'Mais seguidores' }, { label: 'Mais vendas' }], 1);
   await ora.me(a.label); await ora.them('Boa. Seguidores não pagam a renda.');
-  await ora.them('Plano: identidade, conteúdo, anúncios e loja. Tudo ligado, tudo medido.');
   await ora.them('Deixa connosco. Falamos daqui a 3 semanas 💛', { hold: 1300 });
 
   // studio (real photo)
@@ -433,7 +430,7 @@ async function film() {
   await sleep(600); isl.classList.add('live'); SFX.thud();
   const names = ['Marta', 'João', 'Rita', 'Tiago', 'Sofia', 'Inês M.', 'Duarte', 'Carla', 'Leonor', 'Pedro', 'Ana', 'Rui', 'Beatriz', 'Miguel', 'Joana', 'Filipa', 'Tomás', 'Maria', 'Nuno', 'Sara', 'Vasco', 'Catarina', 'Hugo', 'Lara'];
   const items = ['Vela Âmbar', 'Vela Figo', 'Kit Presente', 'Vela Lavanda', 'Vela Cedro'];
-  for (let i = 0; i < 24; i++) { ns2.insertAdjacentHTML('afterbegin', `<div class="notif" style="padding:9px 11px"><div class="app" style="background:var(--wax);width:30px;height:30px"><span style="font:italic 700 13px var(--lume);color:var(--cocoa)">L</span></div><div class="tx"><div class="row">Nova encomenda<span>agora</span></div><div class="nb">${names[i]} · ${items[i % 5]} · ${i % 4 === 2 ? '49,80' : '24,90'} €</div></div></div>`); if (ns2.children.length > 6) ns2.lastChild.remove(); $('#oc').textContent = i + 1; SFX.order(); await sleep(Math.max(90, 480 - i * 20)); }
+  for (let i = 0; i < 24; i++) { ns2.insertAdjacentHTML('afterbegin', `<div class="notif" style="padding:9px 11px"><div class="app" style="background:var(--wax);width:30px;height:30px"><span style="font:italic 700 13px var(--lume);color:var(--cocoa)">L</span></div><div class="tx"><div class="row">Nova encomenda<span>agora</span></div><div class="nb">${names[i]} · ${items[i % 5]} · ${i % 4 === 2 ? '49,80' : '24,90'} €</div></div></div>`); if (ns2.children.length > 6) ns2.lastChild.remove(); $('#oc').textContent = i + 1; SFX.order(); await sleep(Math.max(80, 380 - i * 16)); }
   SFX.cash(); cap('esgotou a Âmbar em 2 dias 😭💛', 2200); await sleep(700);
   ns2.insertAdjacentHTML('afterbegin', `<div class="notif"><div class="app" style="background:linear-gradient(135deg,#ff8fb1,#b86bff)">B</div><div class="tx"><div class="row">Bia 💅<span>agora</span></div><div class="nb">INÊS??? ESGOTASTE A ÂMBAR???? 😭😭😭</div></div></div>`); SFX.notif(); shake();
   await sleep(1700); isl.classList.remove('live');
