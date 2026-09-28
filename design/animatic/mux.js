@@ -1,11 +1,11 @@
 // Encode the soundtrack WAV to Opus via Chromium MediaRecorder, then mux (stream copy) with the VP8 video.
 const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 const fs = require('fs'), path = require('path'), { spawnSync } = require('child_process');
-const OUT = path.resolve(__dirname, '../../dist'), FF = '/opt/pw-browsers/ffmpeg-1011/ffmpeg-linux';
+const OUT = path.resolve(__dirname, '../../dist'), FF = '/opt/pw-browsers/ffmpeg-1011/ffmpeg-linux', NAME = process.env.NAME || 'ORA-animatic';
 (async () => {
   const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files', '--autoplay-policy=no-user-gesture-required'] });
   const p = await b.newPage(); await p.goto('file://' + OUT + '/');
-  const wav = fs.readFileSync(path.join(OUT, 'ORA-animatic-banda-sonora.wav')).toString('base64');
+  const wav = fs.readFileSync(path.join(OUT, NAME + '-banda-sonora.wav')).toString('base64');
   const b64 = await p.evaluate(async (wav) => {
     const bytes = Uint8Array.from(atob(wav), c => c.charCodeAt(0));
     const ctx = new AudioContext({ sampleRate: 48000 }); await ctx.resume();
@@ -20,7 +20,7 @@ const OUT = path.resolve(__dirname, '../../dist'), FF = '/opt/pw-browsers/ffmpeg
   }, wav);
   await b.close();
   const aud = path.join(OUT, '_audio.webm'); fs.writeFileSync(aud, Buffer.from(b64, 'base64'));
-  for (const [v, o] of [['ORA-animatic-9x16-sem-som.webm', 'ORA-animatic-9x16-com-som.webm'], ['ORA-animatic-9x16-sem-som-leve.webm', 'ORA-animatic-9x16-com-som-leve.webm']]) {
+  for (const [v, o] of [[NAME + '-9x16-sem-som.webm', NAME + '-9x16-com-som.webm'], [NAME + '-9x16-sem-som-leve.webm', NAME + '-9x16-com-som-leve.webm']]) {
     if (!fs.existsSync(path.join(OUT, v))) continue;
     const r = spawnSync(FF, ['-hide_banner', '-loglevel', 'error', '-y', '-i', path.join(OUT, v), '-i', aud, '-map', '0:v', '-map', '1:a', '-c', 'copy', '-shortest', path.join(OUT, o)], { stdio: 'inherit' });
     console.log(o, r.status);
