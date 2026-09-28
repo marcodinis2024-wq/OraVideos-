@@ -25,15 +25,15 @@
 
 Funil em 5 fases: Interesses (6,51×) → Lote 3 Alcance (4,54×) → Remarketing (3,87×) → Aumento de Preço (3,46×) → Urgência (2,32×).
 
-### A história (é isto que dá força ao vídeo)
+### A história que mostramos (só o que interessa ao cliente)
 
-1. **Arranque (jul–ago):** 108 bilhetes vendidos com 529,72 €, a 4,90 € por bilhete e CPM abaixo de 2 €.
-2. **Problema detetado (1 set):** o ORA auditou a conta e encontrou três bloqueios em simultâneo. O cartão estava expirado, havia só 29 € de saldo e o lote final nem existia. As campanhas estavam paradas.
-3. **Leitura dos dados:** a mensagem de urgência funcionava (3,85 % de quem clicava comprava), mas o público estava esgotado. A solução era dar-lhe **público novo**, não mudar a mensagem.
-4. **Recuperação (set):** foi construído um novo lote em duas fases, Alcance e Urgência, com criativo novo, incluindo um Reel POV.
-5. **Resultado:** **+39 bilhetes** na reta final, com 305 € adicionais. O total chegou a **147 bilhetes, 3.733 € e ROAS 4,47×**.
+1. **Estratégia de funil:** 5 fases, da descoberta à urgência, com lotes de preço e criativos próprios em cada fase (incluindo um Reel POV).
+2. **Otimização contínua:** os dados mostraram que a mensagem de urgência convertia bem e que o que faltava era público novo. Reforçámos a reta final com essa leitura.
+3. **Resultado:** a fase final trouxe **mais 39 bilhetes**. O total fechou com **147 bilhetes, 3.733 € de receita e ROAS 4,47×**.
 
-**Mensagem para o vídeo:** *"Não lançamos campanhas e esquecemos. Acompanhamos, lemos os dados e corrigimos a tempo."* É a promessa de proximidade e estratégia, provada com números reais.
+**Mensagem para o vídeo:** *"Não lançamos campanhas e esquecemos. Acompanhamos, lemos os dados e otimizamos até ao fim."*
+
+> Fica fora do vídeo tudo o que é operacional interno ou do lado do cliente (pagamentos, saldos, erros de configuração herdados).
 
 **Frases-âncora possíveis:**
 - "Por cada euro investido, 4,47 € de volta."
@@ -46,13 +46,14 @@ Funil em 5 fases: Interesses (6,51×) → Lote 3 Alcance (4,54×) → Remarketin
 
 **O que o ORA fez (1 set 2026):** auditoria completa da conta, do GA4 e do funil do site, com correção da medição.
 
-- Descobriu que **83 % do sinal de otimização** do Google vinha de um passo do configurador **que não pedia contacto**. O Google estava a otimizar para pessoas que "brincavam" com o configurador, não para pessoas que pediam orçamento.
-- **Corrigiu a medição:** o algoritmo passou a otimizar só para **leads reais**, ou seja, formulários com nome, email e telefone.
-- Calculou o **custo real por lead qualificada: ~56 €**, dentro da média do setor.
-- Identificou a maior alavanca, que não custa media: **127 pessoas por mês** terminam o configurador e saem sem deixar contacto. Passar de 4,1 % para 10 % daria **+140 % de leads** com o mesmo investimento.
-- Encontrou **4.859 €** gastos ao longo da vida da conta em campanhas que nunca converteram (antes da gestão atual) e reorganizou o orçamento anual de 17.800 €.
+O que mostra o nosso potencial:
+- **Auditoria de ponta a ponta:** Google Ads, Analytics e percurso do site analisados em conjunto.
+- **Otimização para leads reais:** o algoritmo passou a otimizar só para pedidos de orçamento com contacto, e não para interações sem valor.
+- **Custo por lead qualificada de ~56 €**, dentro da média do setor.
+- **Visão para lá dos anúncios:** identificámos no site uma melhoria com potencial de **+140 % de leads com o mesmo investimento**.
+- **Planeamento anual** de um orçamento de 17.800 €, com sazonalidade.
 
-**Estado:** ainda não há resultados finais de crescimento. As correções são de 1 set e as campanhas estavam em fase de aprendizagem. **Serve para mostrar método e rigor**, não retorno. Se houver números de setembro/outubro (leads e CPL), podem entrar no vídeo.
+**Estado:** ainda não há números de crescimento (as mudanças são de set 2026). No vídeo serve como **marca de confiança + método** ("trabalhamos com marcas internacionais como a Kommerling"). Se houver dados de outubro, podem entrar.
 
 **Mensagem para o vídeo:** *"Antes de gastar mais, medimos bem. Os números bonitos não interessam; interessam as leads reais."*
 
@@ -60,23 +61,27 @@ Funil em 5 fases: Interesses (6,51×) → Lote 3 Alcance (4,54×) → Remarketin
 
 ## Caso 3 — Centro Eletrónico (retalho, Leiria e Coimbra) · Google + Meta
 
-**Informação disponível:** apenas diagnóstico (Manual da Carteira, 1 set). Não há métricas de resultados.
-
-- Loja física com stock real, mas a correr só pesquisa de marca, porque o site bloqueia Shopping e Performance Max.
-- O ORA propôs uma auditoria técnica ao site em 3 blocos e campanhas por categoria de produto com extensões de localização.
-
-**Para entrar no vídeo como prova de retorno, faltam números** (vendas, visitas à loja, chamadas, evolução após as mudanças).
+Ainda não há resultados publicáveis. **No vídeo entra só como logótipo** na sequência "confiaram em nós". Se houver números (vendas, chamadas, visitas à loja), passa a caso.
 
 ---
 
-## Caso 4 — Labar (lavandarias self-service, B2B) · Google Ads
+## Caso 4 — Labar (lavandarias self-service, B2B) · Google Ads ⭐ segundo caso
 
-**Informação disponível:** apenas diagnóstico (Manual da Carteira, 1 set). Não há métricas de resultados.
+**O que fizemos:** em 1 set reestruturámos a conta em duas ofertas (Lavandaria e Equipamentos), com medição por landing page.
 
-- A conta não tinha medição de leads. O ORA desenhou o plano de rastreio: conversões por landing page, chamadas, Enhanced Conversions e Consent Mode v2.
-- O objetivo é passar a conhecer o **custo por lead qualificada** de cada oferta: montagem de lavandaria ou renovação de equipamento.
+**Resultados de 1 a 21 set 2026** (Google Ads, dados ao vivo):
 
-**Para entrar no vídeo como prova de retorno, faltam números** (leads por mês, CPL, antes/depois).
+| | Antes (até 1 set) | Depois (1–21 set) | Variação |
+|---|---|---|---|
+| Taxa de conversão | 1,54 % | **3,51 %** | **×2,3** |
+| Custo por lead (conta) | 80,61 € | **30,68 €** | **−62 %** |
+| Custo por lead (Equipamentos) | 139,75 € | **35,81 €** | **−74 %** |
+
+Detalhe do período: 184,06 € de investimento, 171 cliques e 6 leads, com um orçamento de 10 €/dia (Lavandaria 7,50 € + Equipamentos 2,50 €).
+
+⚠️ A amostra é pequena (3 semanas, 6 conversões). No vídeo, indicar a fonte e o período em rodapé ("Google Ads · 1–21 set 2026"). Se houver dados de outubro, atualizar antes de renderizar.
+
+**Mensagem para o vídeo:** *"O mesmo orçamento, o dobro da eficácia."* / *"Cada lead a custar menos de metade."*
 
 ---
 
@@ -87,6 +92,6 @@ Funil em 5 fases: Interesses (6,51×) → Lote 3 Alcance (4,54×) → Remarketin
 | Trelas Soltas / CãolorRun | ROAS 4,47×, 147 bilhetes, história de recuperação | ✅ Sim (confirmar autorização) |
 | Kommerling | Marca conhecida + rigor na medição | 🟡 Como "método"; retorno só com dados de set/out |
 | Centro Eletrónico | Retalho local, Leiria/Coimbra | ❌ Faltam resultados |
-| Labar | B2B | ❌ Faltam resultados |
+| Labar | CPL −62 %, taxa de conversão ×2,3 | ✅ Sim (com rodapé de fonte/período) |
 
 Também se podem usar logótipos de clientes (com autorização) numa sequência de "confiaram em nós": Kommerling, Centro Eletrónico, Labar, Trelas Soltas, Farmácia Moreira Padrão, SB Smiles, Ativefit, Resitec, DGP Moldes…
