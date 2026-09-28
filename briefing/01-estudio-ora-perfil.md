@@ -18,6 +18,23 @@
 | LinkedIn | https://www.linkedin.com/company/estudioora/ |
 | Smartlink | https://t-sml.mtrbio.com/public/smartlink/estudioora |
 
+## 1.1 Identidade visual (a partir dos materiais enviados)
+
+- **Logótipo:** "ORA®" em tipografia sans-serif muito bold, geométrica.
+- **Assinatura oficial:** **"Estúdio de design com estratégia"**.
+- **Cores:** azul-marinho/cobalto (logótipo) + **amarelo vivo** (placa exterior e parede do estúdio), com fundos brancos. HEX aproximados, a confirmar no manual de marca: azul ≈ `#1E3A78` / cobalto ≈ `#1F3FBF`, amarelo ≈ `#F2E21B`.
+- **Espaço físico:** loja de rua em Leiria, com a placa amarela em caixa e o logótipo nas montras. O interior é luminoso, com madeira clara, plantas e uma parede amarela com o "ORA" — muito bom para planos de vídeo e para comunicar proximidade.
+
+Assets guardados em `assets/`:
+
+| Ficheiro | Uso no vídeo |
+|---|---|
+| `assets/marca/logotipo-ora-azul.png` | Abertura/fecho, endcard |
+| `assets/estudio/placa-ora-amarela.jpg` | Plano de abertura ("chegámos ao ORA") |
+| `assets/estudio/fachada-estudio.jpg` | Proximidade / "o vizinho do lado" |
+| `assets/portfolio/farmacia-moreira-padrao-website-mobile.jpg` | Caso: website mobile de farmácia |
+| `assets/portfolio/sbsmiles-website-desktop.jpg` | Caso: website SB Smiles (medicina dentária), com a marca ORA ao fundo |
+
 ## 2. Posicionamento
 
 - Agência de marketing digital que atua em várias áreas da comunicação **com proximidade e acompanhamento direto**.
@@ -63,6 +80,7 @@
 | Leirisorriso | Saúde (dentária) | Logótipo, estacionário, branding, sinalética, website |
 | Farmácia Moreira Padrão | Saúde (farmácia) | Logótipo, estacionário, redes sociais, website, sinalética, montras |
 | Beatriz Godinho | Saúde | Suportes institucionais e informativos |
+| SB Smiles | Saúde (dentária, nutrição, terapêuticas) | Website (visto nas imagens enviadas) |
 | MLS-Motors | Automóvel | Gestão de redes sociais |
 | Fábrica das Peúgas | Moda/têxtil | Identidade visual |
 
@@ -95,7 +113,9 @@
 - [ ] Números concretos de resultados (ex.: % de crescimento de seguidores, leads, vendas de clientes)
 - [ ] Nº de clientes servidos / projetos entregues
 - [ ] Equipa: nomes, funções, fotos/vídeo
-- [ ] Manual de marca: logótipo, cores, tipografia, tom de voz
+- [x] Logótipo e imagens do estúdio (recebidos)
+- [ ] Manual de marca: HEX exatos das cores, nome da tipografia, tom de voz
+- [ ] Estudo de caso de campanha de evento (a enviar)
 - [ ] Testemunhos em vídeo ou texto de clientes
 - [ ] Objetivo do vídeo, público-alvo, formato (Reels 9:16, YouTube 16:9, LinkedIn), duração
 - [ ] Assets existentes: fotos/vídeos de projetos, bastidores do estúdio
