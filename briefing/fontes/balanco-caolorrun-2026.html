@@ -1,0 +1,406 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Balanço CãolorRun</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf7f1;
+    --surface: #ffffff;
+    --surface-alt: #f2ede2;
+    --ink: #1c2333;
+    --ink-2: #545e70;
+    --ink-3: #8991a0;
+    --border: #e6e0d2;
+    --navy: #16264a;
+    --navy-ink: #eef1f8;
+    --invest: #2d6fb0;
+    --revenue: #d9534f;
+    --good: #2f8f57;
+    --good-bg: #e4f4ea;
+    --winner-bg: #fff6e9;
+    --winner-border: #eecf9a;
+    --winner-accent: #b8862f;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181f;
+      --surface: #1c222c;
+      --surface-alt: #232a37;
+      --ink: #eef0f4;
+      --ink-2: #b7bfcb;
+      --ink-3: #7c8493;
+      --border: #2c3444;
+      --navy: #0e1626;
+      --navy-ink: #eef1f8;
+      --invest: #5b9bd9;
+      --revenue: #e8756f;
+      --good: #5fbe82;
+      --good-bg: #1c2f22;
+      --winner-bg: #2a2416;
+      --winner-border: #4a3d1f;
+      --winner-accent: #e0b666;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181f;
+    --surface: #1c222c;
+    --surface-alt: #232a37;
+    --ink: #eef0f4;
+    --ink-2: #b7bfcb;
+    --ink-3: #7c8493;
+    --border: #2c3444;
+    --navy: #0e1626;
+    --navy-ink: #eef1f8;
+    --invest: #5b9bd9;
+    --revenue: #e8756f;
+    --good: #5fbe82;
+    --good-bg: #1c2f22;
+    --winner-bg: #2a2416;
+    --winner-border: #4a3d1f;
+    --winner-accent: #e0b666;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", -apple-system, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 0 48px;
+  }
+  h1, h2, h3 { font-family: "Baloo 2", "Work Sans", sans-serif; text-wrap: balance; margin: 0; }
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* header */
+  .hero {
+    position: relative;
+    background: var(--navy);
+    color: var(--navy-ink);
+    overflow: hidden;
+    padding-block: 40px 34px;
+  }
+  .hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(38px);
+    opacity: .55;
+  }
+  .hero::before {
+    width: 260px; height: 260px;
+    background: radial-gradient(circle at 30% 30%, #ffb84d, transparent 70%),
+                radial-gradient(circle at 65% 60%, #ff6f91, transparent 70%);
+    top: -90px; right: -60px;
+  }
+  .hero::after {
+    width: 200px; height: 200px;
+    background: radial-gradient(circle at 40% 40%, #5fd6c4, transparent 70%),
+                radial-gradient(circle at 70% 70%, #7fb8ff, transparent 70%);
+    bottom: -80px; left: -50px;
+  }
+  .hero-inner { position: relative; max-width: 860px; margin: 0 auto; padding-inline: 20px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .09em; text-transform: uppercase;
+    color: #b9c3dd; font-weight: 600; margin-bottom: 10px;
+  }
+  .hero h1 { font-size: clamp(28px, 5vw, 38px); font-weight: 700; }
+  .hero .sub { margin-top: 10px; color: #c7cfe4; font-size: 14.5px; max-width: 46ch; }
+  .hero .meta {
+    margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px 22px;
+    font-size: 13px; color: #b9c3dd;
+  }
+  .hero .meta strong { color: var(--navy-ink); font-weight: 600; }
+
+  /* kpis */
+  .kpis {
+    margin-top: -30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 640px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 6px 18px -12px rgba(20, 20, 20, .35);
+  }
+  .kpi .label { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); font-weight: 600; }
+  .kpi .value { font-family: "Baloo 2", sans-serif; font-size: clamp(20px, 3.4vw, 26px); font-weight: 700; margin-top: 6px; color: var(--ink); }
+  .kpi .value.pos { color: var(--good); }
+
+  section { margin-top: 44px; }
+  .section-head { margin-bottom: 16px; }
+  .section-head h2 { font-size: 21px; font-weight: 600; }
+  .section-head p { margin: 6px 0 0; color: var(--ink-2); font-size: 13.5px; max-width: 58ch; }
+
+  /* winner card */
+  .winner {
+    background: var(--winner-bg);
+    border: 1px solid var(--winner-border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+  }
+  .winner .badge {
+    font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: #fff; background: var(--winner-accent); border-radius: 999px;
+    padding: 5px 11px; white-space: nowrap;
+  }
+  .winner h3 { font-size: 19px; margin-top: 10px; }
+  .winner .figs { display: flex; gap: 22px; margin-top: 10px; flex-wrap: wrap; }
+  .winner .figs div { font-size: 12px; color: var(--ink-2); }
+  .winner .figs strong { display: block; font-family: "Baloo 2", sans-serif; font-size: 18px; color: var(--ink); margin-top: 2px; }
+  .winner-text { flex: 1; min-width: 220px; }
+
+  /* chart */
+  .legend { display: flex; gap: 18px; margin-bottom: 14px; flex-wrap: wrap; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-2); font-weight: 500; }
+  .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+  .chart-rows { display: flex; flex-direction: column; gap: 20px; }
+  .chart-row .row-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 7px; gap: 12px; }
+  .chart-row .campaign { font-weight: 600; font-size: 13.5px; color: var(--ink); }
+  .chart-row .period { font-size: 11.5px; color: var(--ink-3); }
+  .chart-row .roas-pill {
+    font-family: "Baloo 2", sans-serif; font-size: 13px; font-weight: 700;
+    background: var(--good-bg); color: var(--good); border-radius: 999px;
+    padding: 3px 10px; white-space: nowrap;
+  }
+  .bar-track { position: relative; height: 15px; background: var(--surface-alt); border-radius: 5px; margin-bottom: 4px; }
+  .bar-fill { height: 100%; border-radius: 5px; display: flex; align-items: center; }
+  .bar-fill.invest { background: var(--invest); }
+  .bar-fill.revenue { background: var(--revenue); }
+  .bar-val { font-size: 11px; font-weight: 600; color: #fff; padding-left: 8px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar-val.outside { color: var(--ink-2); padding-left: 0; margin-left: 8px; }
+
+  /* table */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 14px; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; background: var(--surface); }
+  thead th {
+    text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--ink-3); font-weight: 600; padding: 12px 14px; border-bottom: 1px solid var(--border);
+    background: var(--surface-alt);
+  }
+  thead th.num, td.num { text-align: right; }
+  tbody td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td.num { font-variant-numeric: tabular-nums; }
+  tbody td.name { font-weight: 600; }
+  tbody td.name .p { font-weight: 400; color: var(--ink-3); font-size: 12px; display: block; margin-top: 2px; }
+  tfoot td { padding: 13px 14px; font-weight: 700; border-top: 2px solid var(--border); font-variant-numeric: tabular-nums; background: var(--surface-alt); }
+
+  /* notes */
+  .notes {
+    margin-top: 40px; padding: 16px 18px; background: var(--surface-alt);
+    border-radius: 12px; font-size: 12.5px; color: var(--ink-2); line-height: 1.6;
+  }
+  .notes strong { color: var(--ink); }
+
+  footer {
+    margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+</style>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Relatório de investimento · Meta Ads</div>
+    <h1>CãolorRun 2026 — balanço final</h1>
+    <p class="sub">Do lançamento dos bilhetes ao esgotar dos kits: o retorno completo do investimento em tráfego pago para o evento, campanha a campanha.</p>
+    <div class="meta">
+      <span>Cliente: <strong>Trelas Soltas — por Carlos Cruz</strong></span>
+      <span>Período de campanhas: <strong>27 jul – 25 set 2026</strong></span>
+      <span>Evento: <strong>26 set 2026, Leiria</strong></span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="label">Total investido</div>
+      <div class="value tabular">835,05 €</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Receita gerada</div>
+      <div class="value tabular pos">3.733,00 €</div>
+    </div>
+    <div class="kpi">
+      <div class="label">ROAS médio</div>
+      <div class="value tabular pos">4,47×</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Bilhetes vendidos</div>
+      <div class="value tabular">147</div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>A campanha que mais rendeu</h2>
+      <p>Das cinco fases do funil, esta foi a que trouxe mais vendas e a que devolveu mais por cada euro investido.</p>
+    </div>
+    <div class="winner">
+      <div class="winner-text">
+        <span class="badge">Melhor desempenho</span>
+        <h3>Bilhetes — Interesses</h3>
+        <div class="figs">
+          <div>Investido<strong>262,62 €</strong></div>
+          <div>Receita<strong>1.709,00 €</strong></div>
+          <div>ROAS<strong>6,51×</strong></div>
+          <div>Bilhetes<strong>65</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Investimento vs. receita, por campanha</h2>
+      <p>As cinco fases do funil de vendas, ordenadas da mais à menos rentável.</p>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--invest)"></i>Investimento</span>
+      <span><i style="background:var(--revenue)"></i>Receita gerada</span>
+    </div>
+    <div class="chart-rows">
+
+      <div class="chart-row">
+        <div class="row-top">
+          <div><span class="campaign">Bilhetes — Interesses</span> <span class="period">27 jul – 31 ago</span></div>
+          <span class="roas-pill">6,51×</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill invest" style="width:15.4%"><span class="bar-val">262,62 €</span></div></div>
+        <div class="bar-track"><div class="bar-fill revenue" style="width:100%"><span class="bar-val">1.709,00 €</span></div></div>
+      </div>
+
+      <div class="chart-row">
+        <div class="row-top">
+          <div><span class="campaign">Lote 3 · Fase A — Alcance</span> <span class="period">3 – 13 set</span></div>
+          <span class="roas-pill">4,54×</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill invest" style="width:8.8%"><span class="bar-val outside">149,96 €</span></div></div>
+        <div class="bar-track"><div class="bar-fill revenue" style="width:39.8%"><span class="bar-val">681,00 €</span></div></div>
+      </div>
+
+      <div class="chart-row">
+        <div class="row-top">
+          <div><span class="campaign">Bilhetes — Remarketing</span> <span class="period">27 jul – 15 ago</span></div>
+          <span class="roas-pill">3,87×</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill invest" style="width:8.5%"><span class="bar-val outside">144,81 €</span></div></div>
+        <div class="bar-track"><div class="bar-fill revenue" style="width:32.8%"><span class="bar-val">560,00 €</span></div></div>
+      </div>
+
+      <div class="chart-row">
+        <div class="row-top">
+          <div><span class="campaign">Campanha de Vendas — Aumento de Preço</span> <span class="period">16 – 31 ago</span></div>
+          <span class="roas-pill">3,46×</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill invest" style="width:7.2%"><span class="bar-val outside">122,30 €</span></div></div>
+        <div class="bar-track"><div class="bar-fill revenue" style="width:24.7%"><span class="bar-val">423,00 €</span></div></div>
+      </div>
+
+      <div class="chart-row">
+        <div class="row-top">
+          <div><span class="campaign">Lote 3 · Fase Urgência</span> <span class="period">14 – 25 set</span></div>
+          <span class="roas-pill">2,32×</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill invest" style="width:9.1%"><span class="bar-val outside">155,36 €</span></div></div>
+        <div class="bar-track"><div class="bar-fill revenue" style="width:21.1%"><span class="bar-val">360,00 €</span></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Detalhe por campanha</h2>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Campanha</th>
+            <th class="num">Investido</th>
+            <th class="num">Receita</th>
+            <th class="num">ROAS</th>
+            <th class="num">Bilhetes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Bilhetes — Interesses<span class="p">27 jul – 31 ago</span></td>
+            <td class="num">262,62 €</td>
+            <td class="num">1.709,00 €</td>
+            <td class="num">6,51×</td>
+            <td class="num">65</td>
+          </tr>
+          <tr>
+            <td class="name">Lote 3 · Fase A — Alcance<span class="p">3 – 13 set</span></td>
+            <td class="num">149,96 €</td>
+            <td class="num">681,00 €</td>
+            <td class="num">4,54×</td>
+            <td class="num">21</td>
+          </tr>
+          <tr>
+            <td class="name">Bilhetes — Remarketing<span class="p">27 jul – 15 ago</span></td>
+            <td class="num">144,81 €</td>
+            <td class="num">560,00 €</td>
+            <td class="num">3,87×</td>
+            <td class="num">25</td>
+          </tr>
+          <tr>
+            <td class="name">Campanha de Vendas — Aumento de Preço<span class="p">16 – 31 ago</span></td>
+            <td class="num">122,30 €</td>
+            <td class="num">423,00 €</td>
+            <td class="num">3,46×</td>
+            <td class="num">20</td>
+          </tr>
+          <tr>
+            <td class="name">Lote 3 · Fase Urgência<span class="p">14 – 25 set · Estático Últimos Kits + Última Oportunidade sem Kit + Reel POV</span></td>
+            <td class="num">155,36 €</td>
+            <td class="num">360,00 €</td>
+            <td class="num">2,32×</td>
+            <td class="num">16</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total</td>
+            <td class="num">835,05 €</td>
+            <td class="num">3.733,00 €</td>
+            <td class="num">4,47×</td>
+            <td class="num">147</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+
+  <div class="notes">
+    <strong>Como ler estes números:</strong> o âmbito cobre as cinco campanhas de vendas ligadas à edição de 2026 do CãolorRun, do lançamento dos bilhetes (27 de julho) até ao encerramento do tráfego pago (25 de setembro), na conta de anúncios Trelas Soltas. Receita e ROAS vêm diretamente do pixel de compra da Meta, com a janela de atribuição predefinida da conta. Ficam de fora os impulsionamentos de conteúdo genérico da página (posts de marca, promoções de produto) que não fazem parte do funil de bilhética deste evento.
+  </div>
+
+  <footer>
+    <span>Trelas Soltas · CãolorRun 2026</span>
+    <span>Relatório gerado 28 set 2026</span>
+  </footer>
+
+</div>
+
+</body></html>

@@ -115,7 +115,8 @@ Assets guardados em `assets/`:
 - [ ] Equipa: nomes, funções, fotos/vídeo
 - [x] Logótipo e imagens do estúdio (recebidos)
 - [ ] Manual de marca: HEX exatos das cores, nome da tipografia, tom de voz
-- [ ] Estudo de caso de campanha de evento (a enviar)
+- [x] Estudo de caso de campanha de evento → ver `02-casos-de-sucesso.md`
+- [ ] Resultados de Centro Eletrónico, Labar e Kommerling (pós-set 2026)
 - [ ] Testemunhos em vídeo ou texto de clientes
 - [ ] Objetivo do vídeo, público-alvo, formato (Reels 9:16, YouTube 16:9, LinkedIn), duração
 - [ ] Assets existentes: fotos/vídeos de projetos, bastidores do estúdio
