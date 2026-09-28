@@ -185,6 +185,7 @@ Fonte: `design/animatic/animatic.html` · Ferramentas: `design/animatic/tools.js
 |---|---|---|
 | `dist/ORA-animatic.html` | `node tools.js standalone` | Página autónoma: animação + música + SFX + voz-guia (TTS do browser) em sincronia, com scrubber |
 | `dist/ORA-animatic-9x16-sem-som.webm` | `node tools.js video` | Vídeo 1080×1920, 25 fps, 46 s, legendas queimadas |
+| `dist/ORA-animatic-9x16-com-som.webm` (+ `-leve`) | `node tools.js video && node tools.js audio && node mux.js` | Vídeo com música + SFX (VP8 + Opus); áudio codificado no Chromium e multiplexado sem recodificar |
 | `dist/ORA-animatic-banda-sonora.wav` | `node tools.js audio` | Música + SFX sincronizados (48 kHz, estéreo), com ducking nos trechos de voz |
 | `dist/still_*.jpg` | `node tools.js stills 1,6.5,…` | Fotogramas-chave para revisão |
 
