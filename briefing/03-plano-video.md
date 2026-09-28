@@ -56,15 +56,19 @@ Regras:
 - O navy é a "sala" e o amarelo é a "luz". Nunca usar o amarelo como fundo de texto longo.
 - Os materiais de clientes (CãolorRun, Farmácia, SB Smiles) mantêm as cores deles, mas aparecem sempre **dentro de molduras ORA** (telemóvel, cartão, ecrã), para não quebrar a identidade.
 
-### Tipografia
+### Tipografia — **Rawson** (fonte oficial da marca, confirmada: o "ORA" em ExtraBlack coincide com o logótipo)
 
-| Nível | Estilo | Nota |
+| Nível | Peso | Uso |
 |---|---|---|
-| Títulos / números | Sans geométrica **Black/Heavy**, como a do logótipo "ORA" | ⚠️ Preciso do nome e dos ficheiros (.otf/.ttf) da fonte do logótipo |
-| Texto de apoio | A sans humanista da assinatura "Estúdio de design com estratégia" | Idem |
-| Dados | Mesma família, com algarismos **tabulares** | Para as contagens não "tremerem" |
+| Palavras-âncora / números gigantes | **Rawson ExtraBlack (900)** | "ORA.", 4,47×, 147 |
+| Títulos | **Rawson Black (800)** | Frases de cena ("Cada euro voltou 4,47 vezes.") |
+| Kickers | Rawson Black, caixa alta, tracking +18 % | "RESULTADOS REAIS · EVENTO" |
+| Texto de apoio / legendas | **Rawson Medium (500)** | Descrições, rodapés, CTA secundário |
+| Ênfase pontual | Rawson Bold Italic / Light Italic | Citações de clientes, notas |
 
-Hierarquia: máximo **6 palavras por ecrã** em 9:16. Os títulos entram com animação por palavra, não por letra: é mais legível e mais premium.
+Algarismos **tabulares** nos contadores. Máximo **6 palavras por ecrã** em 9:16. Os títulos entram por palavra.
+
+Ficheiros em `assets/fonts/` (ficam fora do Git por licença: `.gitignore`). Styleframes em `design/styleframes/`.
 
 ### Linguagem de motion
 
@@ -157,7 +161,8 @@ Filmar em 4K 25 fps (ou 50 fps para câmara lenta), em perfil plano/log para gra
 
 ## 9. Pendentes para arrancar
 
-- [ ] Nome e ficheiros da(s) fonte(s) da marca ORA
+- [x] Fonte da marca: Rawson (recebida)
+- [x] Styleframes v1 (`design/styleframes/SF-A…D.png`)
 - [ ] HEX oficial do amarelo (a fotografia dá um amarelo sombreado)
 - [ ] Autorização da Trelas Soltas e da Labar para usar nomes e números (ou versão anónima: "evento em Leiria" / "empresa B2B")
 - [ ] Logótipos de clientes autorizados para a cena 8

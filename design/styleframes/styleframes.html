@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-Medium.otf);font-weight:500}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-BoldIt.otf);font-weight:600;font-style:italic}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-Black.otf);font-weight:800}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-ExtraBlack.ttf);font-weight:900}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-LightIt.otf);font-weight:300;font-style:italic}
+:root{--navy:#1B3B72;--cobalt:#0033A3;--yellow:#F5DF1E;--paper:#F4F6FA;--ink:#0E1A33;--w:1080px;--h:1920px}
+*{box-sizing:border-box;margin:0}
+body{background:#111;font-family:Rawson,sans-serif;font-variant-numeric:tabular-nums}
+.f{width:var(--w);height:var(--h);position:relative;overflow:hidden;display:none}
+.f.on{display:block}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.logo-w{filter:brightness(0) invert(1)}
+.tag{font-weight:500;letter-spacing:.02em}
+.kicker{font-weight:800;font-size:30px;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow)}
+.scene{position:absolute;left:24px;top:24px;font:500 20px Rawson;color:rgba(255,255,255,.35);letter-spacing:.1em}
+
+/* A — cena 3: placa */
+#a{background:var(--navy)}
+#a .photo{position:absolute;inset:0;background:url(../../assets/estudio/placa-ora-amarela.jpg) center 55%/cover;transform:scale(1.08)}
+#a .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(27,59,114,0) 35%,rgba(27,59,114,.92) 72%,var(--navy) 100%)}
+#a .copy{position:absolute;left:90px;right:90px;bottom:330px;color:#fff}
+#a h1{font-weight:900;font-size:128px;line-height:.9;letter-spacing:-.01em}
+#a h1 em{font-style:normal;color:var(--yellow)}
+#a .sub{margin-top:36px;font-weight:500;font-size:42px;opacity:.92}
+#a .rule{width:120px;height:10px;background:var(--yellow);margin-bottom:40px}
+
+/* B — cena 4: serviços */
+#b{background:var(--paper);color:var(--navy)}
+#b .head{position:absolute;top:230px;left:90px;right:90px}
+#b h2{font-weight:900;font-size:104px;line-height:.92;margin-top:18px}
+#b .kicker{color:var(--cobalt)}
+#b .card{position:absolute;left:90px;right:90px;top:600px;height:980px;border-radius:44px;background:var(--navy);overflow:hidden;box-shadow:0 40px 80px -30px rgba(14,26,51,.45)}
+#b .card img{position:absolute;right:-70px;top:130px;width:780px;border-radius:24px;transform:rotate(-4deg);box-shadow:0 30px 60px rgba(0,0,0,.35)}
+#b .card .num{position:absolute;left:56px;top:48px;color:var(--yellow);font-weight:900;font-size:36px;letter-spacing:.1em}
+#b .card .t{position:absolute;left:56px;bottom:120px;color:#fff;font-weight:900;font-size:84px;line-height:.95}
+#b .card .d{position:absolute;left:56px;bottom:52px;color:rgba(255,255,255,.8);font-weight:500;font-size:34px}
+#b .dots{position:absolute;left:90px;top:1640px;display:flex;gap:16px}
+#b .dots i{width:18px;height:18px;border-radius:50%;background:rgba(27,59,114,.25)}
+#b .dots i.on{width:64px;border-radius:9px;background:var(--yellow)}
+#b .peek{position:absolute;left:1010px;top:650px;width:300px;height:880px;border-radius:44px;background:var(--cobalt);opacity:.9}
+
+/* C — cena 6: prova CãolorRun */
+#c{background:var(--navy);color:#fff}
+#c .head{position:absolute;top:230px;left:90px;right:90px}
+#c h2{font-weight:900;font-size:92px;line-height:.95;margin-top:16px}
+#c .phone{position:absolute;left:90px;top:620px;width:440px;height:550px;border-radius:28px;background:#fff;padding:12px;transform:rotate(-5deg);box-shadow:0 50px 90px -20px rgba(0,0,0,.6)}
+#c .phone .scr{width:100%;height:100%;border-radius:18px;background:url(../../assets/casos/caolorrun/criativo-plano-26-setembro.jpg) center/cover}
+#c .stats{position:absolute;left:590px;right:60px;top:600px;display:flex;flex-direction:column;gap:48px}
+#c .stat .v{font-weight:900;font-size:120px;line-height:.9;color:var(--yellow)}
+#c .stat .v small{font-size:96px;margin-left:4px}
+#c .stat .l{font-weight:500;font-size:32px;opacity:.85;margin-top:8px}
+#c .flow{position:absolute;left:90px;right:90px;top:1390px;display:flex;align-items:center;gap:28px;font-weight:900;font-size:64px}
+#c .flow .from{opacity:.7}
+#c .flow .arrow{flex:1;height:8px;background:linear-gradient(90deg,rgba(245,223,30,.2),var(--yellow));position:relative}
+#c .flow .arrow::after{content:"";position:absolute;right:-6px;top:-14px;border-left:28px solid var(--yellow);border-top:18px solid transparent;border-bottom:18px solid transparent}
+#c .flow .to{color:var(--yellow)}
+#c .src{position:absolute;left:90px;top:1500px;font-weight:500;font-size:24px;opacity:.55}
+
+/* D — cena 9: CTA */
+#d{background:var(--yellow);color:var(--navy)}
+#d .o{position:absolute;width:1500px;height:1500px;border-radius:50%;border:170px solid var(--navy);opacity:.06;left:-500px;top:-300px}
+#d .copy{position:absolute;left:90px;right:90px;top:520px}
+#d .pre{font-weight:900;font-size:150px;line-height:.9}
+#d .pre s{text-decoration:none;display:inline-block;position:absolute;left:760px;top:330px;transform:rotate(32deg);opacity:.28}
+#d .big{font-weight:900;font-size:300px;line-height:.85;letter-spacing:-.02em;margin-top:10px}
+#d .line{font-weight:500;font-size:48px;margin-top:40px}
+#d .cta{position:absolute;left:90px;right:90px;top:1330px;display:flex;flex-direction:column;gap:18px}
+#d .btn{align-self:flex-start;background:var(--navy);color:#fff;font-weight:900;font-size:46px;padding:30px 54px;border-radius:999px}
+#d .h{font-weight:500;font-size:38px}
+</style></head><body>
+
+<section class="f grain" id="a">
+  <div class="photo"></div><div class="shade"></div>
+  <div class="copy"><div class="rule"></div>
+    <h1>Design com <em>estratégia.</em></h1>
+    <div class="sub">Estúdio ORA · Leiria, desde 2016</div>
+  </div>
+  <div class="scene">SF-A · CENA 3</div>
+</section>
+
+<section class="f" id="b">
+  <div class="head"><div class="kicker">O que fazemos</div><h2>Websites que vendem.</h2></div>
+  <div class="peek"></div>
+  <div class="card">
+    <div class="num">02 / 04</div>
+    <img src="../../assets/portfolio/sbsmiles-website-desktop.jpg">
+    <div class="d">Webdesign · Lojas online · SEO</div>
+    <div class="t">Websites<br>& Lojas</div>
+  </div>
+  <div class="dots"><i></i><i class="on"></i><i></i><i></i></div>
+  <div class="scene">SF-B · CENA 4</div>
+</section>
+
+<section class="f grain" id="c">
+  <div class="head"><div class="kicker">Resultados reais · Evento</div><h2>Cada euro voltou<br>4,47 vezes.</h2></div>
+  <div class="phone"><div class="scr"></div></div>
+  <div class="stats">
+    <div class="stat"><div class="v">4,47<small>×</small></div><div class="l">retorno do investimento</div></div>
+    <div class="stat"><div class="v">147</div><div class="l">bilhetes vendidos</div></div>
+    <div class="stat"><div class="v">6,51<small>×</small></div><div class="l">na melhor campanha</div></div>
+  </div>
+  <div class="flow"><span class="from">835 €</span><span class="arrow"></span><span class="to">3.733 €</span></div>
+  <div class="src">Meta Ads · jul–set 2026</div>
+  <div class="scene">SF-C · CENA 6</div>
+</section>
+
+<section class="f" id="d">
+  <div class="o"></div>
+  <div class="copy"><div class="pre">Está na <s>h</s></div><div class="big">ORA.</div><div class="line">Estúdio de design com estratégia</div></div>
+  
+  <div class="cta"><div class="btn">ora.com.pt</div><div class="h">@estudio_ora · Leiria</div></div>
+  <div class="scene" style="color:rgba(27,59,114,.4)">SF-D · CENA 9</div>
+</section>
+</body></html>
