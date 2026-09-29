@@ -92,7 +92,7 @@ Texto essencial entre **y 250 e y 1250** e entre x 90 e x 990 (a UI dos Reels/an
 | 5 | b4–b7 | 48–95 | 1,92–3,84 | **Marca**: logótipo SVG 620 px ao centro (y ≈ 700) assenta com mola; kicker letra a letra por baixo; em b6 três pílulas aparecem na meia batida | Kicker: **ENERGIA & ESPIRITUALIDADE** · pílulas: **LOJA · TERAPIAS · EXPERIÊNCIA** · rodapé do bloco: **CORIMBA · LUANDA** | **Toque do sol** (taça 220 Hz) em b4 por cima do groove · plucks nas pílulas |
 | 6 | b8 | 96–107 | 3,84–4,32 | Capítulo: "01" em contorno ouro gigante atrás; título em slam | **01** · **A LOJA** | impacto + tom |
 | 7 | b9 | 108–119 | 4,32–4,80 | Subtítulo em slide-up | Tudo para o teu *ritual.* | — |
-| 8 | b10–b25 | 120–311 | 4,80–12,48 | **Carrossel 3D**, 8 produtos × 2 batidas: Cristais (b10), Japamalas (b12), Incensos (b14), Velas (b16), Óleos essenciais (b18), Taças tibetanas (b20), Selenite (b22), Pulseiras (b24). Índice "01/08…08/08" no canto; kicker fixo "A LOJA" | Nome do produto em Montserrat 800 · rodapé **Imagens ilustrativas** | whoosh + tique de percussão em cada entrada; o gancho de marimba acompanha |
+| 8 | b10–b25 | 120–311 | 4,80–12,48 | **Carrossel 3D**, 8 produtos × 2 batidas: Cristais (b10), Japamalas (b12), Incensos (b14), Velas (b16), Óleos essenciais (b18), Taças tibetanas (b20), Selenita (b22), Pulseiras (b24). Índice "01/08…08/08" no canto; kicker fixo "A LOJA" | Nome do produto em Montserrat 800 · rodapé **Imagens ilustrativas** | whoosh + tique de percussão em cada entrada; o gancho de marimba acompanha |
 | 9 | b26–b27 | 312–335 | 12,48–13,44 | Os 8 cartões recuam e formam um mosaico 2×4 (morph) | **E muito mais na loja.** | fill de toms + riser |
 | 10 | b28 | 336–347 | 13,44–13,92 | **Sunburst + mudança de sala para pergaminho**; "02" contorno ouro antigo | **02** · **TERAPIAS** | impacto + prato; entram palmas e vocal chops |
 | 11 | b29 | 348–359 | 13,92–14,40 | Subtítulo | Cuida da tua *energia.* | — |
@@ -162,7 +162,7 @@ Texto essencial entre **y 250 e y 1250** e entre x 90 e x 990 (a UI dos Reels/an
 | Velas | `vela-frasco-acesa.jpg` |
 | Óleos essenciais | `kokarte/oleos-essenciais.jpg` |
 | Taças tibetanas | `kokarte/taca-tibetana.jpg` |
-| Selenite | `kokarte/selenite.jpg` |
+| Selenita | `kokarte/selenite.jpg` |
 | Pulseiras | `kokarte/pulseiras.jpg` |
 | Reiki | `kokarte/maos-reiki.jpg` |
 | Massagem | `kokarte/pedras-massagem.jpg` |
@@ -176,6 +176,6 @@ Créditos em `assets/stock/unsplash/CREDITOS.md`.
 ## 15. Riscos
 
 1. Sem filmagens reais: as fotos são ilustrativas e marcadas como tal. Quando houver vídeo da loja, substituir os cartões pelos planos reais (mesma grelha).
-2. Confirmar com a cliente que todas as categorias do carrossel existem em stock (vêm do catálogo Kyte).
-3. Selenite: grafia do catálogo ("selenite"); em PT-PT também se usa "selenita" — confirmar a preferida.
-4. A carta do oráculo refere kokarte.com: confirmar que a funcionalidade continua ativa no site.
+2. ✅ Confirmado pela cliente (29 set 2026): os 8 produtos do carrossel existem em loja.
+3. ✅ Grafia confirmada: **Selenita**.
+4. ✅ O oráculo em kokarte.com continua ativo.
