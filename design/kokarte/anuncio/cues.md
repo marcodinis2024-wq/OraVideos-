@@ -21,7 +21,7 @@ Grelha: **125 BPM, 1 batida = 12 fotogramas = 0,48 s**, 16.ª = 3 fotogramas. Ba
 | Duração | **1 474 560 amostras = 30,720 s** (768 fotogramas) | **737 280 amostras = 15,360 s** (384 fotogramas) |
 | Loudness integrada | **−14,0 LUFS** | **−14,0 LUFS** |
 | True peak | **−1,4 dBTP** | **−1,5 dBTP** |
-| LRA | 1,4 LU | 1,6 LU |
+| LRA | 1,4 LU | 1,5 LU |
 | Limitador | brickwall, look-ahead de 1,5 ms, release de 120 ms, teto de amostra −1,9 dBFS. Chega a −4,3 dB só nos 3 impactos pesados (b0, b28, b56); no groove fica entre −1 e −1,5 dB | máx. −3,9 dB (b0, b16, b24) |
 
 Cadeia da música: bombo, baixo e percussão → saturação `tanh` suave ("glue"); pads, keys, stabs, gancho e chops → **sidechain do bombo** (bombeio de −6 dB, recuperação de 75 ms); reverb de sala de 2,2 s; delay ping-pong (colcheia pontuada / colcheia) nos chops, no gancho e nos stabs; EQ de mastering da música com low-shelf −3 dB a 110 Hz e high-shelf +5 dB a 2,4 kHz (o mix era escuro demais para telemóvel). Desvanecimento só nos últimos 0,34 s.
@@ -62,11 +62,11 @@ Nível = diferença de loudness curta (K-weighted, janela de 0,3 s) SFX − mús
 | 4,80 → 11,52 | b10, 12, 14, 16, 18, 20, 22, 24 | Carrossel: 8 cartões entram da direita | **whoosh R → centro** (arranca 0,14 s antes, pico na batida, pitch ±6 % por cartão) + **tique de madeira** ao assentar (+40 ms) | −5 a −6 dB |
 | 12,48 | b26 · f312 | Mosaico 2×4 | fill de toms + riser + prato invertido | música |
 | 13,44 | b28 · f336 | Sunburst + pergaminho "02 TERAPIAS" | **impacto pesado** + prato; entram palmas e vocal chops | +5,1 dB |
-| 14,40 | b30 · f360 | Cartão Reiki (59.000 Kz) | **swipe** (sobe) + **contagem** f362–f371 (10 tiques a subir 1,9 → 2,9 kHz) + **"ding"** de dois tons ascendentes E6→A6 em f372 (preço assenta) | −5 dB |
-| 15,84 | b33 · f396 | Massagem (38.000 Kz) | idem (contagem f398–407, ding f408) | −5,4 dB |
-| 17,28 | b36 · f432 | Mapeamento (45.000 Kz) | idem (ding f444) | −7 dB |
-| 18,72 | b39 · f468 | Programa (150.000 Kz) | idem (ding f480) | −6,9 dB |
-| 20,16 | b42 · f504 | RESET (8.500 Kz) | idem (ding f516) | −7 dB |
+| 14,40 | b30 · f360 | Cartão Reiki (59.000 Kz) | **swipe** (sobe) + **contagem** f368–f377 (10 tiques a subir 1,9 → 2,9 kHz) + **"ding"** de dois tons ascendentes E6→A6 em **f378** (preço assenta; a = f362) | −5 dB |
+| 15,84 | b33 · f396 | Massagem (38.000 Kz) | idem (contagem f402–411, ding f412) | −5,4 dB |
+| 17,28 | b36 · f432 | Mapeamento (45.000 Kz) | idem (contagem f438–447, ding f448) | −7 dB |
+| 18,72 | b39 · f468 | Programa (150.000 Kz) | idem (contagem f474–483, ding f484) | −6,9 dB |
+| 20,16 | b42 · f504 | RESET (8.500 Kz) | idem (contagem f510–519, ding f520) | −7 dB |
 | 21,60 | b45 · f540 | 5 cartões em leque | 3 whooshes suaves em cascata L→R; riser + prato invertido na música até ao b48 | −8,7 dB |
 | 23,04 | b48 · f576 | Floresta + partículas "03 A EXPERIÊNCIA" | **breakdown** (sai o bombo) + **impacto leve + tom** + **taça** (80 %) | impacto +1,2 · taça −2 dB |
 | 23,52 | b49 · f588 | Carta do oráculo sobe | kalimba (música) + **brilhos** (4 sinos agudos espalhados no estéreo) | −8,8 dB |
@@ -88,9 +88,9 @@ Níveis medidos no 15 s: impactos pesados +4,8 / +5,6 / +5 dB · whooshes secos 
 | 3,84 | b8 · f96 | A LOJA | impacto leve + tom; marimba entra |
 | 3,84 → 7,20 | b8 … b15 (1 por batida) | 8 produtos, entradas secas | whoosh **curto** (0,22 s, pré-roll de 80 ms) R → centro + tique |
 | 7,20 | b15 | — | 4 toms + riser + prato invertido |
-| 7,68 | b16 · f192 | Sunburst + pergaminho, TERAPIAS, Reiki | **impacto pesado** + prato; palmas e chops entram; swipe + contagem + ding (f204) |
-| 8,64 | b18 · f216 | Massagem | swipe + contagem + ding (f228) |
-| 9,60 | b20 · f240 | Mapeamento | swipe + contagem + ding (f252) |
+| 7,68 | b16 · f192 | Sunburst + pergaminho, TERAPIAS, Reiki | **impacto pesado** + prato; palmas e chops entram; swipe + contagem f196–204 + ding **f205** (a = f194) |
+| 8,64 | b18 · f216 | Massagem | swipe + contagem f218–226 + ding f227 |
+| 9,60 | b20 · f240 | Mapeamento | swipe + contagem f242–250 + ding f251 |
 | 10,56 · 11,04 | b22 · b23 | Pílulas "+ Programa · RESET" | 2 pops E6 · A6; riser e rolo de palmas até ao b24 |
 | 11,52 | b24 · f288 | CTA (= b56 do 30 s) | **drop final** + **impacto pesado** + prato |
 | 12,00 → 14,88 | b25 … b31 | Botão a pulsar | plucks E5 · A5 · C#6 · B5 · G#5 · A5 · E6 |
@@ -99,6 +99,6 @@ Níveis medidos no 15 s: impactos pesados +4,8 / +5,6 / +5 dB · whooshes secos 
 
 ## Notas para o motion
 
-- **Preços:** o som assume a contagem nos fotogramas **+2 a +11** da batida do cartão e o preço a **assentar em +12**, ou seja, no ding, que cai na batida seguinte. Se a animação tiver outro desfasamento, basta mudar `2 + k` e `12 / FPS` em `preco()`.
+- **Preços** (sincronizado com `kokarte-anuncio.html`; a = fotograma da batida do cartão, **+2 no 1.º cartão**, o Reiki): swipe na batida do cartão. **30 s:** 10 tiques em a+6…a+15, ding em a+16 (a contagem visual corre de a+6 a a+16). **15 s:** 9 tiques em a+2…a+10, ding em a+11. Os valores estão em `c0`/`c1`/`set` (e `a`) nas entradas `preco` dos arranjos em `kokarte-anuncio-audio.js`.
 - **Cartões do carrossel:** o pico do whoosh e o tique coincidem com a batida de entrada. O ataque expo-out do cartão encaixa aí.
 - Os níveis por tipo estão em `LEV` (dB) em `kokarte-anuncio-audio.js`. Depois de mudar um nível, basta voltar a correr o render: a normalização a −14 LUFS é automática.

@@ -42,7 +42,7 @@
         [8, 'impacto', { heavy: 0 }],
         ...[10, 12, 14, 16, 18, 20, 22, 24].map((b, i) => [b, 'cartao', { i, len: 0.34 }]),
         [28, 'impacto', { heavy: 1 }],
-        ...[30, 33, 36, 39, 42].map((b, i) => [b, 'preco', { i }]),
+        ...[30, 33, 36, 39, 42].map((b, i) => [b, 'preco', { i, a: i ? 0 : 2, c0: 6, c1: 15, set: 16 }]), // sincronizado com kokarte-anuncio.html: contagem a+6…a+16, assenta em a+16
         [45, 'leque'],
         [48, 'impacto', { heavy: 0 }], [48, 'toqueDoSol', { g: 0.8 }], [49, 'brilhos'],
         [56, 'impacto', { heavy: 1 }],
@@ -62,7 +62,7 @@
         [8, 'impacto', { heavy: 0 }],
         ...[8, 9, 10, 11, 12, 13, 14, 15].map((b, i) => [b, 'cartao', { i, len: 0.22, dry: 1 }]),
         [16, 'impacto', { heavy: 1 }],
-        ...[16, 18, 20].map((b, i) => [b, 'preco', { i }]),
+        ...[16, 18, 20].map((b, i) => [b, 'preco', { i, a: i ? 0 : 2, c0: 2, c1: 10, set: 11 }]), // contagem a+2…a+11, assenta em a+11
         [22, 'pilula', { m: 88 }], [23, 'pilula', { m: 93 }],
         [24, 'impacto', { heavy: 1 }],
         ...[[25, 76], [26, 81], [27, 85], [28, 83], [29, 80], [30, 81], [31, 88]].map(([b, m]) => [b, 'pluck', { m }]),
@@ -367,10 +367,11 @@
       woosh(t - pre, d + pre, 500 * v, 3800 * v, 1100, o.dry ? 0.46 : 0.4, 0.85, 0.0, pre / (d + pre) + 0.05, 1.1);
       tique(t + (o.dry ? 0.02 : 0.04), 1050 * vary(t, 31 + o.i, 0.05), 0.12, 0.1);
     }
-    function preco(t, o) { // swipe (cartão de cima sai para cima) + contagem f+2…f+11 + "ding" em f+12 (preço assenta)
-      woosh(t - 0.05, 0.26, 700, 5200, 3000, 0.3, (rnd(t, 40) - 0.5) * 0.3, 0, 0.35, 1.2, WN2);
-      for (let k = 0; k < 10; k++) tique(t + (2 + k) / FPS, 1900 + k * 110, 0.05 + 0.004 * k, (k % 2 ? 0.12 : -0.12));
-      const td = t + 12 / FPS, v = vary(t, 41 + o.i, 0.008);
+    function preco(t0, o) { // swipe na batida do cartão + contagem (tiques a+c0…a+c1) + "ding" em a+set (preço assenta); a = batida + o.a fotogramas
+      const t = t0 + o.a / FPS, n = o.c1 - o.c0 + 1;
+      woosh(t0 - 0.05, 0.26, 700, 5200, 3000, 0.3, (rnd(t0, 40) - 0.5) * 0.3, 0, 0.35, 1.2, WN2);
+      for (let k = 0; k < n; k++) tique(t + (o.c0 + k) / FPS, 1900 + k * 110, 0.05 + 0.004 * k, (k % 2 ? 0.12 : -0.12));
+      const td = t + o.set / FPS, v = vary(t0, 41 + o.i, 0.008);
       bell(td, mtof(88) * v, 0.075, 0.7, 0.05, 0.4, [[1, 1, 1], [2.76, 0.18, 0.4]]);
       bell(td + 0.07, mtof(93) * v, 0.085, 1.0, -0.05, 0.45, [[1, 1, 1], [2.76, 0.2, 0.4], [5.4, 0.05, 0.2]]);
     }
