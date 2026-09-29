@@ -120,7 +120,7 @@ Confirmado no CSS do site (Google Fonts, licença SIL OFL):
 | **Poppins** | `body` / `sans` | 400, 600 | Corpo, preços, legendas |
 | Cormorant Garamond | — | 500 itálico, 600 | **Proposta, a confirmar**: só mensagens do oráculo e afirmações (a carta usa serifa clássica dourada) |
 
-**Logótipo:** sans geométrica em caixa alta, semibold, tracking largo. Fonte desconhecida. **Não existe versão vetorial** (confirmado pela cliente): usar o JPEG até se redesenhar um vetor fiel (proposta: redesenho vetorial aprovado pela cliente, sem alterar o desenho).
+**Logótipo:** sans geométrica em caixa alta, semibold, tracking largo. A fonte original continua desconhecida, mas isso já não importa: o wordmark foi **redesenhado em paths** a partir do JPEG (`assets/kokarte/logotipo-kokarte.svg`; redesenho vetorial fiel, aprovado pela cliente). Nunca compor "KOKARTE" com Montserrat para fazer de logótipo: usar o SVG.
 
 ### Escala para 1080 × 1920
 
@@ -141,23 +141,33 @@ Confirmado no CSS do site (Google Fonts, licença SIL OFL):
 
 ## 4. Logótipo
 
-**Ficheiros** (descarregados de kokarte.com):
-- `assets/kokarte/logotipo-kokarte-500.jpg` — 500 × 500, JPEG, ouro sobre verde #334432
+**Ficheiros vetoriais** (redesenho vetorial fiel, aprovado pela cliente — 29 set 2026). Usar estes em todas as peças novas:
+- `assets/kokarte/logotipo-kokarte.svg` — símbolo + wordmark; sol em gradiente ouro #BE9B47 → #CFAC58 → #F4D47D (→ #E9C877 na ponta direita, medido), wordmark em ouro liso #D4A847 (medido no JPEG: no original as letras não têm gradiente). Fundo transparente, `viewBox="0 0 343 184"`
+- `assets/kokarte/logotipo-kokarte-simbolo.svg` — só o sol com raios e horizonte, `viewBox="0 0 264 110"`
+- `assets/kokarte/logotipo-kokarte-mono-claro.svg` — tudo em névoa #E8F1EC (sobre verde, musgo, floresta ou foto escura)
+- `assets/kokarte/logotipo-kokarte-mono-escuro.svg` — tudo em floresta #0F2017 (sobre pergaminho, névoa ou ouro)
+- `assets/kokarte/logo-comparacao.png` — prova de fidelidade: original e SVG lado a lado, à mesma escala
+
+**Como foi redesenhado:** medido sobre o JPEG no Chromium (canvas, píxel a píxel) e ajustado por iterações até coincidir. O sol é um semicírculo (47,3 × 45,6 px na escala do JPEG) separado dos raios por um anel escuro de ~3,5 px. Tem **15 raios** simétricos: 13 em leque, a alternar longos e curtos (vertical a 0°, curtos a ±14°, longos a ±28°, curtos a ±42°, longos a ±51° e o par inferior quase paralelo: curto a ±69° e longo a ±70,5°), e mais 2 raios horizontais pousados sobre o horizonte. Os raios afilam em lâmina até à ponta. A linha do horizonte é um arco fino (≈3,4 px no centro) que afina até às pontas e desce ligeiramente nas extremidades. O **wordmark foi vetorizado em paths** (não depende de nenhuma fonte): sans geométrica em caixa alta com hastes de 11,7 px, barras de 10,4 px e altura de maiúscula de 46,3 px na escala do JPEG; o "A" tem vértice em bico e o espaçamento entre letras é o do original. Não se acrescentou nenhum elemento. Diferença residual: menos de 1 px, sobretudo nas pontas finas dos raios, que no JPEG estão desfocadas.
+
+**Originais** (descarregados de kokarte.com):
+- `assets/kokarte/logotipo-kokarte-500.jpg` — 500 × 500, JPEG, ouro sobre verde #334432 (referência; já não é preciso usá-lo em peças)
 - `assets/kokarte/favicon-32.png`
 - `assets/kokarte/oraculo-carta-envelope.png` — 3072 × 2048, PNG transparente, carta "UMA MENSAGEM PARA TI" com selo de cera "K"
 - `assets/kokarte/site-fundo-motion.mp4` — vídeo de fundo do site (H.264; não pré-visualizado neste ambiente)
 
 **Desenho:** meio sol dourado a nascer sobre uma linha de horizonte, raios em leque; por baixo, o wordmark KOKARTE. Monograma secundário: "K" serifado em selo de cera.
 
-| Versão | Estado |
-|---|---|
-| Ouro sobre verde | Existe (única) |
-| Verde ou ouro antigo sobre pergaminho | Precisa de vetor |
-| Monocromática branco/floresta | Precisa de vetor |
+| Versão | Ficheiro | Fundos |
+|---|---|---|
+| Principal: ouro (gradiente) sobre verde | `logotipo-kokarte.svg` | verde #334432, musgo #1D382B, floresta #0F2017 |
+| Símbolo isolado | `logotipo-kokarte-simbolo.svg` | idem; ícone, avatar, transição "nascer do sol" (usar sem wordmark só com OK da cliente) |
+| Monocromática clara | `logotipo-kokarte-mono-claro.svg` | verdes e fotos escuras |
+| Monocromática escura | `logotipo-kokarte-mono-escuro.svg` | pergaminho #F4ECDC, névoa, ouro |
 
 - **Área de proteção** (proposta): x = altura do "K"; 1x livre em volta.
-- **Tamanho mínimo** (proposta): 160 px de largura digital, 25 mm impresso. O JPEG não deve passar de ~400 px de largura em vídeo; para 1080 px é preciso vetor.
-- **Proibido:** esticar, inclinar, rodar · ouro sobre branco/pergaminho · trocar o verde por preto ou roxo "místico" · separar o sol do wordmark sem aprovação · sombras duras, contornos, brilhos arco-íris.
+- **Tamanho mínimo** (proposta): 160 px de largura digital, 25 mm impresso. Com o SVG não há limite de ampliação (1080 px, 4K, impressão).
+- **Proibido:** esticar, inclinar, rodar · ouro sobre branco/pergaminho · trocar o verde por preto ou roxo "místico" · separar o sol do wordmark sem aprovação · alterar o número ou o ângulo dos raios, ou refazer o wordmark com uma fonte · sombras duras, contornos, brilhos arco-íris.
 
 ---
 
@@ -223,7 +233,7 @@ Formatos: 1080×1920 · 1080×1350 · 1080×1080 · 1920×1080 · 820×312 (Face
 5. Preços em Kz e só depois de confirmados pela cliente para a data.
 6. Fechar sempre com como marcar/comprar: WhatsApp + @kok.arte + kokarte.com.
 7. Transições nascem do logótipo: nascer do sol ou linha dourada.
-8. O logótipo usa-se a partir do ficheiro; nunca se recria.
+8. O logótipo usa-se a partir dos SVG em `assets/kokarte/` (redesenho vetorial fiel, aprovado); nunca se recria com fontes.
 9. Nunca misturar identidades: stock ou materiais de outros clientes só entram se licenciados e escolhidos para a KOKARTE, sempre com esta paleta.
 10. Cara, voz ou nome da cliente e de clientes finais só com autorização.
 
@@ -231,9 +241,9 @@ Formatos: 1080×1920 · 1080×1350 · 1080×1080 · 1920×1080 · 820×312 (Face
 
 ## 10. Lacunas — pedir à cliente
 
-Confirmado pela cliente a 29 set 2026: **preços corretos**, **os dois telefones ativos**, **autorização escrita** de imagem para todas as pessoas a filmar, **não existe logótipo vetorial**.
+Confirmado pela cliente a 29 set 2026: **preços corretos**, **os dois telefones ativos**, **autorização escrita** de imagem para todas as pessoas a filmar, **não existe logótipo vetorial** e a cliente **aprovou redesenhá-lo**.
 
-1. **Logótipo:** não há vetor. Proposta: redesenhar em SVG a partir do JPEG (sol, raios, horizonte, wordmark) e pedir aprovação; até lá, JPEG ≤ 400 px.
+1. **Logótipo:** resolvido. Fez-se o redesenho vetorial fiel em SVG (principal, símbolo, mono claro e mono escuro; ver secção 4). Falta só confirmar com a cliente a área de proteção e o tamanho mínimo propostos.
 2. **Fotos e vídeos reais:** o Instagram @kok.arte não abriu neste ambiente (limite de pedidos a visitantes sem sessão). Pedir à cliente 6–9 posts/reels recentes, capas dos destaques e planos da loja (lista R1–R12 em `briefing/kokarte/01-plano-viral.md`).
 3. **Eventos e próximas datas do RESET:** o site não os mostra a visitantes (ver secção de serviços); pedir diretamente.
 4. **Horário, ponto de referência na Estrada da Corimba, condições e zonas de entrega.**

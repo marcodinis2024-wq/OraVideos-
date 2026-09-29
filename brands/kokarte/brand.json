@@ -120,7 +120,7 @@
       "medio": "#CFAC58",
       "claro": "#F4D47D",
       "origem": "amostrado no sol e nas letras do logótipo (JPEG; aproximado)",
-      "papel": "gradiente metálico do logótipo e de brilhos; site usa ainda #E5C158 (hover) e #F0D080 (ouro claro)"
+      "papel": "gradiente metálico do logótipo e de brilhos; site usa ainda #E5C158 (hover) e #F0D080 (ouro claro); no SVG do logótipo o sol usa #BE9B47 → #CFAC58 → #F4D47D → #E9C877 e o wordmark usa ouro liso #D4A847 (medido)"
     },
     "fundoEscuro": {
       "nome": "Floresta",
@@ -342,7 +342,7 @@
     "proporcao": "60 % verdes (verde/musgo/floresta) · 20 % fotografia de produto e pergaminho · 12 % ouro · 8 % névoa e neutros"
   },
   "tipografia": {
-    "estado": "Fontes do site confirmadas no CSS (Google Fonts, SIL OFL). Fonte do logótipo desconhecida (sem ficheiro) — A CONFIRMAR",
+    "estado": "Fontes do site confirmadas no CSS (Google Fonts, SIL OFL). A fonte original do logótipo continua desconhecida, mas o wordmark já está vetorizado em paths no SVG",
     "display": {
       "familia": "Montserrat",
       "pesos": [
@@ -367,7 +367,7 @@
       ],
       "nota": "a carta do oráculo usa uma serifa clássica em caixa alta dourada ('UMA MENSAGEM PARA TI'); usar só em mensagens/afirmações do oráculo, nunca em títulos comerciais"
     },
-    "logotipo": "sans geométrica em caixa alta, peso semibold, tracking largo (A CONFIRMAR nome da fonte; Montserrat 600 é a aproximação disponível — nunca recriar o logótipo, usar o ficheiro)",
+    "logotipo": "sans geométrica em caixa alta, peso semibold, tracking largo; redesenhada em paths em assets/kokarte/logotipo-kokarte.svg (redesenho vetorial fiel, aprovado pela cliente). Nunca compor o logótipo com Montserrat: usar o SVG",
     "ficheiros": [
       "Google Fonts: Montserrat 400/600/700, Poppins 400/600/700 (carregadas em kokarte.com)"
     ],
@@ -457,29 +457,43 @@
   },
   "logo": {
     "ficheiros": [
-      "assets/kokarte/logotipo-kokarte-500.jpg (500×500, JPEG, ouro sobre verde #334432; descarregado de https://kokarte.com/logo.jpeg)",
+      "assets/kokarte/logotipo-kokarte.svg (PRINCIPAL; símbolo + wordmark; sol com gradiente #BE9B47 → #CFAC58 → #F4D47D → #E9C877, wordmark em ouro liso #D4A847; fundo transparente; viewBox 0 0 343 184)",
+      "assets/kokarte/logotipo-kokarte-simbolo.svg (só o sol, os raios e o horizonte; mesmo gradiente; viewBox 0 0 264 110)",
+      "assets/kokarte/logotipo-kokarte-mono-claro.svg (tudo em névoa #E8F1EC)",
+      "assets/kokarte/logotipo-kokarte-mono-escuro.svg (tudo em floresta #0F2017)",
+      "assets/kokarte/logo-comparacao.png (prova de fidelidade: JPEG original e SVG lado a lado)",
+      "assets/kokarte/logotipo-kokarte-500.jpg (original de referência, 500×500, JPEG, ouro sobre verde #334432; descarregado de https://kokarte.com/logo.jpeg)",
       "assets/kokarte/favicon-32.png (32×32)",
       "assets/kokarte/oraculo-carta-envelope.png (3072×2048, PNG transparente — carta do oráculo com selo 'K'; https://kokarte.com/cartasemfundo2.png)",
       "assets/kokarte/site-fundo-motion.mp4 (vídeo de fundo do site; H.264, não pré-visualizado aqui)"
     ],
     "descricao": "Meio sol dourado a nascer sobre uma linha de horizonte, com raios em leque, e por baixo o wordmark KOKARTE em caixa alta. Monograma secundário: 'K' serifado em selo de cera dourado (oráculo).",
-    "emFalta": "não existe versão vetorial (confirmado pela cliente); proposta: redesenho SVG fiel a partir do JPEG, a aprovar. Fonte do wordmark desconhecida",
+    "vetor": {
+      "estado": "redesenho vetorial fiel, aprovado pela cliente (a cliente confirmou que não existia vetor e aprovou o redesenho, 29 set 2026)",
+      "metodo": "medido píxel a píxel no JPEG (canvas no Chromium) e ajustado por iterações até coincidir; a diferença residual é inferior a 1 px, sobretudo nas pontas finas dos raios, que no JPEG estão desfocadas. Comparação em assets/kokarte/logo-comparacao.png",
+      "simbolo": "meio sol (semicírculo 47,3 × 45,6 px na escala do JPEG) separado dos raios por um anel escuro de ~3,5 px; 15 raios simétricos em lâmina afilada: 13 em leque (0°, ±14° curtos, ±28° longos, ±42° curtos, ±51° longos, par inferior quase paralelo ±69° curto e ±70,5° longo) + 2 horizontais sobre o horizonte; horizonte em arco fino (~3,4 px no centro) que afina e desce nas pontas",
+      "wordmark": "convertido em paths, sem dependência de fonte: sans geométrica em caixa alta, hastes 11,7 px, barras 10,4 px, altura de maiúscula 46,3 px (escala do JPEG), 'A' com vértice em bico, espaçamento igual ao original",
+      "cores": "sol: gradiente linear horizontal #BE9B47 (0) → #CFAC58 (24 %) → #F4D47D (68 %) → #E9C877 (100 %, medido); wordmark: ouro liso #D4A847 (medido; no original as letras não têm gradiente)",
+      "elementosNovos": "nenhum"
+    },
     "areaDeProtecao": "x = altura do 'K' do wordmark; 1x livre em todo o contorno (proposta, A CONFIRMAR)",
     "tamanhoMinimoPx": 160,
-    "tamanhoMinimo": "160 px de largura digital com símbolo; 25 mm impresso (proposta, A CONFIRMAR). O JPEG de 500 px não deve ser ampliado acima de ~400 px de largura",
+    "tamanhoMinimo": "160 px de largura digital com símbolo; 25 mm impresso (proposta, A CONFIRMAR). Com o SVG não há limite de ampliação",
     "versoes": [
       "positiva",
       "negativa",
       "monocromatica"
     ],
     "versoesDetalhe": {
-      "principal": "ouro sobre verde #334432 (a única que existe hoje)",
-      "sobreClaro": "verde #334432 ou ouro antigo #7F6118 sobre pergaminho (precisa de vetor — A CONFIRMAR)",
-      "monocromatica": "branco 100 % ou floresta 100 % (precisa de vetor)"
+      "principal": "logotipo-kokarte.svg: ouro sobre verde #334432, musgo #1D382B ou floresta #0F2017",
+      "simbolo": "logotipo-kokarte-simbolo.svg: ícone, avatar e transição 'nascer do sol' (sem wordmark só com OK da cliente)",
+      "monoClaro": "logotipo-kokarte-mono-claro.svg: névoa #E8F1EC sobre verdes e fotos escuras",
+      "monoEscuro": "logotipo-kokarte-mono-escuro.svg: floresta #0F2017 sobre pergaminho #F4ECDC, névoa ou ouro"
     },
     "proibicoes": [
       "esticar, inclinar ou rodar",
-      "ampliar o JPEG de 500 px acima de ~400 px (pixeliza); pedir vetor",
+      "usar o JPEG em peças novas (usar os SVG)",
+      "alterar o número ou o ângulo dos raios, o gradiente, ou refazer o wordmark com uma fonte",
       "ouro sobre branco ou pergaminho (1,8–2,1:1)",
       "separar o sol do wordmark sem aprovação (o sol isolado pode ser usado como ícone animado só com OK da cliente)",
       "trocar o verde por preto ou roxo 'místico'",
@@ -592,12 +606,12 @@
     "Preços em Kz (45.000 Kz); preços atuais confirmados pela cliente a 29 set 2026.",
     "Fechar sempre com como marcar/comprar: WhatsApp + @kok.arte + kokarte.com.",
     "Toda a transição nasce do logótipo: nascer do sol ou linha dourada. Nada de wipes genéricos.",
-    "O logótipo usa-se a partir do ficheiro; não se recria com fontes.",
+    "O logótipo usa-se a partir dos SVG em assets/kokarte/ (redesenho vetorial fiel, aprovado); nunca se recria com fontes.",
     "Nunca misturar identidades: stock ou materiais de outros clientes (ex.: velas de outros projetos em assets/stock) só entram se forem licenciados e escolhidos para a KOKARTE, e nunca com a paleta de outro cliente.",
     "Cara, voz ou nome da cliente e de clientes finais só com autorização (autorização escrita existente para as filmagens, confirmada a 29 set 2026)."
   ],
   "aConfirmar": [
-    "Fonte do logótipo (não há vetor: redesenho SVG a aprovar)",
+    "Área de proteção e tamanho mínimo do logótipo (propostas; o vetor já existe)",
     "Horário e ponto de referência exato na Estrada da Corimba",
     "Se vende cosmética/cuidado pessoal (categoria do Facebook)",
     "Próximos eventos/workshops e datas do RESET by KOKARTE",
