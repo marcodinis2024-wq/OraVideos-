@@ -54,8 +54,8 @@ html,body{height:100%;background:#070d09;overflow:hidden}
 .cc .sh{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,32,23,.18) 0%,rgba(15,32,23,0) 22%,rgba(15,32,23,0) 52%,rgba(15,32,23,.72) 78%,rgba(15,32,23,.9) 100%)}
 .cc .rim{position:absolute;inset:0;border-radius:40px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16),inset 0 1px 0 rgba(255,255,255,.25)}
 .spec{position:absolute;inset:0;border-radius:40px;background:linear-gradient(105deg,rgba(255,255,255,0) 42%,rgba(255,250,235,.16) 50%,rgba(255,255,255,0) 58%);background-size:300% 100%;mix-blend-mode:screen;pointer-events:none}
-.cc .lline{position:absolute;left:345px;top:836px;width:70px;height:3px;background:var(--ouro);transform-origin:50% 50%}
-.cc .lbl{position:absolute;left:30px;right:30px;top:850px;height:112px;overflow:hidden}
+.cc .lline{position:absolute;left:345px;top:786px;width:70px;height:3px;background:var(--ouro);transform-origin:50% 50%}
+.cc .lbl{position:absolute;left:30px;right:30px;top:800px;height:112px;overflow:hidden}
 .cc .lbl div{position:absolute;left:0;right:0;top:0;height:112px;line-height:112px;text-align:center;font:800 84px/112px Montserrat,sans-serif;letter-spacing:-.01em;color:var(--nev);white-space:nowrap}
 .cc .csh{position:absolute;left:80px;top:1050px;width:600px;height:70px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),rgba(0,0,0,0));filter:blur(8px)}
 .hdr{position:absolute;top:244px;font:600 30px/36px Montserrat,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--ouroc);white-space:nowrap}
@@ -69,7 +69,7 @@ html,body{height:100%;background:#070d09;overflow:hidden}
 .light .hdr.r b{color:var(--oa)}
 /* terapias */
 #stk{position:absolute;left:0;top:0;width:1080px;height:1920px;perspective:2000px;perspective-origin:540px 700px}
-.tc{position:absolute;left:110px;top:300px;width:860px;height:940px;border-radius:40px;transform-origin:50% 50%}
+.tc{position:absolute;left:110px;top:300px;width:860px;height:900px;border-radius:40px;transform-origin:50% 50%}
 .tc .tb{position:absolute;inset:0;border-radius:40px;overflow:hidden;background:linear-gradient(172deg,#3d523c 0%,#334432 45%,#2a392a 100%);box-shadow:0 50px 80px -34px rgba(15,32,23,.55),0 14px 26px -12px rgba(15,32,23,.35),inset 0 0 0 1px rgba(232,241,236,.14),inset 0 1px 0 rgba(255,255,255,.18)}
 .tc .tph{position:absolute;left:0;top:0;width:860px;height:400px;overflow:hidden}
 .tc .tph img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;filter:url(#grade)}
@@ -82,7 +82,7 @@ html,body{height:100%;background:#070d09;overflow:hidden}
 .tc .tp .num{display:inline-block;text-align:right}
 .tc .tp .kz{font-size:.6em;margin-left:.22em;font-weight:600}
 .tc .spec{border-radius:40px}
-.tsh{position:absolute;left:190px;top:1210px;width:700px;height:80px;border-radius:50%;background:radial-gradient(closest-side,rgba(15,32,23,.35),rgba(15,32,23,0));filter:blur(10px)}
+.tsh{position:absolute;left:190px;top:1165px;width:700px;height:80px;border-radius:50%;background:radial-gradient(closest-side,rgba(15,32,23,.35),rgba(15,32,23,0));filter:blur(10px)}
 .bp{display:inline-block;padding:0 50px;height:118px;line-height:118px;border-radius:59px;background:linear-gradient(175deg,#3d523c,#334432 60%,#2a392a);box-shadow:0 30px 50px -26px rgba(15,32,23,.6),inset 0 0 0 1px rgba(232,241,236,.14);font:700 50px/118px Montserrat,sans-serif;color:var(--nev);white-space:nowrap}
 .bp b{color:var(--ouroc);margin-right:.35em}
 /* carta */
@@ -112,7 +112,7 @@ html,body{height:100%;background:#070d09;overflow:hidden}
 #band{position:absolute;left:0;top:0;width:3200px;height:260px;margin:-130px 0 0 -1600px;background:linear-gradient(180deg,rgba(212,175,55,0) 0%,rgba(240,208,128,.35) 38%,rgba(255,246,214,.95) 50%,rgba(240,208,128,.35) 62%,rgba(212,175,55,0) 100%);mix-blend-mode:screen}
 #vig{background:radial-gradient(ellipse 78% 62% at 50% 46%,rgba(8,18,12,0) 58%,rgba(8,18,12,.34) 100%)}
 #grain{mix-blend-mode:overlay;opacity:.38}
-#illus{position:absolute;left:90px;top:1420px;font:400 26px/1.3 Poppins,sans-serif;letter-spacing:.02em}
+#illus{position:absolute;left:0;right:0;text-align:center;top:1221px;font:400 26px/1.3 Poppins,sans-serif;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -190,7 +190,7 @@ const C = CUT === 30 ? {
   R: { hook: [0, 48], brand: [36, 96], loja: [96, 348], ter: [336, 585], exp: [576, 684], cta: [672, 768] },
   bursts: [{ f0: 36, x: 545, y: 760, to: 'brand' }, { f0: 336, x: 540, y: 560, to: 'ter' }, { f0: 672, x: 543, y: 483, to: 'cta' }],
   loja: { chap: 96, t0: 120, step: 24, ed: 10, mos: 312 },
-  ter: { chap: 336, st0: 356, s: [360, 396, 432, 468, 504], n: 5, fan: 540, pills: null, kin: 358 },
+  ter: { chap: 336, st0: 360, s: [360, 396, 432, 468, 504], n: 5, fan: 540, pills: null, kin: 358 },
   cta: 672, slams: [0, 12, 24, 96, 340, 578],
 } : {
   R: { hook: [0, 48], brand: [36, 96], loja: [96, 204], ter: [192, 300], exp: [9999, 9999], cta: [288, 384] },
@@ -225,15 +225,15 @@ function chapter(parent, num, title, sub, yNum = 560, yT = 660, ySub = 850) {
   const s = sub ? T(parent, W(sub), ySub, 'sub') : null;
   return { n, t, s, tsp: t.i.querySelector('.imp') };
 }
-function animChapter(ch, f, fNum, fT, fSub, fOut) {
+function animChapter(ch, f, fNum, fT, fSub, fOut, subOut = fOut) {
   const out = eIn(P(f, fOut, fOut + 6));
-  const on = f >= fNum - 1 && f < fOut + 6;
+  const on = f >= fNum - 1 && f < Math.max(fOut + 6, subOut + 3);
   [ch.n, ch.t, ch.s].forEach(x => x && vis(x.o, on)); if (!on) return;
   const nq = eOut(P(f, fNum - 1, fNum + 9));
-  ch.n.i.style.opacity = nq * .8 * (1 - out); tf(ch.n.i, -(f - fNum) * 1.2 - 60 * out, 1.25 - .25 * nq);
+  ch.n.i.style.opacity = nq * .6 * (1 - out); tf(ch.n.i, -(f - fNum) * 1.2 - 60 * out, 1.25 - .25 * nq);
   const tq = eOut(P(f, fT - 1, fT + 4));
   ch.t.i.style.opacity = tq * (1 - out); ch.t.i.style.filter = `blur(${(1 - tq) * 14 + out * 8}px)`; tf(ch.t.i, -90 * out, 1.18 - .18 * tq);
-  if (ch.s) { words(ch.s.ws(), f, fSub, { st: 2, du: 9, dy: 50, bl: 8 }); ch.s.i.style.opacity = 1 - out; tf(ch.s.i, -60 * out); }
+  if (ch.s) { const sq = eOut(P(f, fSub - 1, fSub + 3)), so = eIn(P(f, subOut, subOut + 3)); ch.s.i.style.opacity = sq * (1 - so); ch.s.i.style.filter = sq < .999 ? `blur(${(1 - sq) * 8}px)` : 'none'; tf(ch.s.i, (1 - sq) * 30 - 30 * so); }
 }
 
 /* ---------- A LOJA ---------- */
@@ -252,7 +252,7 @@ const CARDS = PROD.map(([n, img, pos, xf = '', flt = '']) => {
 });
 const lKick = mk(SC.loja, 'div', 'hdr l', 'A loja');
 const lIdx = mk(SC.loja, 'div', 'hdr r', '<b>01</b> / 08'); const lIdxB = lIdx.querySelector('b');
-const lMos = T(SC.loja, W('E muito mais|na ~loja.~'), 1150, 'ttl', 'font-size:84px');
+const lMos = T(SC.loja, W('E muito mais|na ~loja.~'), 1082, 'ttl', 'font-size:76px');
 
 /* ---------- TERAPIAS ---------- */
 const CH2 = chapter(SC.ter, '02', 'TERAPIAS', 'Cuida da tua ~energia.~');
@@ -421,7 +421,7 @@ function render(t) {
   if (on.loja) {
     const LC = C.loja;
     keyAt(SC.loja, 540, 720, 1);
-    if (LC.chap != null) animChapter(CH1, f, 96, 96, 108, 117);
+    if (LC.chap != null) animChapter(CH1, f, 96, 96, 108, 117, 118);
     else [CH1.n, CH1.t, CH1.s].forEach(x => vis(x.o, false));
     let c = -1.6 + 1.6 * eOut(P(f, LC.t0, LC.t0 + LC.ed + 2));
     for (let k = 1; k < 8; k++) c += eOut(P(f, LC.t0 + k * LC.step, LC.t0 + k * LC.step + LC.ed));
@@ -431,7 +431,7 @@ function render(t) {
       const u = i - c, a = Math.abs(u), m = Math.min(1, a), sg = Math.sign(u);
       let x = sg * (600 * m + 420 * Math.max(0, a - 1)), y = 0, s = 1 - .22 * m, ry = -38 * sg * m, bl = 8 * m, br = 1 - .35 * m, op = clamp(1 - (a - 1) / .6);
       if (LC.mos != null && f >= LC.mos) {
-        const q = eIO(P(f, LC.mos + i * .6, LC.mos + 11 + i * .6));
+        const q = eIO(P(f, LC.mos + i * .4, LC.mos + 9 + i * .4));
         const col = i % 4, row = Math.floor(i / 4), gx = (col - 1.5) * 236, gy = 680 + (row - .5) * 326 - 840;
         x = L(x, gx, q); y = L(y, gy, q); s = L(s, .29, q); ry = L(ry, 0, q); bl = L(bl, 0, q); br = L(br, 1, q); op = L(op, 1, q);
       }
@@ -465,19 +465,19 @@ function render(t) {
   /* --- TERAPIAS --- */
   if (on.ter) {
     const TC = C.ter;
-    if (TC.chap != null) animChapter(CH2, f, TC.chap + 2, TC.chap + 5, TC.chap + 12, TC.chap + 20);
+    if (TC.chap != null) animChapter(CH2, f, TC.chap + 2, TC.chap + 5, TC.chap + 12, TC.chap + 20, TC.chap + 22);
     else [CH2.n, CH2.t, CH2.s].forEach(x => vis(x.o, false));
     const r = eOut(P(f, TC.st0, TC.st0 + 12));
     const fanOn = TC.fan != null && f >= TC.fan;
     TCS.forEach((cd, k) => {
       if (k >= TC.n) { vis(cd.e, false); return; }
       let d = k; for (let j = 0; j < k; j++) { const ej = TC.s[j + 1]; if (f >= ej) d -= clamp(spring((f - ej) / FPS, .42, .82), 0, 1.02); }
-      const ex = k + 1 < TC.s.length ? TC.s[k + 1] : (TC.pills != null ? TC.pills : null);
+      const ex = k + 1 < TC.s.length ? TC.s[k + 1] : (TC.pills != null ? TC.pills - 9 : null);
       const x = ex != null ? eIn(P(f, ex, ex + 9)) : 0;
       let tx = 0, ty = 34 * d + (1 - r) * 1500 - 1350 * x, rx = 18 * x, rz = 0, s = 1 - .06 * d, br = 1 - .05 * d, op = clamp(2.4 - d) * (d > 1.2 ? .85 : 1);
       if (fanOn) {
         const ord = k === 4 ? 0 : k + 1, q = eOut(P(f, TC.fan + ord * 2, TC.fan + ord * 2 + 14));
-        const gx = (k - 2) * 188, gy = 690 + Math.pow(k - 2, 2) * 16 - 770;
+        const gx = (k - 2) * 188, gy = 690 + Math.pow(k - 2, 2) * 16 - 750;
         tx = L(tx, gx, q); ty = L(ty, gy, q); rx = L(rx, 0, q); rz = L(0, (k - 2) * 6, q); s = L(s, .25, q); br = L(br, 1, q); op = L(op, 1, q);
         cd.e.style.zIndex = 10 + k;
       } else cd.e.style.zIndex = 50 - k;
@@ -502,9 +502,9 @@ function render(t) {
       if (counting) $('#vbg').setAttribute('stdDeviation', `0 ${(6 * (1 - cv)).toFixed(2)}`);
       cd.spec.style.backgroundPosition = `${L(-5, 105, clamp(1 - Math.abs(rx) / 18) * eIO(P(f, a - 2, a + 14))).toFixed(1)}% 0`;
       cd.img.style.transform = `scale(${1 + .04 * eIO(P(f, a, a + 36))})`;
-      if (!done && d < .5 && f >= aE && f < aE + 14) sparkle(540 + tx, 300 + 470 + ty + 330, f, aE, 9, 40 + k, 150, .9);
+      if (!done && d < .5 && f >= aE && f < aE + 14) sparkle(540 + tx, 300 + 450 + ty + 320, f, aE, 9, 40 + k, 150, .9);
     });
-    tsh.style.opacity = (1 - eIO(P(f, TC.fan ?? 1e9, (TC.fan ?? 1e9) + 10))) * r * (TC.pills != null ? 1 - eIn(P(f, TC.pills, TC.pills + 8)) : 1);
+    tsh.style.opacity = (1 - eIO(P(f, TC.fan ?? 1e9, (TC.fan ?? 1e9) + 10))) * r * (TC.pills != null ? 1 - eIn(P(f, TC.pills - 9, TC.pills)) : 1);
     // cabeçalho
     const hq = eOut(P(f, TC.kin, TC.kin + 8));
     [tKick, tIdx].forEach(e => { vis(e, f >= TC.kin); e.style.opacity = hq; e.style.transform = `translateY(${(1 - hq) * 20}px)`; });
@@ -522,7 +522,7 @@ function render(t) {
       words(tPillsCap.ws(), f, TC.pills + 2, { st: 2, du: 10, dy: 40, bl: 8 }); tf(tPillsCap.i);
       tPills.forEach((p, j) => { const fj = TC.pills + 4 + 6 * j, q = spring((f - fj) / FPS, .42, .8), o = eOut(P(f, fj - 1, fj + 5)); p.i.style.opacity = o; tf(p.i, (1 - o) * 40, .8 + .2 * q); });
     }
-    illus = TC.pills != null && f >= TC.pills ? 1 - eIn(P(f, TC.pills, TC.pills + 6)) : eOut(P(f, TC.st0 + 4, TC.st0 + 12)) * (fanOn ? 1 - eIn(P(f, TC.fan + 30, TC.fan + 36)) : 1);
+    illus = TC.pills != null && f >= TC.pills - 9 ? 1 - eIn(P(f, TC.pills - 9, TC.pills - 3)) : eOut(P(f, TC.st0 + 4, TC.st0 + 12)) * (fanOn ? 1 - eIn(P(f, TC.fan + 30, TC.fan + 36)) : 1);
     illusLight = true;
   }
 
