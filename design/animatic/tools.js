@@ -17,6 +17,7 @@ async function page(b, dsf = 1) { const p = await b.newPage({ viewport: { width:
     const raw = path.join(OUT, '_frames.mjpeg'); const fd = fs.openSync(raw, 'w');
     for (let i = 0; i < N; i++) { await p.evaluate(t => window.__render(t), i / fps); await p.evaluate(() => window.__beforeShot && window.__beforeShot()); fs.writeSync(fd, await p.screenshot({ type: 'jpeg', quality: 88 })); if (i % 100 === 0) console.log('frame', i, '/', N); }
     fs.closeSync(fd);
+    if (process.env.KEEP_FRAMES) { console.log('frames kept', raw); return b.close(); }
     const ff = spawn(FFMPEG, ['-y', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', raw, '-c:v', 'libvpx', '-b:v', '8M', '-qmin', '4', '-qmax', '30', '-deadline', 'good', '-cpu-used', '4', '-an', path.join(OUT, NAME + '-9x16-sem-som.webm')], { stdio: ['ignore', 'ignore', 'inherit'] });
     await new Promise(r => ff.on('close', r)); fs.unlinkSync(raw);
   } else if (mode === 'audio') {
