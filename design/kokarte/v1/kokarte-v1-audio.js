@@ -116,7 +116,7 @@
     // PAD quente: 2 serras desafinadas ±7 cents + triângulo, por voz; LP partilhado com automação
     const padBus = G(1); const padLP = BQ('lowpass', 900, 0.8); padBus.connect(padLP); padLP.connect(musicIn); send(padLP, 0.5, mRevIn);
     function padChord(b0, b1, ch) {
-      const t0 = at(B(b0)) - 0.02, t1 = at(B(b1)); const notes = CH[ch].pad;
+      const t0 = Math.max(0, at(B(b0)) - 0.02), t1 = at(B(b1)); const notes = CH[ch].pad;
       notes.forEach((m, i) => {
         const f = mtof(m), e = G(0), p = PAN((i / (notes.length - 1) * 2 - 1) * 0.55, padBus); e.connect(p);
         const g = 0.026;
@@ -279,13 +279,13 @@
     }
     function papel(lt) {
       const t = at(lt), d = 0.4, p = PAN(0, sfx); p.pan.setValueAtTime(-0.1, t); p.pan.linearRampToValueAtTime(0.12, t + d); send(p, 0.12, sRevIn);
-      const shp = x => Math.pow(Math.sin(Math.PI * Math.min(1, x * 1.15)), 0.7);
+      const shp = x => Math.pow(Math.max(0, Math.sin(Math.PI * Math.min(1, x * 1.15))), 0.7);
       { const n = noise(lt, d, PN), h = BQ('highpass', 500, 0.7), b = BQ('bandpass', 1600, 0.7), e = G(0, p); n.connect(h); h.connect(b); b.connect(e); b.frequency.setValueAtTime(1600, t); b.frequency.exponentialRampToValueAtTime(3200, t + d); rough(e.gain, t, d, 0.5, lt, shp); }
       { const n = noise(lt + 0.5, d, WN), h = BQ('highpass', 5200, 0.7), e = G(0, p); n.connect(h); h.connect(e); rough(e.gain, t, d, 0.05, lt + 0.5, shp); }
     }
     function virar(lt) {
       const t = at(lt), d = 0.32, p = PAN(0, sfx); p.pan.setValueAtTime(-0.5, t); p.pan.linearRampToValueAtTime(0.5, t + d); send(p, 0.18, sRevIn);
-      const shp = x => x < 0.38 ? Math.pow(x / 0.38, 1.5) : Math.pow(1 - (x - 0.38) / 0.62, 2);
+      const shp = x => x < 0.38 ? Math.pow(x / 0.38, 1.5) : Math.pow(Math.max(0, 1 - (x - 0.38) / 0.62), 2);
       { const n = noise(lt, d, PN), b = BQ('bandpass', 900, 1.1), e = G(0, p); n.connect(b); b.connect(e); b.frequency.setValueAtTime(900, t); b.frequency.exponentialRampToValueAtTime(2600, t + d * 0.38); b.frequency.exponentialRampToValueAtTime(1100, t + d); rough(e.gain, t, d, 0.55, lt, shp); }
       { const n = noise(lt + 0.3, d, PN), l = BQ('lowpass', 380, 0.7), e = G(0, p); n.connect(l); l.connect(e); rough(e.gain, t, d, 0.5, lt + 0.3, shp); }
     }
@@ -306,7 +306,7 @@
       const t = at(lt), d = 0.55, n = noise(lt, d, PN2), b = BQ('bandpass', 350, 0.9), e = G(0), p = PAN(0, sfx); n.connect(b); b.connect(e); e.connect(p); send(p, 0.3, sRevIn);
       b.frequency.setValueAtTime(350, t); b.frequency.exponentialRampToValueAtTime(3800, t + d * 0.85);
       p.pan.setValueAtTime(-0.7, t); p.pan.linearRampToValueAtTime(0.7, t + d);
-      const N = 48, cv = new Float32Array(N); for (let i = 0; i < N; i++) { const x = i / (N - 1); cv[i] = 0.5 * (x < 0.7 ? Math.pow(x / 0.7, 1.8) : Math.pow(1 - (x - 0.7) / 0.3, 1.5)); } e.gain.setValueCurveAtTime(cv, t, d);
+      const N = 48, cv = new Float32Array(N); for (let i = 0; i < N; i++) { const x = i / (N - 1); cv[i] = 0.5 * (x < 0.7 ? Math.pow(x / 0.7, 1.8) : Math.pow(Math.max(0, 1 - (x - 0.7) / 0.3), 1.5)); } e.gain.setValueCurveAtTime(cv, t, d);
       const o = OSC('sine', 480, t, t + d + 0.05), l = BQ('lowpass', 2500, 0.7), og = G(0); o.frequency.setValueAtTime(480, t); o.frequency.exponentialRampToValueAtTime(1500, t + d); o.connect(l); l.connect(og); og.connect(p);
       og.gain.setValueAtTime(0, t); og.gain.linearRampToValueAtTime(0.018, t + d * 0.7); og.gain.linearRampToValueAtTime(0, t + d);
       bell(lt + 0.42, PENT.E7, 0.03, 0.6, 0.6, 0.5, [[1, 1, 1], [2.76, 0.2, 0.3]]);
