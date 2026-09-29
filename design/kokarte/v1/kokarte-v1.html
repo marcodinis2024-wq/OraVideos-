@@ -16,7 +16,7 @@ html,body{height:100%;background:#070d09;overflow:hidden}
 .abs{position:absolute;left:0;top:0}
 .w{display:inline-block;will-change:transform,opacity}
 .g{color:var(--ouro)}
-.kick{position:absolute;left:0;right:0;top:242px;text-align:center;font:600 30px/1.2 Montserrat,sans-serif;letter-spacing:.18em;color:var(--ouro);text-transform:uppercase}
+.kick{position:absolute;left:0;right:0;top:242px;text-align:center;text-shadow:0 2px 14px rgba(15,32,23,.55);font:600 30px/1.2 Montserrat,sans-serif;letter-spacing:.18em;color:var(--ouro);text-transform:uppercase}
 .h1{position:absolute;left:70px;right:70px;text-align:center;font:700 112px/.98 Montserrat,sans-serif;letter-spacing:-.01em;color:var(--nev)}
 .h2{position:absolute;left:70px;right:70px;text-align:center;font:700 84px/1 Montserrat,sans-serif;color:var(--nev)}
 .orac{position:absolute;left:90px;right:90px;text-align:center;font:italic 500 76px/1.14 'Cormorant Garamond',serif;color:var(--nev)}
@@ -32,7 +32,7 @@ html,body{height:100%;background:#070d09;overflow:hidden}
 .ph img{position:absolute;width:100%;height:100%;object-fit:cover;filter:url(#duo)}
 #pbg .ph img{filter:url(#duo) blur(14px) brightness(.8)}
 #pbg:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,32,23,.45) 0%,rgba(15,32,23,.1) 35%,rgba(15,32,23,.15) 65%,rgba(15,32,23,.6) 100%)}
-#p15 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,32,23,.55) 0%,rgba(15,32,23,0) 22%,rgba(15,32,23,0) 50%,rgba(15,32,23,.78) 78%,rgba(15,32,23,.85) 100%)}
+#p15 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,32,23,.72) 0%,rgba(15,32,23,.45) 12%,rgba(15,32,23,0) 22%,rgba(15,32,23,0) 50%,rgba(15,32,23,.78) 78%,rgba(15,32,23,.85) 100%)}
 #illus{position:absolute;left:90px;top:1542px;font:400 28px/1.3 Poppins,sans-serif;color:var(--n3);letter-spacing:.02em}
 /* envelope */
 .env{position:absolute;left:0;top:0;width:480px;height:300px;transform-origin:240px 150px}
@@ -319,7 +319,7 @@ function render(t) {
       let dy = 0, sc = 1, op = 1, bl = 0;
       if (!loop && f >= 56) dy = -6 * Math.sin(2 * Math.PI * (f - 56) / 28 + i * 1.1) * eIO(P(f, 56, 64));
       if (!loop && i > 0) { const q = eIO(P(f, 77, 83)); sc = 1 - .14 * q; op = 1 - .55 * q; bl = 9 * q; }
-      if (loop) { const q = eOut(P(f, 847 + i * 2, 859 + i * 2)); op = q; dy = 90 * (1 - q); }
+      if (loop) { const q = eOut(P(f, 847 + i * 2, 859 + i * 2)); op = f >= 847 + i * 2 ? 1 : 0; sc = .35 + .65 * q; dy = 60 * (1 - q); }
       const x = 540 + (E.x - 540) * S, y = 760 + (E.y - 760) * S + dy;
       E.e.style.transform = `translate(${x - 240}px,${y - 150}px) rotate(${E.r}deg) scale(${.625 * S * sc})`;
       E.e.style.opacity = op; E.e.style.filter = bl > .05 ? `blur(${bl}px)` : 'none';
@@ -389,9 +389,9 @@ function render(t) {
     // cartão
     H.ccs.forEach((C, k) => { vis(C.c, k === si && showBack); });
     const C = H.ccs[si];
-    animWords(C.name, gc2, 89, { st: 2, du: 13 }); animWords(C.dur, gc2, 95, { st: 1, du: 12, dy: 24, bl: 6 });
-    C.line.style.transform = `scaleX(${eOut(P(gc2, 97, 110))})`;
-    C.price.style.opacity = eOut(P(gc2, 99, 107)); C.price.style.transform = `scale(${.9 + .1 * spring((gc2 - 99) / FPS)})`;
+    animWords(C.name, gc2, 85, { st: 2, du: 13 }); animWords(C.dur, gc2, 91, { st: 1, du: 12, dy: 24, bl: 6 });
+    C.line.style.transform = `scaleX(${eOut(P(gc2, 93, 106))})`;
+    C.price.style.opacity = eOut(P(gc2, 95, 103)); C.price.style.transform = `scale(${.9 + .1 * spring((gc2 - 95) / FPS)})`;
     H.cseal.style.opacity = P(gc2, 91, 93); H.cseal.style.transform = `scale(${spring((gc2 - 91) / FPS, .4, .8)})`;
     if (showBack && gc2 >= 91 && gc2 < 105 && !(g < 7 && seg > 0)) sparkle(cx, cy - 410 * s, f, 84 + 140 * seg + 91, 8, 50 + seg, 70, .9);
     // bloom da carta
@@ -427,7 +427,7 @@ function render(t) {
   if (m4On) {
     m4grp.style.transformOrigin = '540px 1180px'; m4grp.style.transform = `scale(${1 + .02 * eIO(P(f, 560, 644))})`;
     const lq = eOut(P(f, 560, 576)); m4line.style.left = (540 - 450 * lq) + 'px'; m4line.style.width = 900 * lq + 'px';
-    M4[0].el.style.opacity = L(1, .55, eOut(P(f, 588, 598))); M4[1].el.style.opacity = L(1, .55, eOut(P(f, 616, 626)));
+    M4[0].el.style.opacity = L(1, .72, eOut(P(f, 588, 598))); M4[1].el.style.opacity = L(1, .72, eOut(P(f, 616, 626)));
     const rq = eOut(P(f, 632, 650));
     sunRise.setAttribute('transform', `translate(0 ${(1 - rq) * 60})`);
     sunG.setAttribute('opacity', .4 + .6 * rq);
