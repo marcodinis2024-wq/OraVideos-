@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt"><head><meta charset="utf-8"><title>KOKARTE anúncio — banda sonora</title>
+<style>body{background:#0F2017;color:#F4ECDC;font:16px/1.5 system-ui,sans-serif;padding:32px}button{background:#D4AF37;color:#0F2017;border:0;border-radius:8px;padding:10px 18px;font-weight:600;cursor:pointer;margin-right:8px}#st{color:#B3C2B2;margin-left:12px}</style>
+</head><body>
+<h1>KOKARTE · anúncio "Mais do que uma loja" · banda sonora</h1>
+<p>Afro-house luminoso · 125 BPM (12 fotogramas/batida) · Lá maior · sem voz. 30 s = 768 fotogramas = 30,72 s · 15 s = 384 fotogramas = 15,36 s.</p>
+<button data-cut="30">Renderizar e tocar 30 s</button><button data-cut="15">Renderizar e tocar 15 s</button><span id="st"></span>
+<script src="kokarte-anuncio-audio.js"></script>
+<script>
+/* Render offline determinístico:
+ *  1. renderiza o arranjo (30 ou 15) com exatamente N amostras (30,72 s / 15,36 s a 48 kHz);
+ *  2. mede a loudness integrada (BS.1770-4, K-weighting + gates −70 LUFS / −10 LU);
+ *  3. ganho para −14 LUFS + limitador brickwall com look-ahead (1,5 ms) e release 120 ms;
+ *  4. itera ganho ↔ limitador; exporta WAV PCM 24-bit 48 kHz estéreo. */
+(function () {
+  const SR = 48000, TARGET = -14;
+  let CEIL = Math.pow(10, -1.9 / 20);              // teto de amostra → true peak ≤ −1 dBTP (confirmado com ffmpeg ebur128)
+  const lenOf = cut => Math.round(KOKAD.CUTS[cut].DUR * SR);
+
+  async function renderRaw(cut, stem) {
+    const N = lenOf(cut), ctx = new OfflineAudioContext(2, N, SR);
+    kokAdAudio(ctx, ctx.destination, { cut, stem });
+    const buf = await ctx.startRendering();
+    return [buf.getChannelData(0).slice(), buf.getChannelData(1).slice()];
+  }
+  function biq(x, b, a) { const y = new Float64Array(x.length); let x1 = 0, x2 = 0, y1 = 0, y2 = 0; for (let i = 0; i < x.length; i++) { const v = b[0] * x[i] + b[1] * x1 + b[2] * x2 - a[1] * y1 - a[2] * y2; x2 = x1; x1 = x[i]; y2 = y1; y1 = v; y[i] = v; } return y; }
+  function lufs(L, R) {
+    const s1b = [1.53512485958697, -2.69169618940638, 1.19839281085285], s1a = [1, -1.69065929318241, 0.73248077421585];
+    const s2b = [1, -2, 1], s2a = [1, -1.99004745483398, 0.99007225036621];
+    const kl = biq(biq(L, s1b, s1a), s2b, s2a), kr = biq(biq(R, s1b, s1a), s2b, s2a);
+    const cs = new Float64Array(L.length + 1); for (let i = 0; i < L.length; i++) cs[i + 1] = cs[i] + kl[i] * kl[i] + kr[i] * kr[i];
+    const blk = Math.round(0.4 * SR), hop = Math.round(0.1 * SR), z = [];
+    for (let s = 0; s + blk <= L.length; s += hop) z.push((cs[s + blk] - cs[s]) / blk);
+    const lk = v => -0.691 + 10 * Math.log10(v), mean = a => a.reduce((p, c) => p + c, 0) / a.length;
+    const z1 = z.filter(v => lk(v) > -70), rel = lk(mean(z1)) - 10, z2 = z1.filter(v => lk(v) > rel);
+    return lk(mean(z2));
+  }
+  function limit(L, R, g) { // brickwall com look-ahead (não circular: o anúncio não é um loop)
+    const n = L.length, W = Math.round(0.0015 * SR), h = W >> 1, rel = 1 - Math.exp(-1 / (0.12 * SR));
+    const g1 = new Float32Array(n).fill(1); let hits = 0;
+    for (let i = 0; i < n; i++) { const p = Math.max(Math.abs(L[i]), Math.abs(R[i])) * g; if (p > CEIL) { hits++; const r = CEIL / p; for (let k = -W; k <= W; k++) { const j = i + k; if (j >= 0 && j < n && r < g1[j]) g1[j] = r; } } }
+    const oL = new Float32Array(n), oR = new Float32Array(n);
+    if (!hits) { for (let i = 0; i < n; i++) { oL[i] = L[i] * g; oR[i] = R[i] * g; } return [oL, oR, 0]; }
+    // média móvel ±h do envelope (já alargado ±W): no pico a média ≤ ganho necessário; depois release exponencial
+    const at = i => g1[Math.max(0, Math.min(n - 1, i))];
+    const g2 = new Float32Array(n); let acc = 0; for (let k = -h; k <= h; k++) acc += at(k);
+    for (let i = 0; i < n; i++) { g2[i] = acc / (2 * h + 1); acc += at(i + h + 1) - at(i - h); }
+    const grB = new Float32Array(Math.ceil(n / 4800)).fill(1); let prev = 1, minG = 1;
+    for (let i = 0; i < n; i++) { const v = Math.min(g2[i], prev + (1 - prev) * rel); prev = v; oL[i] = L[i] * g * v; oR[i] = R[i] * g * v; if (v < minG) minG = v; const bk = Math.floor(i / 4800); if (v < grB[bk]) grB[bk] = v; }
+    window.__grTop = Array.from(grB).map((v, i) => [+(i / 10).toFixed(1), +(20 * Math.log10(v)).toFixed(1)]).filter(x => x[1] < -1).sort((a, b) => a[1] - b[1]).slice(0, 25);
+    return [oL, oR, 20 * Math.log10(minG)];
+  }
+  function wav24(L, R) {
+    const n = L.length, dv = new DataView(new ArrayBuffer(44 + n * 6)), ws = (o, s) => [...s].forEach((c, i) => dv.setUint8(o + i, c.charCodeAt(0)));
+    ws(0, 'RIFF'); dv.setUint32(4, 36 + n * 6, true); ws(8, 'WAVE'); ws(12, 'fmt '); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 2, true);
+    dv.setUint32(24, SR, true); dv.setUint32(28, SR * 6, true); dv.setUint16(32, 6, true); dv.setUint16(34, 24, true); ws(36, 'data'); dv.setUint32(40, n * 6, true);
+    const put = (o, x) => { let v = Math.round(Math.max(-1, Math.min(1, x)) * 8388607); if (v < 0) v += 16777216; dv.setUint8(o, v & 255); dv.setUint8(o + 1, (v >> 8) & 255); dv.setUint8(o + 2, (v >> 16) & 255); };
+    for (let i = 0; i < n; i++) { put(44 + i * 6, L[i]); put(47 + i * 6, R[i]); }
+    return new Uint8Array(dv.buffer);
+  }
+  const b64 = bytes => { let s = ''; for (let i = 0; i < bytes.length; i += 32768) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 32768)); return btoa(s); };
+
+  async function master(cut) {
+    const [L, R] = await renderRaw(cut, 'mix'), N = L.length;
+    const raw = lufs(L, R); let g = Math.pow(10, (TARGET - raw) / 20), out;
+    for (let it = 0; it < 8; it++) { out = limit(L, R, g); const m = lufs(out[0], out[1]); if (Math.abs(m - TARGET) < 0.03 || it === 7) break; g *= Math.pow(10, (TARGET - m) / 20); }
+    const fin = lufs(out[0], out[1]); let pk = 0; for (let i = 0; i < N; i++) pk = Math.max(pk, Math.abs(out[0][i]), Math.abs(out[1][i]));
+    window.__info = { cut, rawLUFS: +raw.toFixed(2), gainDB: +(20 * Math.log10(g)).toFixed(2), LUFS: +fin.toFixed(2), samplePeakDB: +(20 * Math.log10(pk)).toFixed(2), maxGainReductionDB: +out[2].toFixed(2), samples: N };
+    window.__gain = g; return out;
+  }
+  window.__setCeil = db => { CEIL = Math.pow(10, db / 20); };
+  window.__renderAudio = async cut => { const [L, R] = await master(cut); return b64(wav24(L, R)); };
+  // stems (mesmo ganho do master, sem limitador) para verificar o equilíbrio música/SFX
+  window.__renderStem = async (cut, stem, g) => { const [L, R] = await renderRaw(cut, stem); const k = g || window.__gain || 1; for (let i = 0; i < L.length; i++) { L[i] *= k; R[i] *= k; } return b64(wav24(L, R)); };
+
+  let actx = null, src = null;
+  document.querySelectorAll('button[data-cut]').forEach(btn => btn.onclick = async () => {
+    const st = document.getElementById('st');
+    if (src) { src.stop(); src = null; }
+    const cut = +btn.dataset.cut; st.textContent = 'a renderizar…'; const [L, R] = await master(cut);
+    actx = actx || new AudioContext({ sampleRate: SR }); const b = actx.createBuffer(2, L.length, SR); b.copyToChannel(L, 0); b.copyToChannel(R, 1);
+    src = actx.createBufferSource(); src.buffer = b; src.connect(actx.destination); src.start();
+    st.textContent = `a tocar ${cut} s · ${window.__info.LUFS} LUFS (medição interna)`;
+  });
+})();
+</script>
+</body></html>
