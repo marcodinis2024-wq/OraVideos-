@@ -30,7 +30,7 @@
 |---|---|---|---|---|
 | `ora-navy` · **primária** | **#1B3B72** | 27 59 114 | Logótipo, medido em píxeis (exato) | Identidade. Fundo principal, títulos sobre claro |
 | `ora-amarelo` · **acento** | **#F5DF1E** | 245 223 30 | Aprovado pelo cliente | **Resultado**: números-prova, palavra-chave, CTA, faixa de transição |
-| `ora-cobalto` · secundária | **#0033A3** | 0 51 163 | Letras da placa (média medida #012F9E) · **a confirmar** | Kickers e destaques sobre claro, logótipo sobre amarelo, dados |
+| `ora-cobalto` · secundária | **#0033A3** | 0 51 163 | Letras da placa · **oficial (aprovado pelo cliente)** | Kickers e destaques sobre claro, logótipo sobre amarelo, dados |
 | `papel` · fundo claro | #F4F6FA | | Estúdio/site | Fundos claros, cartões, respiro |
 | `branco` | #FFFFFF | | | Texto sobre navy, cartões |
 | `tinta` · texto | #0E1A33 | | Derivada do navy | Texto corrido sobre claro e amarelo; caixas de legenda (86 %) |
@@ -122,7 +122,7 @@ Uma só família. O "ORA" do logótipo é Rawson ExtraBlack.
 | Monocromática | Preto 100 % ou branco 100 % (gravação, vinil, carimbo) |
 
 - **Área de proteção:** x = altura do "R". Espaço livre de 1x à volta, medido a partir do ® e da assinatura.
-- **Tamanho mínimo** (proposta, **a confirmar**): com assinatura, 240 px de largura (digital) ou 40 mm (impresso). Sem assinatura, 96 px ou 15 mm.
+- **Tamanho mínimo** (**aprovado pelo cliente**): com assinatura, 240 px de largura (digital) ou 40 mm (impresso). Sem assinatura, 96 px ou 15 mm.
 - **Proibido:** esticar, inclinar ou rodar · recriar com outra fonte · gradientes, sombras, contornos · amarelo sobre branco · navy sobre cobalto · pousar sobre fotos agitadas sem véu navy · remover o ® · desmontar as letras (a animação usa o "O" como íris, não parte o logótipo).
 
 ---
@@ -174,7 +174,7 @@ Uma barra #F5DF1E de 1100 × 3400 px, rodada **18°** (a inclinação da perna d
 **Música:** indie-electronic / funk moderno, otimista, a 125 BPM, com licença comercial (nunca faixas "trending" nos anúncios).
 **Voz:** PT-PT, calorosa e segura, em ritmo de conversa. Fala em nome do coletivo.
 
-**Toque ORA (sonic logo, ~1,4 s, proposta a validar):**
+**Toque ORA (sonic logo, ~1,4 s, aprovado pelo cliente):**
 1. Um sopro de ar ascendente (0,3 s) acompanha a abertura da íris.
 2. **"O":** Mi5 (659 Hz, seno com 10 % de triângulo) sobre um sub de 130 → 34 Hz.
 3. **"RA":** Si5 (988 Hz), meia batida depois (0,24 s).
@@ -221,8 +221,8 @@ A quinta ascendente soa a "positivo", limpa e curta, como pede o rigor premium, 
 
 ## 10. A confirmar com o cliente
 
-- [ ] HEX oficial do cobalto (a fotografia dá #012F9E; o valor de trabalho é #0033A3)
-- [ ] Logótipo vetorial e versão sem assinatura
-- [ ] Tamanhos mínimos e área de proteção, caso exista manual anterior
-- [ ] Toque ORA (sonic logo)
+- [x] Cobalto oficial: **#0033A3** (aprovado pelo cliente)
+- [x] Logótipo: não existe versão vetorial nem sem assinatura; usa-se o PNG atual (`assets/marca/logotipo-ora-azul.png`)
+- [x] Tamanhos mínimos aprovados: 240 px com assinatura, 96 px sem
+- [x] Toque ORA aprovado como som-assinatura
 - [ ] Papel da assinatura "Marketing para Negócios" face à oficial

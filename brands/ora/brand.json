@@ -8,7 +8,7 @@
   "publico": "Donos e decisores de PME da região Centro (indústria, saúde, retalho, restauração, eventos) que querem marketing com resultados medidos",
   "cores": {
     "primaria":    { "nome": "ORA Navy",    "hex": "#1B3B72", "rgb": [27, 59, 114],  "origem": "logótipo oficial, medido em píxeis (exato)", "papel": "identidade, fundo principal de vídeo e redes, títulos sobre claro" },
-    "secundaria":  { "nome": "ORA Cobalto", "hex": "#0033A3", "rgb": [0, 51, 163],   "origem": "letras da placa exterior (média medida #012F9E; valor de trabalho — a confirmar com o fornecedor da placa)", "papel": "kickers e destaques sobre claro, logótipo sobre amarelo, barras de dados" },
+    "secundaria":  { "nome": "ORA Cobalto", "hex": "#0033A3", "rgb": [0, 51, 163],   "origem": "letras da placa exterior — oficial, aprovado pelo cliente", "papel": "kickers e destaques sobre claro, logótipo sobre amarelo, barras de dados" },
     "acento":      { "nome": "ORA Amarelo", "hex": "#F5DF1E", "rgb": [245, 223, 30], "origem": "aprovado pelo cliente (placa e parede do estúdio)", "papel": "resultado: números-prova, palavra-chave do título, CTA, faixa de transição" },
     "fundoClaro":  { "nome": "Papel",       "hex": "#F4F6FA", "papel": "fundo claro, cartões, respiro" },
     "branco":      { "nome": "Branco",      "hex": "#FFFFFF", "papel": "texto sobre navy/cobalto, cartões sobre papel" },
@@ -77,7 +77,7 @@
     "emFalta": "versão vetorial (.ai/.svg/.pdf) e versão sem assinatura — pedir ao cliente",
     "areaDeProtecao": "x = altura do 'R' (altura de maiúscula). Espaço livre mínimo de 1x em todo o contorno, medido a partir do ® e da assinatura",
     "tamanhoMinimoPx": 240,
-    "tamanhoMinimo": { "comAssinatura": "240 px de largura (digital) · 40 mm (impresso)", "semAssinatura": "96 px de largura (digital) · 15 mm (impresso)", "nota": "proposta — a confirmar com o manual do cliente" },
+    "tamanhoMinimo": { "comAssinatura": "240 px de largura (digital) · 40 mm (impresso)", "semAssinatura": "96 px de largura (digital) · 15 mm (impresso)", "nota": "aprovado pelo cliente" },
     "versoes": ["positiva","negativa","monocromatica"],
     "versoesDetalhe": {
       "positiva": "navy #1B3B72 sobre branco ou papel",
@@ -138,7 +138,7 @@
     "genero": "indie-electronic / funk moderno, otimista, com groove (faixa licenciada para uso comercial)",
     "bpm": 125,
     "sfxAssinatura": [
-      "Toque ORA (sonic logo, ~1,4 s): sopro de ar ascendente 0,3 s que acompanha a íris → 'O': nota Mi5 (659 Hz, seno + 10 % triângulo) sobre sub 130 → 34 Hz → 'RA': Si5 (988 Hz), meia batida depois (0,24 s) → cauda de reverb 2,4 s. Intervalo de quinta ascendente = 'positivo'. Proposta a validar pelo cliente.",
+      "Toque ORA (sonic logo, ~1,4 s): sopro de ar ascendente 0,3 s que acompanha a íris → 'O': nota Mi5 (659 Hz, seno + 10 % triângulo) sobre sub 130 → 34 Hz → 'RA': Si5 (988 Hz), meia batida depois (0,24 s) → cauda de reverb 2,4 s. Intervalo de quinta ascendente = 'positivo'. Aprovado pelo cliente.",
       "Whoosh grave para a faixa amarela diagonal (passa-banda 300 → 4000 Hz, pan L→R acompanhando a faixa)",
       "Ticks de contador + cha-ching discreto (Dó7 + Mi7) só quando aparece um resultado real",
       "Hit final (sub 130 → 34 Hz + ar agudo) no assentar do logótipo"
@@ -173,10 +173,12 @@
     "Fechar com a assinatura e um CTA simples: 'Marca uma conversa · ora.com.pt'."
   ],
   "aConfirmar": [
-    "HEX oficial do cobalto (placa medida em fotografia: #012F9E; valor de trabalho #0033A3)",
-    "Logótipo vetorial e versão sem assinatura",
-    "Tamanhos mínimos e área de proteção face a eventual manual existente",
-    "Toque ORA (sonic logo) — proposta",
     "Relação entre 'Marketing para Negócios' (redes) e a assinatura oficial"
+  ],
+  "decididos": [
+    "Cobalto oficial #0033A3",
+    "Logótipo: só existe o PNG atual (sem vetor nem versão sem assinatura) — usar tal como está",
+    "Tamanhos mínimos: 240 px com assinatura, 96 px sem",
+    "Toque ORA aprovado como som-assinatura"
   ]
 }
