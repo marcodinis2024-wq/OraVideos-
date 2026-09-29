@@ -13,29 +13,77 @@
   "oferta": {
     "produtos": {
       "fonte": "catálogo Kyte (títulos e descrição via índice de pesquisa; o site em si está atrás de Cloudflare)",
-      "categorias": ["japamalas", "pulseiras", "defumação", "acessórios", "queimadores", "incensos", "selenite", "decoração", "cristais", "esotéricos", "óleos essenciais", "candeeiros", "produtos naturais", "óleos aromáticos", "âmbar", "taças tibetanas", "budas", "velas", "livros & oráculos"],
-      "exemplos": ["Japamala Obsidiana Negra", "Kit 7 chackras bruto grande (grafia do catálogo)"],
+      "categorias": [
+        "japamalas",
+        "pulseiras",
+        "defumação",
+        "acessórios",
+        "queimadores",
+        "incensos",
+        "selenite",
+        "decoração",
+        "cristais",
+        "esotéricos",
+        "óleos essenciais",
+        "candeeiros",
+        "produtos naturais",
+        "óleos aromáticos",
+        "âmbar",
+        "taças tibetanas",
+        "budas",
+        "velas",
+        "livros & oráculos"
+      ],
+      "exemplos": [
+        "Japamala Obsidiana Negra",
+        "Kit 7 chackras bruto grande (grafia do catálogo)"
+      ],
       "precos": "japamalas entre 3.500 Kz e 18.900 Kz (índice de pesquisa; A CONFIRMAR atualização)"
     },
     "servicos": {
-      "fonte": "https://kokarte.com/servicos.html — valores por omissão no código da página (o painel de administração pode tê-los alterado; A CONFIRMAR antes de publicar preços)",
+      "fonte": "https://kokarte.com/servicos.html — preços confirmados pela cliente a 29 set 2026",
       "lista": [
-        { "titulo": "Consulta de Mapeamento Energético", "duracao": "60 min", "valor": "45.000 Kz", "resumo": "leitura do perfil energético, emocional, numerológico e kármico + radiestesia; pode ser complementada com Limpeza e Harmonização Energética" },
-        { "titulo": "Reiki Tibetano", "duracao": "60 min", "valor": "59.000 Kz", "resumo": "Sessão Completa (início) e Sessão de Manutenção" },
-        { "titulo": "Programa de Transformação Pessoal", "duracao": "60–90 min/sessão", "valor": "150.000 Kz (pack de 3)", "resumo": "reprogramação mental, gestão e inteligência emocional, definição de metas" },
-        { "titulo": "Massagem Bioenergética com Cristais", "duracao": "60 min", "valor": "38.000 Kz", "resumo": "massagem + trabalho energético, aromaterapia e cristais" },
-        { "titulo": "RESET by KOKARTE", "duracao": "sessão de grupo", "valor": "8.500 Kz", "resumo": "respiração, meditação guiada, visualização e alongamentos suaves" }
+        {
+          "titulo": "Consulta de Mapeamento Energético",
+          "duracao": "60 min",
+          "valor": "45.000 Kz",
+          "resumo": "leitura do perfil energético, emocional, numerológico e kármico + radiestesia; pode ser complementada com Limpeza e Harmonização Energética"
+        },
+        {
+          "titulo": "Reiki Tibetano",
+          "duracao": "60 min",
+          "valor": "59.000 Kz",
+          "resumo": "Sessão Completa (início) e Sessão de Manutenção"
+        },
+        {
+          "titulo": "Programa de Transformação Pessoal",
+          "duracao": "60–90 min/sessão",
+          "valor": "150.000 Kz (pack de 3)",
+          "resumo": "reprogramação mental, gestão e inteligência emocional, definição de metas"
+        },
+        {
+          "titulo": "Massagem Bioenergética com Cristais",
+          "duracao": "60 min",
+          "valor": "38.000 Kz",
+          "resumo": "massagem + trabalho energético, aromaterapia e cristais"
+        },
+        {
+          "titulo": "RESET by KOKARTE",
+          "duracao": "sessão de grupo",
+          "valor": "8.500 Kz",
+          "resumo": "respiração, meditação guiada, visualização e alongamentos suaves"
+        }
       ]
     },
     "experienciasDigitais": [
       "Oráculo 'Uma mensagem para ti': carta num envelope com selo de cera dourado 'K'; o utilizador clica no selo, recebe uma mensagem e pode guardar/partilhar a carta como imagem (kokarte-oraculo.png) — ótimo mecanismo para trend",
       "Energia do Mês: cristal-guia, benefícios, cuidados e afirmação (ex.: outubro = Obsidiana, 'Energia da Transformação'; novembro = Selenita)"
     ],
-    "eventos": "secção 'Próximos Eventos & Workshops' existe no site; lista dinâmica, sem eventos visíveis no código — A CONFIRMAR"
+    "eventos": "secção existe, mas os eventos são guardados em localStorage (chave kokarte_eventos) do browser de quem os cria; visitantes nunca os veem. Datas: pedir à cliente"
   },
   "contactos": {
     "whatsapp": "+244 936 676 628 (botão do site e constante NUMERO_WHATSAPP em kokarte.com/js/app.js — confirmado)",
-    "telefoneAlternativo": "+244 936 276 100 (aparece em páginas do catálogo Kyte via índice de pesquisa — A CONFIRMAR se ainda está ativo)",
+    "telefoneAlternativo": "+244 936 276 100 (ativo, confirmado pela cliente)",
     "email": "kok.arte@outlook.com (catálogo Kyte, via índice de pesquisa)",
     "instagram": "https://www.instagram.com/kok.arte/ (@kok.arte, ligado a partir do site)",
     "facebook": "https://www.facebook.com/kok.arte.ao (ligado a partir do site; categoria 'Beleza, cosmética e cuidado pessoal', ~513 gostos segundo o índice de pesquisa)",
@@ -45,70 +93,367 @@
   },
   "cores": {
     "estado": "Medidas nos ficheiros: logótipo (canvas no Chromium, pixel exato) e CSS do site (tokens Tailwind). O dourado do logótipo é um gradiente num JPEG, por isso o seu HEX é aproximado.",
-    "primaria":    { "nome": "Verde KOKARTE", "hex": "#334432", "rgb": [51, 68, 50], "origem": "fundo do logótipo e do favicon, pixel medido (exato)", "papel": "identidade; fundo principal de vídeo, post e capa" },
-    "acento":      { "nome": "Ouro KOKARTE", "hex": "#D4AF37", "rgb": [212, 175, 55], "origem": "token kokarteGold no CSS de kokarte.com (exato)", "papel": "luz: logótipo, linhas finas, preços, CTA, palavra-chave. Só sobre verdes" },
-    "ouroGradiente": { "escuro": "#BE9B47", "medio": "#CFAC58", "claro": "#F4D47D", "origem": "amostrado no sol e nas letras do logótipo (JPEG; aproximado)", "papel": "gradiente metálico do logótipo e de brilhos; site usa ainda #E5C158 (hover) e #F0D080 (ouro claro)" },
-    "fundoEscuro": { "nome": "Floresta", "hex": "#0F2017", "rgb": [15, 32, 23], "origem": "token kokarteBg no CSS (exato)", "papel": "fundo profundo, vinhetas, letterbox" },
-    "superficie":  { "nome": "Musgo", "hex": "#1D382B", "rgb": [29, 56, 43], "origem": "token kokarteCard no CSS (exato)", "papel": "cartões e painéis sobre floresta (no site com vidro/blur)" },
-    "fundoClaro":  { "nome": "Pergaminho", "hex": "#F4ECDC", "origem": "tom dominante da carta/envelope do oráculo (amostrado; aproximado)", "papel": "fundo claro, carta do oráculo, respiro" },
-    "texto":       { "nome": "Névoa", "hex": "#E8F1EC", "origem": "token kokarteText no CSS (exato)", "papel": "texto sobre verdes" },
-    "textoSobreClaro": { "nome": "Floresta", "hex": "#0F2017", "papel": "texto sobre pergaminho e sobre ouro" },
-    "ouroTexto":   { "nome": "Ouro antigo", "hex": "#7F6118", "origem": "derivado do ouro (proposta)", "papel": "texto dourado sobre pergaminho (4,93:1)" },
+    "primaria": {
+      "nome": "Verde KOKARTE",
+      "hex": "#334432",
+      "rgb": [
+        51,
+        68,
+        50
+      ],
+      "origem": "fundo do logótipo e do favicon, pixel medido (exato)",
+      "papel": "identidade; fundo principal de vídeo, post e capa"
+    },
+    "acento": {
+      "nome": "Ouro KOKARTE",
+      "hex": "#D4AF37",
+      "rgb": [
+        212,
+        175,
+        55
+      ],
+      "origem": "token kokarteGold no CSS de kokarte.com (exato)",
+      "papel": "luz: logótipo, linhas finas, preços, CTA, palavra-chave. Só sobre verdes"
+    },
+    "ouroGradiente": {
+      "escuro": "#BE9B47",
+      "medio": "#CFAC58",
+      "claro": "#F4D47D",
+      "origem": "amostrado no sol e nas letras do logótipo (JPEG; aproximado)",
+      "papel": "gradiente metálico do logótipo e de brilhos; site usa ainda #E5C158 (hover) e #F0D080 (ouro claro)"
+    },
+    "fundoEscuro": {
+      "nome": "Floresta",
+      "hex": "#0F2017",
+      "rgb": [
+        15,
+        32,
+        23
+      ],
+      "origem": "token kokarteBg no CSS (exato)",
+      "papel": "fundo profundo, vinhetas, letterbox"
+    },
+    "superficie": {
+      "nome": "Musgo",
+      "hex": "#1D382B",
+      "rgb": [
+        29,
+        56,
+        43
+      ],
+      "origem": "token kokarteCard no CSS (exato)",
+      "papel": "cartões e painéis sobre floresta (no site com vidro/blur)"
+    },
+    "fundoClaro": {
+      "nome": "Pergaminho",
+      "hex": "#F4ECDC",
+      "origem": "tom dominante da carta/envelope do oráculo (amostrado; aproximado)",
+      "papel": "fundo claro, carta do oráculo, respiro"
+    },
+    "texto": {
+      "nome": "Névoa",
+      "hex": "#E8F1EC",
+      "origem": "token kokarteText no CSS (exato)",
+      "papel": "texto sobre verdes"
+    },
+    "textoSobreClaro": {
+      "nome": "Floresta",
+      "hex": "#0F2017",
+      "papel": "texto sobre pergaminho e sobre ouro"
+    },
+    "ouroTexto": {
+      "nome": "Ouro antigo",
+      "hex": "#7F6118",
+      "origem": "derivado do ouro (proposta)",
+      "papel": "texto dourado sobre pergaminho (4,93:1)"
+    },
     "neutros": [
-      { "token": "neutro-100", "hex": "#E9EEE7", "papel": "fundos alternados claros" },
-      { "token": "neutro-200", "hex": "#D3DDD2", "papel": "bordas, divisórias sobre claro" },
-      { "token": "neutro-300", "hex": "#B3C2B2", "papel": "texto secundário sobre verde (5,60:1) e floresta (9,10:1)" },
-      { "token": "neutro-400", "hex": "#8A9C89", "papel": "decorativo ou títulos grandes sobre verde (3,57:1)" },
-      { "token": "neutro-500", "hex": "#5E6F5D", "papel": "texto secundário sobre pergaminho (4,58:1)" },
-      { "token": "neutro-600", "hex": "#465545", "papel": "texto de apoio sobre pergaminho (6,76:1)" },
-      { "token": "neutro-700", "hex": "#2A3A2E", "papel": "superfícies intermédias" }
+      {
+        "token": "neutro-100",
+        "hex": "#E9EEE7",
+        "papel": "fundos alternados claros"
+      },
+      {
+        "token": "neutro-200",
+        "hex": "#D3DDD2",
+        "papel": "bordas, divisórias sobre claro"
+      },
+      {
+        "token": "neutro-300",
+        "hex": "#B3C2B2",
+        "papel": "texto secundário sobre verde (5,60:1) e floresta (9,10:1)"
+      },
+      {
+        "token": "neutro-400",
+        "hex": "#8A9C89",
+        "papel": "decorativo ou títulos grandes sobre verde (3,57:1)"
+      },
+      {
+        "token": "neutro-500",
+        "hex": "#5E6F5D",
+        "papel": "texto secundário sobre pergaminho (4,58:1)"
+      },
+      {
+        "token": "neutro-600",
+        "hex": "#465545",
+        "papel": "texto de apoio sobre pergaminho (6,76:1)"
+      },
+      {
+        "token": "neutro-700",
+        "hex": "#2A3A2E",
+        "papel": "superfícies intermédias"
+      }
     ],
     "neutrosNota": "neutros derivados (propostas) com viés do verde; o site usa ainda emerald-200 do Tailwind com opacidade para texto secundário",
     "contrasteWCAG": [
-      { "frente": "#D4AF37", "fundo": "#334432", "racio": 4.96, "nivel": "AA" },
-      { "frente": "#CFAC58", "fundo": "#334432", "racio": 4.81, "nivel": "AA (logótipo real)" },
-      { "frente": "#F0D080", "fundo": "#334432", "racio": 6.97, "nivel": "AA" },
-      { "frente": "#D4AF37", "fundo": "#1D382B", "racio": 6.04, "nivel": "AA" },
-      { "frente": "#D4AF37", "fundo": "#0F2017", "racio": 8.06, "nivel": "AAA" },
-      { "frente": "#E8F1EC", "fundo": "#334432", "racio": 9.05, "nivel": "AAA" },
-      { "frente": "#E8F1EC", "fundo": "#1D382B", "racio": 11.03, "nivel": "AAA" },
-      { "frente": "#E8F1EC", "fundo": "#0F2017", "racio": 14.71, "nivel": "AAA" },
-      { "frente": "#FFFFFF", "fundo": "#334432", "racio": 10.43, "nivel": "AAA" },
-      { "frente": "#334432", "fundo": "#F4ECDC", "racio": 8.88, "nivel": "AAA" },
-      { "frente": "#0F2017", "fundo": "#F4ECDC", "racio": 14.43, "nivel": "AAA" },
-      { "frente": "#0F2017", "fundo": "#D4AF37", "racio": 8.06, "nivel": "AAA" },
-      { "frente": "#334432", "fundo": "#D4AF37", "racio": 4.96, "nivel": "AA" },
-      { "frente": "#7F6118", "fundo": "#F4ECDC", "racio": 4.93, "nivel": "AA" },
-      { "frente": "#B3C2B2", "fundo": "#334432", "racio": 5.60, "nivel": "AA" },
-      { "frente": "#8A9C89", "fundo": "#334432", "racio": 3.57, "nivel": "AA só títulos grandes" },
-      { "frente": "#5E6F5D", "fundo": "#F4ECDC", "racio": 4.58, "nivel": "AA" },
-      { "frente": "#465545", "fundo": "#F4ECDC", "racio": 6.76, "nivel": "AA" },
-      { "frente": "#D4AF37", "fundo": "#F4ECDC", "racio": 1.79, "nivel": "PROIBIDO" },
-      { "frente": "#D4AF37", "fundo": "#FFFFFF", "racio": 2.10, "nivel": "PROIBIDO" },
-      { "frente": "#334432", "fundo": "#0F2017", "racio": 1.62, "nivel": "PROIBIDO (só camadas de fundo)" },
-      { "frente": "#1D382B", "fundo": "#334432", "racio": 1.22, "nivel": "PROIBIDO (só camadas de fundo)" }
+      {
+        "frente": "#D4AF37",
+        "fundo": "#334432",
+        "racio": 4.96,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#CFAC58",
+        "fundo": "#334432",
+        "racio": 4.81,
+        "nivel": "AA (logótipo real)"
+      },
+      {
+        "frente": "#F0D080",
+        "fundo": "#334432",
+        "racio": 6.97,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#D4AF37",
+        "fundo": "#1D382B",
+        "racio": 6.04,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#D4AF37",
+        "fundo": "#0F2017",
+        "racio": 8.06,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#E8F1EC",
+        "fundo": "#334432",
+        "racio": 9.05,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#E8F1EC",
+        "fundo": "#1D382B",
+        "racio": 11.03,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#E8F1EC",
+        "fundo": "#0F2017",
+        "racio": 14.71,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#FFFFFF",
+        "fundo": "#334432",
+        "racio": 10.43,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#334432",
+        "fundo": "#F4ECDC",
+        "racio": 8.88,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#0F2017",
+        "fundo": "#F4ECDC",
+        "racio": 14.43,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#0F2017",
+        "fundo": "#D4AF37",
+        "racio": 8.06,
+        "nivel": "AAA"
+      },
+      {
+        "frente": "#334432",
+        "fundo": "#D4AF37",
+        "racio": 4.96,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#7F6118",
+        "fundo": "#F4ECDC",
+        "racio": 4.93,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#B3C2B2",
+        "fundo": "#334432",
+        "racio": 5.6,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#8A9C89",
+        "fundo": "#334432",
+        "racio": 3.57,
+        "nivel": "AA só títulos grandes"
+      },
+      {
+        "frente": "#5E6F5D",
+        "fundo": "#F4ECDC",
+        "racio": 4.58,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#465545",
+        "fundo": "#F4ECDC",
+        "racio": 6.76,
+        "nivel": "AA"
+      },
+      {
+        "frente": "#D4AF37",
+        "fundo": "#F4ECDC",
+        "racio": 1.79,
+        "nivel": "PROIBIDO"
+      },
+      {
+        "frente": "#D4AF37",
+        "fundo": "#FFFFFF",
+        "racio": 2.1,
+        "nivel": "PROIBIDO"
+      },
+      {
+        "frente": "#334432",
+        "fundo": "#0F2017",
+        "racio": 1.62,
+        "nivel": "PROIBIDO (só camadas de fundo)"
+      },
+      {
+        "frente": "#1D382B",
+        "fundo": "#334432",
+        "racio": 1.22,
+        "nivel": "PROIBIDO (só camadas de fundo)"
+      }
     ],
     "proporcao": "60 % verdes (verde/musgo/floresta) · 20 % fotografia de produto e pergaminho · 12 % ouro · 8 % névoa e neutros"
   },
   "tipografia": {
     "estado": "Fontes do site confirmadas no CSS (Google Fonts, SIL OFL). Fonte do logótipo desconhecida (sem ficheiro) — A CONFIRMAR",
-    "display": { "familia": "Montserrat", "pesos": [600, 700], "nota": "configurada como 'display' no site; caixa alta com tracking +8–12 % aproxima o wordmark do logótipo" },
-    "texto":   { "familia": "Poppins", "pesos": [400, 600], "nota": "configurada como 'body' e 'sans' no site" },
-    "serifaOraculo": { "familia": "Cormorant Garamond (proposta, A CONFIRMAR)", "pesos": ["600", "500 itálico"], "nota": "a carta do oráculo usa uma serifa clássica em caixa alta dourada ('UMA MENSAGEM PARA TI'); usar só em mensagens/afirmações do oráculo, nunca em títulos comerciais" },
+    "display": {
+      "familia": "Montserrat",
+      "pesos": [
+        600,
+        700
+      ],
+      "nota": "configurada como 'display' no site; caixa alta com tracking +8–12 % aproxima o wordmark do logótipo"
+    },
+    "texto": {
+      "familia": "Poppins",
+      "pesos": [
+        400,
+        600
+      ],
+      "nota": "configurada como 'body' e 'sans' no site"
+    },
+    "serifaOraculo": {
+      "familia": "Cormorant Garamond (proposta, A CONFIRMAR)",
+      "pesos": [
+        "600",
+        "500 itálico"
+      ],
+      "nota": "a carta do oráculo usa uma serifa clássica em caixa alta dourada ('UMA MENSAGEM PARA TI'); usar só em mensagens/afirmações do oráculo, nunca em títulos comerciais"
+    },
     "logotipo": "sans geométrica em caixa alta, peso semibold, tracking largo (A CONFIRMAR nome da fonte; Montserrat 600 é a aproximação disponível — nunca recriar o logótipo, usar o ficheiro)",
-    "ficheiros": ["Google Fonts: Montserrat 400/600/700, Poppins 400/600/700 (carregadas em kokarte.com)"],
+    "ficheiros": [
+      "Google Fonts: Montserrat 400/600/700, Poppins 400/600/700 (carregadas em kokarte.com)"
+    ],
     "numeros": "font-variant-numeric: tabular-nums em preços; formato 45.000 Kz",
     "escala1080x1920": [
-      { "nivel": "H1 · frase-âncora", "familia": "Montserrat", "peso": 700, "px": 112, "entrelinha": 0.98, "tracking": "-1 %", "uso": "máx. 6 palavras" },
-      { "nivel": "H2", "familia": "Montserrat", "peso": 700, "px": 84, "entrelinha": 1.0, "tracking": "0", "uso": "nome de serviço/produto" },
-      { "nivel": "Kicker", "familia": "Montserrat", "peso": 600, "px": 30, "entrelinha": 1.2, "tracking": "+18 %", "caixa": "alta", "uso": "ENERGIA DO MÊS · SERVIÇOS · LUANDA (ouro)" },
-      { "nivel": "Mensagem do oráculo", "familia": "Cormorant Garamond", "peso": "500 itálico", "px": 64, "entrelinha": 1.2, "tracking": "0", "uso": "frase do oráculo/afirmação (floresta sobre pergaminho)" },
-      { "nivel": "Preço", "familia": "Poppins", "peso": 600, "px": 60, "entrelinha": 1.0, "tracking": "0", "uso": "45.000 Kz, ouro sobre verde" },
-      { "nivel": "Corpo", "familia": "Poppins", "peso": 400, "px": 40, "entrelinha": 1.35, "tracking": "0", "uso": "texto de apoio" },
-      { "nivel": "Legenda queimada", "familia": "Poppins", "peso": 600, "px": 46, "entrelinha": 1.2, "tracking": "0", "uso": "palavra a palavra, caixa floresta a 86 %" },
-      { "nivel": "Nota", "familia": "Poppins", "peso": 400, "px": 28, "entrelinha": 1.35, "tracking": "+2 %", "uso": "contactos, avisos (mínimo 28 px)" }
+      {
+        "nivel": "H1 · frase-âncora",
+        "familia": "Montserrat",
+        "peso": 700,
+        "px": 112,
+        "entrelinha": 0.98,
+        "tracking": "-1 %",
+        "uso": "máx. 6 palavras"
+      },
+      {
+        "nivel": "H2",
+        "familia": "Montserrat",
+        "peso": 700,
+        "px": 84,
+        "entrelinha": 1.0,
+        "tracking": "0",
+        "uso": "nome de serviço/produto"
+      },
+      {
+        "nivel": "Kicker",
+        "familia": "Montserrat",
+        "peso": 600,
+        "px": 30,
+        "entrelinha": 1.2,
+        "tracking": "+18 %",
+        "caixa": "alta",
+        "uso": "ENERGIA DO MÊS · SERVIÇOS · LUANDA (ouro)"
+      },
+      {
+        "nivel": "Mensagem do oráculo",
+        "familia": "Cormorant Garamond",
+        "peso": "500 itálico",
+        "px": 64,
+        "entrelinha": 1.2,
+        "tracking": "0",
+        "uso": "frase do oráculo/afirmação (floresta sobre pergaminho)"
+      },
+      {
+        "nivel": "Preço",
+        "familia": "Poppins",
+        "peso": 600,
+        "px": 60,
+        "entrelinha": 1.0,
+        "tracking": "0",
+        "uso": "45.000 Kz, ouro sobre verde"
+      },
+      {
+        "nivel": "Corpo",
+        "familia": "Poppins",
+        "peso": 400,
+        "px": 40,
+        "entrelinha": 1.35,
+        "tracking": "0",
+        "uso": "texto de apoio"
+      },
+      {
+        "nivel": "Legenda queimada",
+        "familia": "Poppins",
+        "peso": 600,
+        "px": 46,
+        "entrelinha": 1.2,
+        "tracking": "0",
+        "uso": "palavra a palavra, caixa floresta a 86 %"
+      },
+      {
+        "nivel": "Nota",
+        "familia": "Poppins",
+        "peso": 400,
+        "px": 28,
+        "entrelinha": 1.35,
+        "tracking": "+2 %",
+        "uso": "contactos, avisos (mínimo 28 px)"
+      }
     ],
-    "grelha1080x1920": { "margemLateral": 90, "zonaSeguraTopo": 220, "zonaSeguraBase": 320, "raioCartao": 32, "raioChip": 999 }
+    "grelha1080x1920": {
+      "margemLateral": 90,
+      "zonaSeguraTopo": 220,
+      "zonaSeguraBase": 320,
+      "raioCartao": 32,
+      "raioChip": 999
+    }
   },
   "logo": {
     "ficheiros": [
@@ -118,11 +463,15 @@
       "assets/kokarte/site-fundo-motion.mp4 (vídeo de fundo do site; H.264, não pré-visualizado aqui)"
     ],
     "descricao": "Meio sol dourado a nascer sobre uma linha de horizonte, com raios em leque, e por baixo o wordmark KOKARTE em caixa alta. Monograma secundário: 'K' serifado em selo de cera dourado (oráculo).",
-    "emFalta": "versão vetorial (.svg/.ai/.pdf), PNG transparente, versão horizontal, versão monocromática e o nome da fonte",
+    "emFalta": "não existe versão vetorial (confirmado pela cliente); proposta: redesenho SVG fiel a partir do JPEG, a aprovar. Fonte do wordmark desconhecida",
     "areaDeProtecao": "x = altura do 'K' do wordmark; 1x livre em todo o contorno (proposta, A CONFIRMAR)",
     "tamanhoMinimoPx": 160,
     "tamanhoMinimo": "160 px de largura digital com símbolo; 25 mm impresso (proposta, A CONFIRMAR). O JPEG de 500 px não deve ser ampliado acima de ~400 px de largura",
-    "versoes": ["positiva", "negativa", "monocromatica"],
+    "versoes": [
+      "positiva",
+      "negativa",
+      "monocromatica"
+    ],
     "versoesDetalhe": {
       "principal": "ouro sobre verde #334432 (a única que existe hoje)",
       "sobreClaro": "verde #334432 ou ouro antigo #7F6118 sobre pergaminho (precisa de vetor — A CONFIRMAR)",
@@ -138,7 +487,13 @@
     ]
   },
   "tom": {
-    "personalidade": ["acolhedor", "sereno", "sábio sem ser distante", "íntimo (fala a uma pessoa)", "luminoso e esperançoso"],
+    "personalidade": [
+      "acolhedor",
+      "sereno",
+      "sábio sem ser distante",
+      "íntimo (fala a uma pessoa)",
+      "luminoso e esperançoso"
+    ],
     "pessoa": "'nós' quando fala a loja ('Os Nossos Serviços', 'Oferecemos'); a voz do oráculo fala diretamente contigo",
     "tratamento": "confirmado no site: 'tu' no oráculo e nas mensagens emocionais ('Uma mensagem para ti', 'Respira fundo'); 'você/seu' cortês nas páginas comerciais ('cuidar da sua energia', 'Escolha o atendimento'). Regra proposta: 'tu' em vídeo/trend e legendas, 'você' em marcações e preçários. Evitar misturar na mesma frase",
     "lingua": "Documento em PT-PT. A escrita do site é PT europeu ('a carregar', 'atenta', 'ecrã'), o que encaixa na norma angolana. Para vídeo, voz e trends: PT de Angola, com calor e ritmo luandense; calão ('bué', 'kota', 'mambo') só se a cliente o usar. Evitar brasileirismos ('celular', 'frete', 'você está bem?')",
@@ -159,13 +514,34 @@
       "excesso de emojis (máx. 2 por legenda; o site usa ✨ 💎 com parcimónia)"
     ],
     "exemplos": [
-      { "evitamos": "Esta pedra cura a ansiedade e atrai dinheiro!", "fazemos": "Outubro pede transformação. O cristal do mês é a obsidiana." },
-      { "evitamos": "A MELHOR loja esotérica de Luanda!!!", "fazemos": "Cristais, incensos, velas e terapias. Na Corimba." },
-      { "evitamos": "Contacte-nos para mais informações.", "fazemos": "Marca pelo WhatsApp. Nós preparamos o resto." },
-      { "evitamos": "Proteja-se das energias negativas antes que seja tarde.", "fazemos": "Semana pesada? Respira fundo. Há uma mensagem para ti." },
-      { "evitamos": "Reiki que resolve todos os seus problemas.", "fazemos": "Reiki Tibetano. 60 minutos para voltares ao teu centro." }
+      {
+        "evitamos": "Esta pedra cura a ansiedade e atrai dinheiro!",
+        "fazemos": "Outubro pede transformação. O cristal do mês é a obsidiana."
+      },
+      {
+        "evitamos": "A MELHOR loja esotérica de Luanda!!!",
+        "fazemos": "Cristais, incensos, velas e terapias. Na Corimba."
+      },
+      {
+        "evitamos": "Contacte-nos para mais informações.",
+        "fazemos": "Marca pelo WhatsApp. Nós preparamos o resto."
+      },
+      {
+        "evitamos": "Proteja-se das energias negativas antes que seja tarde.",
+        "fazemos": "Semana pesada? Respira fundo. Há uma mensagem para ti."
+      },
+      {
+        "evitamos": "Reiki que resolve todos os seus problemas.",
+        "fazemos": "Reiki Tibetano. 60 minutos para voltares ao teu centro."
+      }
     ],
-    "frasesDaMarca": ["Energia & Espiritualidade", "Uma mensagem para ti", "Respira fundo. Clica no selo para abrir.", "Energia do Mês", "RESET by KOKARTE"]
+    "frasesDaMarca": [
+      "Energia & Espiritualidade",
+      "Uma mensagem para ti",
+      "Respira fundo. Clica no selo para abrir.",
+      "Energia do Mês",
+      "RESET by KOKARTE"
+    ]
   },
   "motion": {
     "curvaEntrada": "cubic-bezier(0.16, 1, 0.3, 1) — expo-out suave",
@@ -197,7 +573,14 @@
     "mistura": "música −18 LUFS sob voz com ducking 6 dB; taça 2–3 dB acima da música no fecho; master −14 LUFS, −1 dBTP"
   },
   "banners": {
-    "formatos": ["1080x1920", "1080x1350", "1080x1080", "1920x1080", "1584x396 (LinkedIn)", "820x312 (Facebook)"],
+    "formatos": [
+      "1080x1920",
+      "1080x1350",
+      "1080x1080",
+      "1920x1080",
+      "1584x396 (LinkedIn)",
+      "820x312 (Facebook)"
+    ],
     "prioridade": "Instagram 9:16 e 4:5; capa Facebook 820x312. LinkedIn provavelmente não se aplica",
     "receita": "fundo verde #334432 com vinheta floresta · linha dourada a marcar o horizonte · logótipo (sol + KOKARTE) · kicker Montserrat 600 caixa alta a ouro · título Montserrat 700 névoa com 1 palavra a ouro · preço Poppins 600 a ouro · rodapé Poppins: @kok.arte · WhatsApp 936 676 628 · kokarte.com"
   },
@@ -206,18 +589,16 @@
     "Nunca ouro sobre branco ou pergaminho; texto dourado sobre claro usa #7F6118.",
     "Nada de promessas de cura, dinheiro, amor ou sorte garantidos: falamos de equilíbrio, pausa e bem-estar.",
     "Uma ideia por ecrã, máx. 6 palavras em 9:16.",
-    "Preços em Kz (45.000 Kz) e só depois de a cliente os confirmar para a data de publicação.",
+    "Preços em Kz (45.000 Kz); preços atuais confirmados pela cliente a 29 set 2026.",
     "Fechar sempre com como marcar/comprar: WhatsApp + @kok.arte + kokarte.com.",
     "Toda a transição nasce do logótipo: nascer do sol ou linha dourada. Nada de wipes genéricos.",
     "O logótipo usa-se a partir do ficheiro; não se recria com fontes.",
     "Nunca misturar identidades: stock ou materiais de outros clientes (ex.: velas de outros projetos em assets/stock) só entram se forem licenciados e escolhidos para a KOKARTE, e nunca com a paleta de outro cliente.",
-    "Cara, voz ou nome da cliente e de clientes finais só com autorização."
+    "Cara, voz ou nome da cliente e de clientes finais só com autorização (autorização escrita existente para as filmagens, confirmada a 29 set 2026)."
   ],
   "aConfirmar": [
-    "Fonte do logótipo e ficheiros vetoriais",
-    "Se +244 936 276 100 ainda está ativo (o site usa +244 936 676 628)",
+    "Fonte do logótipo (não há vetor: redesenho SVG a aprovar)",
     "Horário e ponto de referência exato na Estrada da Corimba",
-    "Preços atuais de serviços e produtos (valores do site são por omissão do código)",
     "Se vende cosmética/cuidado pessoal (categoria do Facebook)",
     "Próximos eventos/workshops e datas do RESET by KOKARTE",
     "Se a cliente quer dar a cara e a voz",

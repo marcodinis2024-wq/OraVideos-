@@ -22,7 +22,7 @@
 
 ### Oferta
 
-**Serviços** (kokarte.com/servicos.html; valores por omissão no código, o painel pode tê-los mudado: **confirmar preços antes de publicar**)
+**Serviços** (kokarte.com/servicos.html; **preços confirmados pela cliente a 29 set 2026**)
 
 | Serviço | Duração | Valor |
 |---|---|---|
@@ -37,14 +37,14 @@
 **Experiências no site** (confirmado)
 - **Oráculo "Uma mensagem para ti"**: carta num envelope com selo de cera "K"; clica-se no selo, sai uma mensagem e pode-se guardar/partilhar a carta em imagem. **É o mecanismo de trend mais forte da marca.**
 - **Energia do Mês**: cristal-guia + benefícios + cuidados + afirmação (outubro = Obsidiana, "Energia da Transformação"; novembro = Selenita).
-- **Eventos & Workshops**: secção existe; sem eventos visíveis (**a confirmar**).
+- **Eventos & Workshops**: a secção existe, mas os eventos são guardados em `localStorage` do browser (chave `kokarte_eventos`). Só aparecem no browser onde foram criados; **visitantes veem sempre "Não existem eventos agendados"**. Próximas datas: pedir diretamente à cliente.
 
 ### Contactos
 
 | Canal | Valor | Estado |
 |---|---|---|
-| WhatsApp | **+244 936 676 628** | Confirmado (botão e código do site) |
-| Telefone alternativo | +244 936 276 100 | Índice Kyte, **a confirmar** se ativo |
+| WhatsApp | **+244 936 676 628** | Confirmado (site + cliente, ativo) |
+| Telefone alternativo | +244 936 276 100 | Confirmado ativo pela cliente (29 set 2026) |
 | E-mail | kok.arte@outlook.com | Índice Kyte |
 | Instagram | @kok.arte | Ligado no site |
 | Facebook | facebook.com/kok.arte.ao | Ligado no site (categoria "Beleza, cosmética e cuidado pessoal", ~513 gostos, índice) |
@@ -120,7 +120,7 @@ Confirmado no CSS do site (Google Fonts, licença SIL OFL):
 | **Poppins** | `body` / `sans` | 400, 600 | Corpo, preços, legendas |
 | Cormorant Garamond | — | 500 itálico, 600 | **Proposta, a confirmar**: só mensagens do oráculo e afirmações (a carta usa serifa clássica dourada) |
 
-**Logótipo:** sans geométrica em caixa alta, semibold, tracking largo. Fonte **a confirmar**; nunca recriar, usar o ficheiro.
+**Logótipo:** sans geométrica em caixa alta, semibold, tracking largo. Fonte desconhecida. **Não existe versão vetorial** (confirmado pela cliente): usar o JPEG até se redesenhar um vetor fiel (proposta: redesenho vetorial aprovado pela cliente, sem alterar o desenho).
 
 ### Escala para 1080 × 1920
 
@@ -231,18 +231,18 @@ Formatos: 1080×1920 · 1080×1350 · 1080×1080 · 1920×1080 · 820×312 (Face
 
 ## 10. Lacunas — pedir à cliente
 
-1. **Logótipo vetorial** (.svg/.ai/.pdf) + PNG transparente + versão monocromática + nome da fonte do wordmark.
-2. **Fotos e vídeos reais:** fachada e interior da loja na Corimba, prateleiras, produtos em destaque, sala de terapias, sessões RESET (com autorização de quem aparece).
-3. **Lista atual de serviços e preços** (os do site são valores por omissão do código) e produtos mais vendidos com preço.
-4. **Contactos:** confirmar se o +244 936 276 100 ainda funciona; horário; ponto de referência na Estrada da Corimba; condições e zonas de entrega.
-5. **Eventos/workshops** e próximas datas do RESET by KOKARTE.
-6. **Cosmética/cuidado pessoal:** vende ou não? (categoria do Facebook).
-7. **Voz e cara:** a cliente quer aparecer e/ou fazer a voz-off? Tratamento preferido (tu/você) nas redes.
-8. **Instagram:** exportar 6–9 posts/reels recentes e as capas dos destaques (não foi possível abrir o perfil neste ambiente).
-9. **Aprovação** da serifa do oráculo (Cormorant Garamond), da transição "Nascer do sol" e do som "Toque do sol".
-10. **Ficheiro de origem** do `fundomotion.mp4` e da carta do oráculo (para usar em alta qualidade).
+Confirmado pela cliente a 29 set 2026: **preços corretos**, **os dois telefones ativos**, **autorização escrita** de imagem para todas as pessoas a filmar, **não existe logótipo vetorial**.
+
+1. **Logótipo:** não há vetor. Proposta: redesenhar em SVG a partir do JPEG (sol, raios, horizonte, wordmark) e pedir aprovação; até lá, JPEG ≤ 400 px.
+2. **Fotos e vídeos reais:** o Instagram @kok.arte não abriu neste ambiente (limite de pedidos a visitantes sem sessão). Pedir à cliente 6–9 posts/reels recentes, capas dos destaques e planos da loja (lista R1–R12 em `briefing/kokarte/01-plano-viral.md`).
+3. **Eventos e próximas datas do RESET:** o site não os mostra a visitantes (ver secção de serviços); pedir diretamente.
+4. **Horário, ponto de referência na Estrada da Corimba, condições e zonas de entrega.**
+5. **Cosmética/cuidado pessoal:** vende ou não? (categoria do Facebook).
+6. **Voz e cara:** a cliente quer aparecer e/ou fazer a voz-off?
+7. **Aprovação** da serifa do oráculo (Cormorant Garamond), da transição "Nascer do sol" e do som "Toque do sol".
+8. **Ficheiro de origem** do `fundomotion.mp4` e da carta do oráculo em camadas.
 
 ## Fontes
 
 - https://kokarte.com/ (HTML, CSS, `js/app.js`, `js/data.js`, `logo.jpeg`, `cartasemfundo2.png`), https://kokarte.com/servicos.html, https://kokarte.com/eventos.html — lidos em 29 set 2026.
-- Índice de pesquisa: https://kokarte.kyte.site/en · https://kokarte.catalog.kyte.site · https://kyte.site/kokarte · https://www.facebook.com/kok.arte.ao/ · https://www.instagram.com/kok.arte/ (não abertos: Cloudflare no Kyte; Instagram não consultado).
+- Índice de pesquisa: https://kokarte.kyte.site/en · https://kokarte.catalog.kyte.site · https://kyte.site/kokarte · https://www.facebook.com/kok.arte.ao/ · https://www.instagram.com/kok.arte/ (não abertos: Cloudflare no Kyte; Instagram: limite de pedidos a visitantes sem sessão, 29 set 2026).

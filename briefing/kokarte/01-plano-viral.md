@@ -3,7 +3,7 @@
 > 29 set 2026 · 9:16 · 1080×1920 · 30 fps · **34,13 s = 16 compassos a 112,5 BPM** (batida = 0,533 s = 16 fotogramas; compasso = 2,133 s = 64 fotogramas)
 > Base: `brands/kokarte/brand.md` e `brand.json`, skills `roteiro-viral` e `motion-premium`, formato de `briefing/07-v3-conceito.md`.
 > Documento em PT-PT; voz e legendas em PT de Angola, tom caloroso, "tu".
-> Regras: sem promessas de cura, dinheiro, amor ou sorte. Preços e datas **a confirmar** estão marcados com *. A cara, o nome e a voz da cliente e de clientes finais só entram com autorização.
+> Regras: sem promessas de cura, dinheiro, amor ou sorte. **Preços confirmados pela cliente (29 set 2026).** Datas e horário **a confirmar** estão marcados com *. Existe autorização escrita de imagem para todas as pessoas a filmar.
 > Nota de ritmo: o brand kit pede 112 BPM. Usamos 112,5 BPM porque a 30 fps dá uma batida de 16 fotogramas exatos. A diferença não se ouve e os cortes caem sempre no fotograma certo.
 
 ## 1. Diagnóstico rápido
@@ -51,9 +51,9 @@ Não encontrámos números públicos fiáveis de visualizações destas trends. 
 | Ep. | Título | Mecânica | Mostra |
 |---|---|---|---|
 | 1 | **Escolhe o teu envelope** (este guião) | Escolhe 1, 2 ou 3 | Obsidiana · RESET · Mapeamento Energético |
-| 2 | **Escolhe o teu cristal** | 3 cristais reais na mão (sem cara), nome escondido | 3 produtos em stock com preço* |
+| 2 | **Escolhe o teu cristal** | 3 cristais reais na mão (sem cara), nome escondido | 3 produtos em stock com preço |
 | 3 | **POV: entraste na KOKARTE** | Sensorial, marca quem vinha contigo | Loja, prateleiras, localização |
-| 4 | **Escolhe a tua pausa** | 1/2/3 → Reiki Tibetano · Massagem Bioenergética com Cristais · RESET | Serviços, duração, preço* |
+| 4 | **Escolhe a tua pausa** | 1/2/3 → Reiki Tibetano · Massagem Bioenergética com Cristais · RESET | Serviços, duração, preço |
 | 5 | **Novembro chegou: Selenita** | Envelope único, "a tua energia de novembro" | Selenite, fecho da série |
 
 ## 4. Guião do conceito principal
@@ -86,11 +86,11 @@ Não encontrámos números públicos fiáveis de visualizações destas trends. 
 | **8,53–10,67** (c5) | **Real:** macro Japamala Obsidiana Negra entre dedos, rack focus | Luz quente lateral; cartão vidro musgo | **ENERGIA DE OUTUBRO** · **Obsidiana** | "Outubro pede transformação:" | Brilho curto | Corte na batida |
 | **10,67–12,80** (c6) | **Real:** obsidiana a rodar num prato, push-in | Halo dourado | *Energia da transformação.* · (opc.) *Japamala desde X Kz** | "a obsidiana." | Pad; silêncio 0,5 s | Linha dourada → envelope 2 |
 | **12,80–14,93** (c7) | Envelope 2 abre (0,5 s) | Igual a c4 | **ENVELOPE 2** · *Hoje, pára. Respira.* | "Dois. Hoje, pára e respira." | Lacre + papel (+3 %) | — |
-| **14,93–17,07** (c8) | **Real:** sessão RESET, grupo de costas / mãos | Sem caras (ou com autorização) | **RESET by KOKARTE** · *Respira connosco.* | "Faz isso connosco no RESET." | Respiração em grupo | Corte na batida |
-| **17,07–19,20** (c9) | Cartão de vidro com mola sobre plano desfocado | Preço a ouro | *Sessão de grupo* · **8.500 Kz*** · *Próxima data: a confirmar* | — | Pop fino | Linha dourada → envelope 3 |
+| **14,93–17,07** (c8) | **Real:** sessão RESET, grupo a respirar / mãos | Caras permitidas (autorização escrita ✅) | **RESET by KOKARTE** · *Respira connosco.* | "Faz isso connosco no RESET." | Respiração em grupo | Corte na batida |
+| **17,07–19,20** (c9) | Cartão de vidro com mola sobre plano desfocado | Preço a ouro | *Sessão de grupo* · **8.500 Kz** · *Próxima data: a confirmar** | — | Pop fino | Linha dourada → envelope 3 |
 | **19,20–21,33** (c10) | Envelope 3 abre | Igual a c4 | **ENVELOPE 3** · *As respostas já estão em ti.* | "Três. As respostas já estão em ti." | Lacre + papel (+6 %) | — |
 | **21,33–23,47** (c11) | **Real:** pêndulo sobre a mesa, mãos sem cara | Luz quente, fundo verde-escuro | **MAPEAMENTO ENERGÉTICO** · *Conhece a tua energia.* | "Vem conhecê-las no Mapeamento Energético." | Tic do pêndulo | Corte na batida |
-| **23,47–25,60** (c12) | Cartão com duração e preço | — | *60 min* · **45.000 Kz*** | — | Pop fino | **Nascer do sol** revela a loja |
+| **23,47–25,60** (c12) | Cartão com duração e preço | — | *60 min* · **45.000 Kz** | — | Pop fino | **Nascer do sol** revela a loja |
 | **25,60–27,73** (c13) | **Real:** 4 planos, 1 por batida: cristais → incenso → vela → taça | Luz natural quente | **NA CORIMBA** · *Cristais. Incensos. Velas. Terapias.* | "Cristais, incensos, velas e terapias. Na Corimba." | Som direto | Cortes secos |
 | **27,73–29,87** (c14) | 3 envelopes abertos lado a lado; push-in | 3 selos acesos | *Qual te saiu?* · *Envia a quem precisa.* | "Qual te saiu? Conta-nos. E envia a quem precisa de ler isto." | Brilho | — |
 | **29,87–32,00** (c15) | **Nascer do sol** → logótipo (≤ 400 px) + CTA | Verde, linha dourada, CTA acima de 1600 px | *Marca pelo WhatsApp* · **936 676 628** · *Estrada da Corimba · Luanda* · @kok.arte | "Marca pelo WhatsApp. Nós preparamos o resto." | **Toque do sol** (taça ≈ 220 Hz*) | — |
@@ -112,6 +112,18 @@ Não encontrámos números públicos fiáveis de visualizações destas trends. 
 
 As mensagens das cartas são **propostas**; preferir frases reais do oráculo do site (pedir a lista à cliente).
 
+### 4.4b Mensagens reais do oráculo (kokarte.com)
+Frases tiradas das mensagens do oráculo do site (parcial: só as primeiras mensagens foram lidas). Recomenda-se usá-las nas cartas em vez das propostas, encurtadas para caber em 2 s de leitura:
+
+| Envelope | Frase na carta (do site) | Liga a |
+|---|---|---|
+| 1 | *"Não confundas uma lição com um lugar onde tens de permanecer."* | Obsidiana — deixar ir, transformação |
+| 2 | *"Hoje faz uma pausa e pergunta-te: 'O que é que eu preciso?'"* | RESET by KOKARTE |
+| 3 | *"Talvez o momento que tens esperado não esteja à tua frente. Talvez seja este."* | Mapeamento Energético |
+
+Alternativa curta (gancho B / stories): *"Nem tudo o que te tira a paz merece uma resposta."*
+Se se usarem estas frases, a locução de c4, c7 e c10 lê a frase da carta em vez da proposta.
+
 ### 4.5 Legendas (.srt)
 ```
 1  00:00:00,000 --> 00:00:02,133  Pára. Uma destas mensagens é para ti.
@@ -129,13 +141,13 @@ As mensagens das cartas são **propostas**; preferir frases reais do oráculo do
 ```
 
 ### 4.6 CTA, caption e hashtags
-- **CTA:** WhatsApp **+244 936 676 628** · Estrada da Corimba, Luanda · @kok.arte · kokarte.com. Horário e ponto de referência: **a confirmar**.
+- **CTA:** WhatsApp **+244 936 676 628** · Estrada da Corimba, Luanda · @kok.arte · kokarte.com. Telefone alternativo (ativo): +244 936 276 100 — só na caption, para não sobrecarregar o ecrã. Horário e ponto de referência: **a confirmar**.
 - **Comentário fixado:** "1 · Obsidiana — deixa ir. 2 · RESET — pára e respira. 3 · Mapeamento Energético — as respostas estão em ti. Marca pelo WhatsApp: +244 936 676 628"
 - **Caption:**
   > Pára um segundo. Uma destas mensagens é tua ✨
   > Escolhe 1, 2 ou 3 antes de veres o resto e conta-nos qual te saiu.
   > Outubro na KOKARTE é mês de obsidiana: energia da transformação.
-  > Marca pelo WhatsApp +244 936 676 628 ou visita-nos na Estrada da Corimba, Luanda.
+  > Marca pelo WhatsApp +244 936 676 628 (ou liga +244 936 276 100) ou visita-nos na Estrada da Corimba, Luanda.
 - **Instagram (máx. 5, verificar na app):** #KOKARTE #Luanda #EscolheUmaCarta #UmaMensagemParaTi #EnergiaDoMês
 - **TikTok:** #KOKARTE #Luanda #Angola #pickacard #escolheumacarta #mensagemparati #cristais #obsidiana #espiritualidade #bemestar
 - Evitar "engagement bait" explícito; perguntas naturais ("Qual te saiu?").
@@ -159,8 +171,8 @@ Telemóvel vertical 4K 30 fps, luz natural quente, 5–8 s por plano, câmara es
 | # | Plano | Uso | Nota |
 |---|---|---|---|
 | R1 | Macro Japamala Obsidiana Negra entre dedos (3 takes) | c5 | Fundo verde ou madeira |
-| R2 | Obsidiana a rodar num prato ou na palma | c6 | Stock e preço* |
-| R3 | Sessão RESET: grupo de costas, mãos, respiração | c8–c9 | **Autorização escrita**; próxima data* |
+| R2 | Obsidiana a rodar num prato ou na palma | c6 | Stock |
+| R3 | Sessão RESET: grupo, mãos, respiração | c8–c9 | Autorização escrita ✅; próxima data* |
 | R4 | Pêndulo a oscilar sobre a mesa, mãos sem cara | c11 | — |
 | R5 | Prateleira de cristais (travelling lateral) | c13 | — |
 | R6 | Incenso a fumegar em contraluz | c13 | Fundo escuro |
@@ -197,10 +209,10 @@ Telemóvel vertical 4K 30 fps, luz natural quente, 5–8 s por plano, câmara es
 
 ## 8. Riscos e assets em falta
 1. **Envelope único e já aberto** — pedir o ficheiro em camadas; senão recortar e reconstruir a aba fechada.
-2. **Logótipo só em JPEG 500 px** — pedir vetor; até lá, só no CTA (≤ 400 px).
-3. **Preços, datas do RESET, horário e ponto de referência** — a confirmar.
-4. **Mensagens do oráculo** — propostas; preferir as reais do site.
-5. **Autorizações de imagem** (RESET, mãos da terapeuta); cara e voz da cliente só se quiser.
+2. **Logótipo só em JPEG 500 px e não existe vetor** — proposta: redesenhar em SVG, fiel ao original, e aprovar com a cliente; até lá, só no CTA (≤ 400 px).
+3. **Preços confirmados.** Datas do RESET, horário e ponto de referência — a confirmar. Nota: o site guarda os eventos no browser de quem os cria (`localStorage`), por isso **nenhum visitante os vê** em kokarte.com; pedir as datas diretamente e corrigir o site.
+4. **Mensagens do oráculo** — usar as frases reais do site (ver 4.4b).
+5. **Autorizações de imagem:** existe autorização escrita de tudo ✅. Voz da cliente: a confirmar se quer gravar.
 6. **Música licenciada** (amapiano 112,5 BPM ou Biblioteca Comercial do TikTok), não áudio em tendência sem licença.
 7. **Linguagem:** nenhuma carta promete cura, amor, dinheiro ou sorte.
 8. **Conta TikTok** e números do DataReportal — reconfirmar.
