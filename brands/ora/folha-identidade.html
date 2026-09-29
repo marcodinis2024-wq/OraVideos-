@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1600">
+<title>ORA Folha de Identidade</title>
+<style>
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-Medium.otf);font-weight:500}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-BoldIt.otf);font-weight:700;font-style:italic}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-LightIt.otf);font-weight:300;font-style:italic}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-Black.otf);font-weight:800}
+@font-face{font-family:Rawson;src:url(../../assets/fonts/Rawson-ExtraBlack.ttf);font-weight:900}
+:root{--navy:#1B3B72;--cobalt:#0033A3;--yellow:#F5DF1E;--paper:#F4F6FA;--white:#FFFFFF;--ink:#0E1A33;--night:#0B1428;
+--n100:#EEF1F6;--n200:#DDE3EE;--n300:#B9C3D6;--n400:#8A94A8;--n500:#626C80;--n600:#4A5670;--n700:#2E3A55;
+--logo:url(../../assets/marca/logotipo-ora-azul.png);--in:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1600px;height:2000px;background:var(--paper);color:var(--ink);font-family:Rawson,system-ui,sans-serif;font-weight:500;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;overflow:hidden}
+.k{font-weight:800;font-size:15px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt)}
+.navy .k,.hd .k{color:var(--yellow)}
+h2{font-weight:900;font-size:34px;line-height:1;letter-spacing:-.01em;color:var(--navy);margin-top:8px}
+.mono{font-weight:500;font-size:14px;letter-spacing:.02em}
+section{position:absolute;left:80px;right:80px}
+
+/* header */
+.hd{position:absolute;left:0;top:0;width:1600px;height:300px;background:var(--navy);color:#fff;overflow:hidden}
+.hd .ring{position:absolute;right:-150px;top:-260px;width:760px;height:760px;border-radius:50%;border:120px solid rgba(255,255,255,.05)}
+.hd .band{position:absolute;right:140px;top:-200px;width:120px;height:800px;background:var(--yellow);transform:rotate(18deg)}
+.hd .t{position:absolute;left:80px;top:62px}
+.hd h1{font-weight:900;font-size:140px;line-height:.9;letter-spacing:-.02em;margin-top:16px}
+.hd h1 em{font-style:normal;color:var(--yellow)}
+.hd .sub{font-size:28px;margin-top:18px;color:#fff}
+.hd .meta{position:absolute;right:360px;bottom:40px;text-align:right;font-size:15px;line-height:1.6;color:var(--n300)}
+.hd .meta b{color:#fff;font-weight:800}
+
+/* logo */
+#logo{top:336px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:22px}
+.tile{height:168px;border-radius:24px;position:relative;display:grid;place-items:center;overflow:hidden}
+.tile .m{width:220px;height:136px;background:var(--c);-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+.tile .lb{position:absolute;left:18px;bottom:14px;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.tile.pos{background:#fff;--c:var(--navy)} .tile.pos .lb{color:var(--n500)}
+.tile.neg{background:var(--navy);--c:#fff} .tile.neg .lb{color:var(--n300)}
+.tile.plc{background:var(--yellow);--c:var(--cobalt)} .tile.plc .lb{color:var(--navy)}
+.tile.mon{background:var(--n100);--c:#000} .tile.mon .lb{color:var(--n500)}
+.tile.pos .guard{position:absolute;width:250px;height:130px;top:10px;border:1.5px dashed rgba(0,51,163,.35);border-radius:4px}
+.lrules{display:flex;gap:28px;margin-top:12px;font-size:14px;color:var(--n600)}
+.lrules b{font-weight:800;color:var(--navy)}
+
+/* palette */
+#pal{top:626px}
+.big{display:grid;grid-template-columns:1.6fr 1.2fr 1fr;gap:20px;margin-top:22px}
+.sw{height:176px;border-radius:24px;padding:24px 26px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.sw .nm{font-weight:900;font-size:30px;line-height:1}
+.sw .hx{font-weight:800;font-size:18px;letter-spacing:.04em;margin-top:6px}
+.sw .rl{font-size:15px;line-height:1.35;max-width:360px}
+.sw .cr{position:absolute;right:22px;top:22px;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.badge{font-weight:800;font-size:12px;letter-spacing:.06em;padding:6px 10px;border-radius:999px;white-space:nowrap}
+.small{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:16px}
+.ss{height:78px;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--n200)}
+.ss b{font-weight:900;font-size:19px} .ss span{font-size:13px}
+.ramp{display:grid;grid-template-columns:repeat(9,1fr);margin-top:16px;border-radius:18px;overflow:hidden;height:70px}
+.ramp div{padding:12px 12px;display:flex;flex-direction:column;justify-content:space-between;font-size:12px}
+.ramp b{font-weight:800;font-size:13px}
+.pnote{margin-top:12px;font-size:14px;color:var(--n600)}
+.pnote b{color:var(--navy);font-weight:800}
+
+/* type + motion row */
+#type{top:1126px;right:auto;width:800px}
+#mot{top:1126px;left:920px;right:80px}
+.scale{margin-top:18px;background:#fff;border-radius:24px;padding:14px 30px;position:relative;overflow:hidden}
+.row{display:grid;grid-template-columns:170px 1fr;align-items:center;border-bottom:1px solid var(--n100);padding:9px 0}
+.row:last-child{border:0}
+.row .sp{font-size:12px;color:var(--n500);letter-spacing:.02em;line-height:1.3}
+.row .sp b{display:block;color:var(--navy);font-weight:800;font-size:13px}
+.hero{font-weight:900;font-size:96px;line-height:.9;letter-spacing:-.02em;color:var(--navy)}
+.hero em{font-style:normal;color:var(--cobalt)}
+.x1{font-weight:900;font-size:48px;line-height:.95;color:var(--navy);letter-spacing:-.01em}
+.x3{font-weight:800;font-size:28px;color:var(--navy)}
+.xk{font-weight:800;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt)}
+.xb{font-weight:500;font-size:19px;line-height:1.3;color:var(--ink)}
+.xq{font-weight:700;font-style:italic;font-size:21px;color:var(--navy)}
+.xq i{font-weight:300}
+
+.mcard{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.mc{height:182px;border-radius:24px;position:relative;overflow:hidden;background:var(--navy);color:#fff}
+.mc .cap{position:absolute;left:20px;right:20px;bottom:16px;font-size:13px;line-height:1.35;color:var(--n300)}
+.mc .cap b{display:block;color:#fff;font-weight:800;font-size:15px;margin-bottom:2px}
+/* iris diagram */
+.iris .o{position:absolute;border-radius:50%;left:50%;top:52px;transform:translate(-50%,-50%)}
+.iris .scene{width:104px;height:104px;background:var(--yellow);overflow:hidden}
+.iris .scene i{position:absolute;inset:0;background:linear-gradient(160deg,#F5DF1E 0 55%,#d9c418 55%)}
+.iris .r1{width:104px;height:104px;border:8px solid #fff}
+.iris .r2{width:146px;height:146px;border:4px solid rgba(255,255,255,.45)}
+.iris .r3{width:196px;height:196px;border:2px solid rgba(255,255,255,.18)}
+.iris .ora{position:absolute;left:50%;top:52px;transform:translate(-50%,-50%);font-weight:900;font-size:32px;color:var(--navy)}
+/* wipe diagram */
+.wipe{background:var(--navy)}
+.wipe .b{position:absolute;left:0;top:0;width:52%;height:calc(100% - 84px);background:var(--paper)}
+.wipe .bar{position:absolute;left:40%;top:-70px;width:56px;height:260px;background:var(--yellow);transform:rotate(18deg)}
+.wipe .ang{position:absolute;right:20px;top:18px;font-weight:900;font-size:26px;color:var(--yellow)}
+.wipe .arrow{position:absolute;left:24px;top:36px;font-weight:800;font-size:12px;letter-spacing:.16em;color:var(--navy)}
+.wipe .cap{color:var(--n300)} .wipe .capbox{position:absolute;left:0;right:0;bottom:0;height:84px;background:var(--navy)}
+.iris .capbox{position:absolute;left:0;right:0;bottom:0;height:84px;background:var(--navy)}
+.curve{margin-top:14px;background:#fff;border-radius:24px;padding:14px 20px;display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center;height:98px}
+.curve svg{display:block}
+.curve .t{font-size:14px;line-height:1.45;color:var(--n600)}
+.curve .t b{color:var(--navy);font-weight:800}
+.sound{margin-top:16px;background:var(--ink);color:#fff;border-radius:24px;height:0}
+
+/* applications */
+#app{top:1690px}
+.apps{display:flex;gap:20px;margin-top:20px;align-items:flex-start}
+.story{width:118px;height:210px;border-radius:16px;background:var(--navy);color:#fff;position:relative;overflow:hidden;flex:none;padding:18px 12px}
+.story .kk{font-weight:800;font-size:7px;letter-spacing:.18em;color:var(--yellow);text-transform:uppercase}
+.story .hh{font-weight:900;font-size:20px;line-height:.92;margin-top:6px}
+.story .nn{font-weight:900;font-size:40px;line-height:.9;color:var(--yellow);margin-top:16px;letter-spacing:-.02em}
+.story .ss2{font-size:8px;color:var(--n300);margin-top:3px}
+.story .ft{position:absolute;left:12px;bottom:14px;font-size:6.5px;color:var(--n400)}
+.post{width:168px;height:210px;border-radius:16px;background:var(--yellow);position:relative;overflow:hidden;flex:none;padding:18px 16px;color:var(--navy)}
+.post .hh{font-weight:900;font-size:24px;line-height:.92}
+.post .big2{font-weight:900;font-size:60px;line-height:.85;margin-top:8px;letter-spacing:-.02em}
+.post .pill{position:absolute;left:16px;bottom:16px;background:var(--navy);color:#fff;font-weight:900;font-size:10px;padding:7px 12px;border-radius:999px}
+.post .hfall{position:absolute;right:18px;top:92px;font-weight:900;font-size:34px;color:rgba(27,59,114,.35);transform:rotate(34deg)}
+.li{flex:1;height:210px;display:flex;flex-direction:column;gap:10px}
+.lib{height:118px;border-radius:16px;background:var(--navy);position:relative;overflow:hidden;color:#fff}
+.lib .ph{position:absolute;left:0;top:0;bottom:0;width:36%;background:url(../../assets/estudio/placa-ora-amarela.jpg) center 52%/cover}
+.lib .ph:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,59,114,0) 55%,var(--navy))}
+.lib .bar{position:absolute;left:34%;top:-40px;width:26px;height:240px;background:var(--yellow);transform:rotate(18deg)}
+.lib .tx{position:absolute;left:45%;top:16px}
+.lib .tx .kk{font-weight:800;font-size:10px;letter-spacing:.18em;color:var(--yellow);text-transform:uppercase}
+.lib .tx .hh{font-weight:900;font-size:16px;line-height:.95;margin-top:6px}
+.lib .tx .hh em{font-style:normal;color:var(--yellow)}
+.lib .url{position:absolute;left:45%;bottom:12px;font-size:10px;color:var(--n300)}
+.lib .lg{position:absolute;right:16px;bottom:10px;width:64px;height:40px;background:#fff;-webkit-mask:var(--logo) center/contain no-repeat;mask:var(--logo) center/contain no-repeat}
+.alb{font-size:12px;color:var(--n500);letter-spacing:.02em}
+.alb b{color:var(--navy);font-weight:800}
+.appcol{display:flex;flex-direction:column;gap:10px}
+
+/* rules */
+#app{right:auto;width:800px;top:1644px}
+#gold{top:1644px;left:920px;right:80px}
+.gl{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;column-gap:26px;row-gap:12px;counter-reset:g}
+.gl li{list-style:none;counter-increment:g;font-size:13px;line-height:1.32;color:var(--n600);padding-left:30px;position:relative}
+.gl li:before{content:counter(g,decimal-leading-zero);position:absolute;left:0;top:0;font-weight:900;font-size:13px;color:var(--cobalt)}
+.gl li b{color:var(--navy);font-weight:800}
+
+/* tone */
+.tone{position:absolute;left:auto}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="ring"></div><div class="band"></div>
+  <div class="t">
+    <div class="k">Brand kit · Folha de identidade · v1</div>
+    <h1>Estúdio ORA<em>.</em></h1>
+    <div class="sub">Estúdio de design com estratégia. Leiria, desde 2016.</div>
+  </div>
+  <div class="meta"><b>O navy é a sala. O amarelo é a luz.</b><br>brands/ora/brand.md · brand.json · set 2026</div>
+</header>
+
+<!-- LOGÓTIPO -->
+<section id="logo">
+  <div class="k">01 · Logótipo</div>
+  <h2>Quatro versões, uma forma.</h2>
+  <div class="tiles">
+    <div class="tile pos"><div class="guard"></div><div class="m"></div><div class="lb">Positiva · navy / branco</div></div>
+    <div class="tile neg"><div class="m"></div><div class="lb">Negativa · branco / navy</div></div>
+    <div class="tile plc"><div class="m"></div><div class="lb">Placa · cobalto / amarelo</div></div>
+    <div class="tile mon"><div class="m"></div><div class="lb">Monocromática</div></div>
+  </div>
+  <div class="lrules">
+    <span><b>Proteção</b> 1x = altura do "R"</span>
+    <span><b>Mínimo</b> 240 px com assinatura · 96 px sem</span>
+    <span><b>Nunca</b> esticar · recolorir · sombras · desmontar letras · amarelo sobre branco</span>
+  </div>
+</section>
+
+<!-- PALETA -->
+<section id="pal">
+  <div class="k">02 · Paleta</div>
+  <h2>Amarelo = resultado.</h2>
+  <div class="big">
+    <div class="sw" style="background:var(--navy);color:#fff">
+      <div><div class="nm">ORA Navy</div><div class="hx">#1B3B72 · primária</div></div>
+      <div class="rl" style="color:var(--n300)">Identidade. Fundo principal e títulos sobre claro. Medido no logótipo.</div>
+      <div class="cr"><span class="badge" style="background:#fff;color:var(--navy)">Branco 10,97 AAA</span><span class="badge" style="background:var(--yellow);color:var(--navy)">Amarelo 8,07 AAA</span></div>
+    </div>
+    <div class="sw" style="background:var(--yellow);color:var(--navy)">
+      <div><div class="nm">ORA Amarelo</div><div class="hx">#F5DF1E · acento</div></div>
+      <div class="rl">Números-prova, palavra-chave, CTA e a faixa de transição.</div>
+      <div class="cr"><span class="badge" style="background:var(--navy);color:var(--yellow)">Navy 8,07 AAA</span><span class="badge" style="background:var(--ink);color:var(--yellow)">Tinta 12,73 AAA</span></div>
+    </div>
+    <div class="sw" style="background:var(--cobalt);color:#fff">
+      <div><div class="nm">ORA Cobalto</div><div class="hx">#0033A3 · secundária</div></div>
+      <div class="rl" style="color:var(--n200)">Destaques sobre claro. Letras da placa (a confirmar).</div>
+      <div class="cr"><span class="badge" style="background:#fff;color:var(--cobalt)">Branco 10,49 AAA</span><span class="badge" style="background:var(--yellow);color:var(--cobalt)">Amarelo 7,72 AAA</span></div>
+    </div>
+  </div>
+  <div class="small">
+    <div class="ss" style="background:var(--paper)"><b style="color:var(--navy)">Papel</b><span style="color:var(--n600)">#F4F6FA · fundo claro · navy 10,13</span></div>
+    <div class="ss" style="background:#fff"><b style="color:var(--navy)">Branco</b><span style="color:var(--n600)">#FFFFFF · cartões · tinta 17,29</span></div>
+    <div class="ss" style="background:var(--ink);border-color:var(--ink)"><b style="color:#fff">Tinta</b><span style="color:var(--n300)">#0E1A33 · texto · papel 15,98</span></div>
+    <div class="ss" style="background:var(--night);border-color:var(--night)"><b style="color:#fff">Noite</b><span style="color:var(--n300)">#0B1428 · fundo escuro · branco 18,34</span></div>
+  </div>
+  <div class="ramp">
+    <div style="background:var(--n100);color:var(--navy)"><b>100</b>#EEF1F6</div>
+    <div style="background:var(--n200);color:var(--navy)"><b>200</b>#DDE3EE</div>
+    <div style="background:var(--n300);color:var(--navy)"><b>300</b>#B9C3D6</div>
+    <div style="background:var(--n400);color:var(--ink)"><b>400</b>#8A94A8</div>
+    <div style="background:var(--n500);color:#fff"><b>500</b>#626C80</div>
+    <div style="background:var(--n600);color:#fff"><b>600</b>#4A5670</div>
+    <div style="background:var(--n700);color:#fff"><b>700</b>#2E3A55</div>
+    <div style="background:var(--ink);color:#fff"><b>Tinta</b>#0E1A33</div>
+    <div style="background:var(--night);color:#fff"><b>Noite</b>#0B1428</div>
+  </div>
+  <div class="pnote"><b>Neutros com viés navy (matiz ≈ 220°).</b> Texto secundário: 300 sobre navy (6,18 AA) · 500 sobre papel (4,88 AA). <b>Proibido:</b> amarelo sobre branco 1,36 · cobalto sobre navy 1,05. <b>Proporção</b> 60 navy · 25 claro · 10 amarelo · 5 resto.</div>
+</section>
+
+<!-- TIPOGRAFIA -->
+<section id="type">
+  <div class="k">03 · Tipografia</div>
+  <h2>Rawson. Uma família, cinco pesos.</h2>
+  <div class="scale">
+    <div class="row"><div class="sp"><b>Número-herói</b>900 · 280–360 px</div><div class="hero">4,47<em>×</em></div></div>
+    <div class="row"><div class="sp"><b>H1 / H2</b>900 · 128 / 100 px</div><div class="x1">Está na ORA.</div></div>
+    <div class="row"><div class="sp"><b>H3</b>800 · 60 px</div><div class="x3">Posts que vendem</div></div>
+    <div class="row"><div class="sp"><b>Kicker</b>800 · 30 px · +18 %</div><div class="xk">Resultados reais · Evento</div></div>
+    <div class="row"><div class="sp"><b>Corpo</b>500 · 42 px · 1,3</div><div class="xb">Criamos, medimos, corrigimos e crescemos contigo, de perto.</div></div>
+    <div class="row"><div class="sp"><b>Citação / nota</b>700 i · 300 i</div><div class="xq">"Trabalha próximo de cada cliente." <i>— nota 28 px mín.</i></div></div>
+  </div>
+</section>
+
+<!-- MOTION + SOM -->
+<section id="mot">
+  <div class="k">04 · Motion &amp; som</div>
+  <h2>Toda a transição nasce da marca.</h2>
+  <div class="mcard">
+    <div class="mc iris">
+      <div class="o r3"></div><div class="o r2"></div>
+      <div class="o scene"><i></i></div><div class="o r1"></div>
+      <div class="ora">ORA</div><div class="capbox"></div>
+      <div class="cap"><b>Íris do "O"</b>Anel 10 → 2600 px, clip circular 0 → 1400 px, 0,65 s expo-out.</div>
+    </div>
+    <div class="mc wipe">
+      <div class="b"></div><div class="arrow">CENA A → B</div><div class="bar"></div><div class="ang">18°</div><div class="capbox"></div>
+      <div class="cap"><b>Faixa amarela</b>1100 × 3400 px a 18° (perna do "A"), 0,6 s, máx. 2× por peça.</div>
+    </div>
+  </div>
+  <div class="curve">
+    <svg width="150" height="84" viewBox="0 0 150 84"><rect x="0" y="0" width="150" height="84" rx="12" fill="#F4F6FA"/><path d="M14 72 C 47 -6, 64 12, 136 12" fill="none" stroke="#1B3B72" stroke-width="4" stroke-linecap="round"/><circle cx="14" cy="72" r="5" fill="#F5DF1E" stroke="#1B3B72" stroke-width="2"/><circle cx="136" cy="12" r="5" fill="#1B3B72"/></svg>
+    <div class="t"><b>Entrada</b> cubic-bezier(.22, 1, .36, 1) · <b>saída</b> ease-in rápido · <b>125 BPM</b>: batida 0,48 s = 12 fotogramas. Texto palavra a palavra, stagger 60–80 ms. Contador 0,8 s + punch 106 %.</div>
+  </div>
+  <div class="curve" style="background:var(--ink)">
+    <svg width="150" height="84" viewBox="0 0 150 84"><rect width="150" height="84" rx="12" fill="#1B3B72"/>
+      <g fill="#B9C3D6" opacity=".5"><rect x="12" y="38" width="3" height="8" rx="1.5"/><rect x="18" y="34" width="3" height="16" rx="1.5"/><rect x="24" y="30" width="3" height="24" rx="1.5"/></g>
+      <circle cx="56" cy="52" r="15" fill="none" stroke="#fff" stroke-width="5"/><text x="56" y="80" fill="#B9C3D6" font-family="Rawson" font-weight="800" font-size="9" text-anchor="middle" dy="-4">Mi5</text>
+      <circle cx="104" cy="30" r="15" fill="#F5DF1E"/><text x="104" y="60" fill="#B9C3D6" font-family="Rawson" font-weight="800" font-size="9" text-anchor="middle">Si5</text>
+      <path d="M72 46 L88 36" stroke="#F5DF1E" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <div class="t" style="color:#B9C3D6"><b style="color:#F5DF1E">Toque ORA</b> · ~1,4 s · sopro com a íris → <b style="color:#fff">"O"</b> Mi5 sobre sub 130 → 34 Hz → <b style="color:#fff">"RA"</b> Si5 meia batida depois → reverb 2,4 s. Quinta ascendente = positivo. Master −14 LUFS.</div>
+  </div>
+</section>
+
+<!-- APLICAÇÕES + REGRAS -->
+<section id="app">
+  <div class="k">05 · Aplicações</div><h2>Mesmo vocabulário, todos os formatos.</h2>
+  <div class="apps">
+    <div class="appcol">
+      <div class="story"><div class="kk">Resultados reais</div><div class="hh">Cada euro voltou</div><div class="nn">4,47×</div><div class="ss2">retorno em anúncios</div><div class="ft">Meta Ads · jul–set 2026</div></div>
+      <div class="alb"><b>Story</b> 1080×1920</div>
+    </div>
+    <div class="appcol">
+      <div class="post"><div class="hh">Está na</div><div class="big2">ORA.</div><div class="hfall">h</div><div class="pill">Marca uma conversa</div></div>
+      <div class="alb"><b>Post</b> 1080×1350</div>
+    </div>
+    <div class="li">
+      <div class="lib"><div class="ph"></div><div class="bar"></div>
+        <div class="tx"><div class="kk">Design com estratégia</div><div class="hh">Não fazemos posts bonitos.<br>Fazemos <em>posts que vendem.</em></div></div>
+        <div class="lg"></div><div class="url">ora.com.pt · Leiria</div></div>
+      <div class="alb"><b>Capa LinkedIn</b> 1584×396 · também 1080×1080 · 1920×1080 · Facebook 820×312</div>
+    </div>
+  </div>
+</section>
+
+<section id="gold">
+  <div class="k">06 · Regras de ouro</div>
+  <h2>Doze regras, zero exceções.</h2>
+  <ol class="gl">
+    <li><b>Amarelo = resultado.</b> Números-prova a amarelo sobre navy.</li>
+    <li><b>Navy é a sala, amarelo é a luz:</b> 60 / 10 %.</li>
+    <li><b>Nunca</b> amarelo sobre branco nem cobalto sobre navy.</li>
+    <li><b>Só Rawson.</b> ExtraBlack impacta, Medium lê.</li>
+    <li><b>Uma ideia por ecrã:</b> máx. 6 palavras em 9:16.</li>
+    <li><b>Nós, sempre.</b> Nunca nomes nem caras da equipa.</li>
+    <li><b>Só números reais,</b> com fonte e período.</li>
+    <li><b>Clientes dentro de molduras ORA,</b> com autorização.</li>
+    <li><b>Transições da marca:</b> íris do "O" ou faixa a 18°.</li>
+    <li><b>Respiro:</b> margem de 90 px; corta-se texto, não margem.</li>
+    <li><b>Logótipo intocável:</b> sem deformar, recolorir, desmontar.</li>
+    <li><b>Fecho:</b> Marca uma conversa · ora.com.pt</li>
+  </ol>
+</section>
+</body>
+</html>
