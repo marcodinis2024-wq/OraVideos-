@@ -13,3 +13,14 @@
 | vela-flores-secas.jpg | aurélie sgnl | https://unsplash.com (photo-1755542234207) |
 | vela-marfim.jpg | New Flame | https://unsplash.com (photo-1707839568871) |
 | frasco-lencois.jpg | Natasha Polyakova | https://unsplash.com (photo-1642773472991) |
+
+## KOKARTE — imagens de ambiente (ilustrativas; nunca apresentadas como fotos da loja)
+
+| Ficheiro | Autor | Link |
+|---|---|---|
+| kokarte/pendulo-cristal.jpg | lilartsy | https://unsplash.com/photos/kXcGC1nZzYM |
+| kokarte/pedras-massagem.jpg | 360floralflaves | https://unsplash.com/photos/2Mqz_m7c6HU |
+| kokarte/ametista.jpg | Daniel Olah | https://unsplash.com/photos/ON0jlgkd8R0 |
+| kokarte/incenso-fumo.jpg | David Brooke Martin | https://unsplash.com/photos/FD9jL29KD5E |
+| kokarte/japamala-contas.jpg | Mohamed Benziane | https://unsplash.com/photos/kjKDlz7NF8k |
+| kokarte/taca-tibetana.jpg | Julio Lopez | https://unsplash.com/photos/G3Kh4PyMOLk |
