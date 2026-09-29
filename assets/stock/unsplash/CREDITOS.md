@@ -24,3 +24,8 @@
 | kokarte/incenso-fumo.jpg | David Brooke Martin | https://unsplash.com/photos/FD9jL29KD5E |
 | kokarte/japamala-contas.jpg | Mohamed Benziane | https://unsplash.com/photos/kjKDlz7NF8k |
 | kokarte/taca-tibetana.jpg | Julio Lopez | https://unsplash.com/photos/G3Kh4PyMOLk |
+| kokarte/oleos-essenciais.jpg | Laura Olsen | https://unsplash.com/photos/lg9QrSa8VaQ |
+| kokarte/selenite.jpg | Ivett M | https://unsplash.com/photos/6sF1jFkSCOA |
+| kokarte/pulseiras.jpg | Alexey Demidov | https://unsplash.com/photos/Lpd_JIshOQM |
+| kokarte/maos-reiki.jpg | A. C. | https://unsplash.com/photos/f9IR_6hg0Qo |
+| kokarte/vela-pedras.jpg | BBC Creative | https://unsplash.com/photos/fHxMPiaqY00 |
