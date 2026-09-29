@@ -88,7 +88,7 @@ Níveis medidos no 15 s: impactos pesados +4,8 / +5,6 / +5 dB · whooshes secos 
 | 3,84 | b8 · f96 | A LOJA | impacto leve + tom; marimba entra |
 | 3,84 → 7,20 | b8 … b15 (1 por batida) | 8 produtos, entradas secas | whoosh **curto** (0,22 s, pré-roll de 80 ms) R → centro + tique |
 | 7,20 | b15 | — | 4 toms + riser + prato invertido |
-| 7,68 | b16 · f192 | Sunburst + pergaminho, TERAPIAS, Reiki | **impacto pesado** + prato; palmas e chops entram; swipe + contagem f196–204 + ding **f205** (a = f194) |
+| 7,68 | b16 · f192 | Sunburst + pergaminho, TERAPIAS, Reiki | **impacto pesado** + prato; palmas e chops entram; swipe + contagem f196–204 + ding ≈ **f208–210** (preço assenta em f208; a = f194) |
 | 8,64 | b18 · f216 | Massagem | swipe + contagem f218–226 + ding f227 |
 | 9,60 | b20 · f240 | Mapeamento | swipe + contagem f242–250 + ding f251 |
 | 10,56 · 11,04 | b22 · b23 | Pílulas "+ Programa · RESET" | 2 pops E6 · A6; riser e rolo de palmas até ao b24 |
