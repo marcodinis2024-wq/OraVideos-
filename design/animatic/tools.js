@@ -11,11 +11,11 @@ async function page(b, dsf = 1) { const p = await b.newPage({ viewport: { width:
   const mode = process.argv[2]; const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--allow-file-access-from-files', '--autoplay-policy=no-user-gesture-required'] });
   if (mode === 'stills') {
     const p = await page(b); const ts = (process.argv[3] || '1,3.5,6.5,10,12,18,21.8,24.5,28,30,36.5,40,42.5,44.5').split(',').map(Number);
-    for (const t of ts) { await p.evaluate(t => window.__render(t), t); await p.screenshot({ path: path.join(OUT, `${NAME}_still_${t.toFixed(2).padStart(5, '0')}.jpg`), type: 'jpeg', quality: 70 }); }
+    for (const t of ts) { await p.evaluate(t => window.__render(t), t); await p.evaluate(() => window.__beforeShot && window.__beforeShot()); await p.screenshot({ path: path.join(OUT, `${NAME}_still_${t.toFixed(2).padStart(5, '0')}.jpg`), type: 'jpeg', quality: 70 }); }
   } else if (mode === 'video') {
     const p = await page(b); const fps = 25, N = Math.round((await p.evaluate(() => window.DUR || 46)) * fps);
     const raw = path.join(OUT, '_frames.mjpeg'); const fd = fs.openSync(raw, 'w');
-    for (let i = 0; i < N; i++) { await p.evaluate(t => window.__render(t), i / fps); fs.writeSync(fd, await p.screenshot({ type: 'jpeg', quality: 88 })); if (i % 100 === 0) console.log('frame', i, '/', N); }
+    for (let i = 0; i < N; i++) { await p.evaluate(t => window.__render(t), i / fps); await p.evaluate(() => window.__beforeShot && window.__beforeShot()); fs.writeSync(fd, await p.screenshot({ type: 'jpeg', quality: 88 })); if (i % 100 === 0) console.log('frame', i, '/', N); }
     fs.closeSync(fd);
     const ff = spawn(FFMPEG, ['-y', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', raw, '-c:v', 'libvpx', '-b:v', '8M', '-qmin', '4', '-qmax', '30', '-deadline', 'good', '-cpu-used', '4', '-an', path.join(OUT, NAME + '-9x16-sem-som.webm')], { stdio: ['ignore', 'ignore', 'inherit'] });
     await new Promise(r => ff.on('close', r)); fs.unlinkSync(raw);
