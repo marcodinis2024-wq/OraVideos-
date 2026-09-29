@@ -12,7 +12,7 @@ const ROOT = path.resolve(__dirname, '../../..'), OUT = path.join(ROOT, 'dist');
   await p.goto('file://' + path.join(__dirname, 'kokarte-v1-audio.html'));
   if (mode === 'mix' || mode === 'stems') {
     const wav = await p.evaluate(() => window.__renderAudio());
-    console.log(JSON.stringify(await p.evaluate(() => window.__info)));
+    console.log(JSON.stringify(await p.evaluate(() => window.__info))); if (process.env.GR) console.log(JSON.stringify(await p.evaluate(() => window.__grTop)));
     if (mode === 'mix') { fs.mkdirSync(OUT, { recursive: true }); const f = path.join(OUT, 'kokarte-v1-audio.wav'); fs.writeFileSync(f, Buffer.from(wav, 'base64')); console.log('escrito', f); }
     else { const dir = process.argv[3]; fs.mkdirSync(dir, { recursive: true }); for (const s of ['music', 'sfx']) fs.writeFileSync(path.join(dir, s + '.wav'), Buffer.from(await p.evaluate(s => window.__renderStem(s), s), 'base64')); console.log('stems em', dir); }
   } else if (mode === 'loop') console.log(JSON.stringify(await p.evaluate(() => window.__loopCheck())));

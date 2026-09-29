@@ -103,7 +103,7 @@
     const musicOut = G(stem === 'sfx' ? 0 : db(-1), master);
     const introLP = BQ('lowpass', 20000, 0.5, musicOut);      // "intro filtrada" e sucção na anacruse
     const musicIn = G(1, introLP);
-    const musicNF = G(1, musicOut);                            // log drum, bombo, prato invertido: fora do filtro
+    const musicNF = G(1); { const nfSh = shaper(1.25); const nfPre = G(0.62); musicNF.connect(nfPre); nfPre.connect(nfSh); nfSh.connect(musicOut); }                            // log drum, bombo, prato invertido: fora do filtro
     const mRev = mkRev(2.6, 3.2, 0.02), mRevIn = G(1); mRevIn.connect(mRev);
     const mRevLP = BQ('lowpass', 5200, 0.6); mRev.connect(mRevLP); mRevLP.connect(G(0.55, introLP));
     // SFX
@@ -119,7 +119,7 @@
       const t0 = Math.max(0, at(B(b0)) - 0.02), t1 = at(B(b1)); const notes = CH[ch].pad;
       notes.forEach((m, i) => {
         const f = mtof(m), e = G(0), p = PAN((i / (notes.length - 1) * 2 - 1) * 0.55, padBus); e.connect(p);
-        const g = 0.026;
+        const g = 0.031;
         e.gain.setValueAtTime(0, t0); e.gain.linearRampToValueAtTime(g, t0 + 0.24); e.gain.setValueAtTime(g, t1 - 0.04); e.gain.setTargetAtTime(0, t1 - 0.04, 0.16);
         [['sawtooth', -7, 0.55], ['sawtooth', 7, 0.55], ['triangle', 0, 1.1]].forEach(([ty, dt, a]) => { const o = OSC(ty, f, t0, t1 + 1.6); o.detune.value = dt; o.connect(G(a, e)); });
       });
@@ -130,7 +130,7 @@
     function rhodes(lt, m, dur, vel, pan) {
       const t = at(lt), f = mtof(m), end = t + dur + 0.7;
       const e = G(0), p = PAN(pan, keysBus); e.connect(p);
-      const pk = 0.05 * vel;
+      const pk = 0.058 * vel;
       e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(pk, t + 0.004); e.gain.setTargetAtTime(pk * 0.3, t + 0.004, 0.28); e.gain.setTargetAtTime(0, t + dur, 0.09);
       const car = OSC('sine', f, t, end), mod = OSC('sine', f, t, end), mg = G(0); mod.connect(mg); mg.connect(car.frequency);
       mg.gain.setValueAtTime(f * 1.25 * vel, t); mg.gain.setTargetAtTime(f * 0.1, t, 0.13);
@@ -139,10 +139,10 @@
     }
     const keysChord = (lt, ch, dur, vel, oct = 0) => CH[ch].keys.forEach((m, i) => rhodes(lt + i * 0.004, m + oct, dur, vel * vary(lt, i, 0.06), (i - 1.5) * 0.18));
     // LOG DRUM: seno + triângulo com queda de afinação, saturação tanh, LP; "knock" curto
-    const ldBus = G(1); const ldSh = shaper(1.5); const ldLP = BQ('lowpass', 1100, 0.7); ldBus.connect(ldSh); ldSh.connect(ldLP); ldLP.connect(musicNF);
+    const ldBus = G(1); const ldSh = shaper(1.5); const ldLP = BQ('lowpass', 1100, 0.7); const ldPre = G(0.62); ldBus.connect(ldPre); ldPre.connect(ldSh); ldSh.connect(ldLP); ldLP.connect(musicNF);
     function logDrum(lt, m, vel, len = 0.3, gl = 1.4) {
       const t = at(lt), f = mtof(m);
-      const e = G(0, ldBus); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.5 * vel, t + 0.003); e.gain.setTargetAtTime(0, t + 0.003, len / 4.6);
+      const e = G(0, ldBus); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.22 * vel, t + 0.003); e.gain.setTargetAtTime(0, t + 0.003, len / 4.6);
       const o = OSC('sine', f * gl, t, t + len + 0.4); o.frequency.setValueAtTime(f * gl, t); o.frequency.exponentialRampToValueAtTime(f, t + 0.045); o.connect(e);
       const o2 = OSC('triangle', f * 2 * gl, t, t + len + 0.4); o2.frequency.setValueAtTime(f * 2 * gl, t); o2.frequency.exponentialRampToValueAtTime(f * 2, t + 0.045); o2.connect(G(0.2, e));
       const n = noise(lt, 0.015, WN), nb = BQ('bandpass', 1500, 1.4), ng = G(0); n.connect(nb); nb.connect(ng); ng.connect(ldBus);
@@ -151,7 +151,7 @@
     function kick(lt, vel, f1 = 52, dec = 0.3) {
       const t = at(lt), o = OSC('sine', 150, t, t + dec + 0.3), e = G(0, musicNF);
       o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(f1, t + 0.07); o.connect(e);
-      e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.62 * vel, t + 0.002); e.gain.setTargetAtTime(0, t + 0.002, dec / 4.6);
+      e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.3 * vel, t + 0.002); e.gain.setTargetAtTime(0, t + 0.002, dec / 4.6);
     }
     function crash(lt, vel, to) {
       const t = at(lt), n = noise(lt, 2.2, PN2), h = BQ('highpass', 4200, 0.6), e = G(0, to); n.connect(h); h.connect(e);
@@ -195,11 +195,11 @@
       pF.exponentialRampToValueAtTime(5200, at(F(643)));                                         // filtro a abrir f560–643
       pF.exponentialRampToValueAtTime(2600, at(B(46) + 0.15));
       pF.setValueAtTime(2600, at(B(60))); pF.exponentialRampToValueAtTime(850, at(DUR));
-      pQ.setValueAtTime(0.8, at(0)); pQ.setValueAtTime(0.8, at(B(40))); pQ.linearRampToValueAtTime(3.2, at(F(643))); pQ.linearRampToValueAtTime(0.8, at(B(46) + 0.15));
+      pQ.setValueAtTime(0.8, at(0)); pQ.setValueAtTime(0.8, at(B(40))); pQ.linearRampToValueAtTime(2.2, at(F(643))); pQ.linearRampToValueAtTime(0.8, at(B(46) + 0.15));
       const pG = padBus.gain;
       pG.setValueAtTime(0.95, at(0)); pG.setValueAtTime(0.95, at(B(6))); pG.linearRampToValueAtTime(0.72, at(B(6) + 0.4));
       pG.setValueAtTime(0.72, at(B(36))); pG.linearRampToValueAtTime(1.05, at(B(36) + 0.5));
-      pG.setValueAtTime(1.05, at(B(40))); pG.linearRampToValueAtTime(1.25, at(F(643)));
+      pG.setValueAtTime(1.05, at(B(40))); pG.linearRampToValueAtTime(1.08, at(F(643)));
       pG.linearRampToValueAtTime(0.8, at(B(46) + 0.2)); pG.setValueAtTime(0.8, at(B(60))); pG.linearRampToValueAtTime(0.95, at(DUR));
 
       // --- pad
@@ -220,8 +220,8 @@
           } else if (sec === 'build' && beat >= 42) shaker(lt + sw, (0.08 + 0.42 * (beat - 42) / 4) * [1, 0.7, 0.9, 0.7][sb], 0.05, 0.15);
           // BOMBO
           if (sb === 0) {
-            if (sec === 'A') kick(lt, beat === 6 ? 0.8 : 0.5);
-            else if (sec === 'drop') kick(lt, beat === 46 ? 1 : 0.68, beat === 46 ? 55 : 52, beat === 46 ? 0.45 : 0.3);
+            if (sec === 'A') kick(lt, beat === 6 ? 0.65 : 0.5);
+            else if (sec === 'drop') kick(lt, beat === 46 ? 0.7 : 0.62, beat === 46 ? 55 : 52, beat === 46 ? 0.45 : 0.3);
           }
           // RIM (batidas 2 e 4 no drop; 4 na secção A)
           if ((sec === 'A' && s % 16 === 12) || (sec === 'drop' && s % 8 === 4)) rim(lt, sec === 'drop' ? 0.9 : 0.7);
@@ -229,7 +229,7 @@
           if (sec === 'drop' && sb === 2) hat(lt + sw, 0.8 * vary(lt, 2, 0.1));
           // LOG DRUM
           const root = CH[ch].bass;
-          if (b0 === 50) { if (sb === 0) { const k = s / 4; logDrum(lt, [42, 45, 47, 49][k], [1, 0.9, 0.9, 0.95][k], 0.34, 1.35); } } // plano 15: um por corte
+          if (b0 === 50) { if (sb === 0) { const k = s / 4; logDrum(lt, [42, 45, 47, 49][k], [0.62, 0.58, 0.58, 0.62][k], 0.34, 1.35); } } // plano 15: um por corte
           else if (b0 === 58 && s >= 8) { const FILL = { 8: [40, 0.45], 10: [42, 0.55], 11: [45, 0.6], 12: [45, 0.68], 13: [47, 0.75], 14: [49, 0.82], 15: [52, 0.9] }; if (FILL[s]) logDrum(lt, FILL[s][0], FILL[s][1], 0.15, 1.25); }
           else if ((sec === 'A' && beat > 6) || sec === 'drop') { const p = LD[s % 16]; if (p) logDrum(lt + sw, root + p[0], p[1] * vary(lt, 4, 0.06) * (sec === 'A' ? 0.85 : 1), p[2]); }
           // KEYS
@@ -241,7 +241,7 @@
         }
       });
       // entrada do log drum no f84 (b6): nota com glide largo
-      logDrum(B(6), CH[chordAt(6)].bass, 1, 0.45, 1.9);
+      logDrum(B(6), CH[chordAt(6)].bass, 0.8, 0.45, 1.9);
       // downbeat f0: bombo afinado em Lá1 + prato suave (passa pelo filtro da intro)
       kick(0, 0.9, 55, 0.5); crash(0, 0.7, musicIn);
       // drop f644: prato suave (fora do filtro)
@@ -267,10 +267,10 @@
     function lacre(lt, o) {
       const pm = o.pm, t = at(lt), p = PAN(0.05, sfx); send(p, 0.14, sRevIn);
       const clk = (dt, g, f, q = 1.2) => { const tt = t + dt, n = noise(lt + dt, 0.006, WN), b = BQ('bandpass', f, q), e = G(0, p); n.connect(b); b.connect(e); e.gain.setValueAtTime(0, tt); e.gain.linearRampToValueAtTime(g, tt + 0.0005); e.gain.setTargetAtTime(0, tt + 0.0005, 0.0012); };
-      [[0, 1], [0.006, 0.7], [0.013, 0.85], [0.021, 0.45], [0.034, 0.3]].forEach(([dt, a], i) => clk(dt / pm, 0.9 * a, 2700 * pm * vary(lt, 20 + i, 0.08)));
+      [[0, 1], [0.006, 0.7], [0.013, 0.85], [0.021, 0.45], [0.034, 0.3]].forEach(([dt, a], i) => clk(dt / pm, 0.42 * a, 2700 * pm * vary(lt, 20 + i, 0.08)));
       [[0.075, 0.16], [0.105, 0.11], [0.15, 0.08]].forEach(([dt, a], i) => clk(dt, a, 3600 * pm * vary(lt, 30 + i, 0.1), 2));   // migalhas de lacre
-      { const n = noise(lt, 0.05, WN), b = BQ('bandpass', 1100 * pm, 0.8), e = G(0, p); n.connect(b); b.connect(e); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.35, t + 0.001); e.gain.setTargetAtTime(0, t + 0.001, 0.008); }
-      { const o2 = OSC('sine', 190 * pm, t, t + 0.12), e = G(0, p); o2.frequency.setValueAtTime(190 * pm, t); o2.frequency.exponentialRampToValueAtTime(115 * pm, t + 0.04); o2.connect(e); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.28, t + 0.001); e.gain.setTargetAtTime(0, t + 0.001, 0.014); }
+      { const n = noise(lt, 0.05, WN), b = BQ('bandpass', 1100 * pm, 0.8), e = G(0, p); n.connect(b); b.connect(e); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.2, t + 0.001); e.gain.setTargetAtTime(0, t + 0.001, 0.008); }
+      { const o2 = OSC('sine', 190 * pm, t, t + 0.12), e = G(0, p); o2.frequency.setValueAtTime(190 * pm, t); o2.frequency.exponentialRampToValueAtTime(115 * pm, t + 0.04); o2.connect(e); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.2, t + 0.001); e.gain.setTargetAtTime(0, t + 0.001, 0.014); }
     }
     function rough(param, t, d, g, lt, shape) { // envelope com textura (fibras de papel)
       const N = 48, cv = new Float32Array(N);
@@ -319,14 +319,14 @@
     }
     function toqueDoSol(lt) { // taça tibetana ≈ 220 Hz (Lá3): parciais inarmónicos em pares a batimento, cauda ~1,6 s audível
       const t = at(lt), f0 = 220, bus = G(1, sfx); send(bus, 0.55, sRevIn);
-      [[1, 0.36, 2.4, 0.9], [2.71, 0.15, 1.5, 1.7], [5.03, 0.07, 0.8, 2.6], [8.12, 0.03, 0.45, 3.3]].forEach(([r, a, t60, beat], i) => {
+      [[1, 0.27, 2.4, 0.9], [2.71, 0.12, 1.5, 1.7], [5.03, 0.07, 0.8, 2.6], [8.12, 0.03, 0.45, 3.3]].forEach(([r, a, t60, beat], i) => {
         [-1, 1].forEach(sd => {
           const o = OSC('sine', f0 * r + sd * beat / 2, t, t + t60 + 0.2), e = G(0), p = PAN(sd * (0.25 + i * 0.1), bus); o.connect(e); e.connect(p);
           e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(a / 2, t + 0.005); e.gain.setTargetAtTime(0, t + 0.005, t60 / 6.9);
         });
       });
       // batente (maço de feltro): pancada curta, grave e abafada
-      const n = noise(lt, 0.05, PN), l = BQ('lowpass', 1300, 0.7), e = G(0, bus); n.connect(l); l.connect(e); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.3, t + 0.001); e.gain.setTargetAtTime(0, t + 0.001, 0.008);
+      const n = noise(lt, 0.05, PN), l = BQ('lowpass', 1300, 0.7), e = G(0, bus); n.connect(l); l.connect(e); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(0.14, t + 0.003); e.gain.setTargetAtTime(0, t + 0.003, 0.01);
     }
     function tinido(lt) { // dois cristais a tocar-se
       const t = [[3140, 1, 0.45], [4710, 0.45, 0.3], [6850, 0.2, 0.14]], t2 = [[3525, 1, 0.35], [5230, 0.4, 0.2]];

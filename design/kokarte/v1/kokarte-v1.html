@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KOKARTE v1 — Uma destas mensagens é tua</title>
+<link rel="stylesheet" href="../../../assets/fonts/kokarte/fonts.css">
+<script src="sun-paths.js"></script>
+<style>
+:root{--verde:#334432;--ouro:#D4AF37;--ouroc:#F0D080;--flo:#0F2017;--musgo:#1D382B;--nev:#E8F1EC;--perg:#F4ECDC;--oa:#7F6118;--n3:#B3C2B2}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#070d09;overflow:hidden}
+#wrap{position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0}
+#stage{position:absolute;inset:0;overflow:hidden;background:var(--verde);font-family:Montserrat,sans-serif;color:var(--nev)}
+.L{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+.abs{position:absolute;left:0;top:0}
+.w{display:inline-block;will-change:transform,opacity}
+.g{color:var(--ouro)}
+.kick{position:absolute;left:0;right:0;top:242px;text-align:center;font:600 30px/1.2 Montserrat,sans-serif;letter-spacing:.18em;color:var(--ouro);text-transform:uppercase}
+.h1{position:absolute;left:70px;right:70px;text-align:center;font:700 112px/.98 Montserrat,sans-serif;letter-spacing:-.01em;color:var(--nev)}
+.h2{position:absolute;left:70px;right:70px;text-align:center;font:700 84px/1 Montserrat,sans-serif;color:var(--nev)}
+.orac{position:absolute;left:90px;right:90px;text-align:center;font:italic 500 76px/1.14 'Cormorant Garamond',serif;color:var(--nev)}
+.vc{transform:translateY(-50%)}
+/* fundo */
+#bg{background:radial-gradient(ellipse 80% 55% at 50% 44%,#3b4e39 0%,#334432 60%,#2c3c2b 100%)}
+#key{position:absolute;left:0;top:0;width:1500px;height:1500px;margin:-750px 0 0 -750px;border-radius:50%;background:radial-gradient(closest-side,rgba(240,208,128,.16),rgba(212,175,55,.06) 50%,rgba(212,175,55,0) 100%)}
+#deep{background:radial-gradient(ellipse 90% 70% at 50% 55%,#16291d 0%,#0F2017 70%,#0a170f 100%)}
+#vig{background:radial-gradient(ellipse 78% 62% at 50% 46%,rgba(15,32,23,0) 58%,rgba(15,32,23,.32) 100%)}
+#grain{mix-blend-mode:overlay;opacity:.5}
+/* fotos */
+.ph{position:absolute;inset:-60px;overflow:hidden}
+.ph img{position:absolute;width:100%;height:100%;object-fit:cover;filter:url(#duo)}
+#pbg .ph img{filter:url(#duo) blur(14px) brightness(.8)}
+#pbg:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,32,23,.45) 0%,rgba(15,32,23,.1) 35%,rgba(15,32,23,.15) 65%,rgba(15,32,23,.6) 100%)}
+#p15 .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,32,23,.55) 0%,rgba(15,32,23,0) 22%,rgba(15,32,23,0) 50%,rgba(15,32,23,.78) 78%,rgba(15,32,23,.85) 100%)}
+#illus{position:absolute;left:90px;top:1542px;font:400 28px/1.3 Poppins,sans-serif;color:var(--n3);letter-spacing:.02em}
+/* envelope */
+.env{position:absolute;left:0;top:0;width:480px;height:300px;transform-origin:240px 150px}
+.env svg,.hl svg{position:absolute;left:0;top:0;overflow:visible}
+.csh{position:absolute;left:30px;top:282px;width:420px;height:46px;border-radius:50%;background:radial-gradient(closest-side,rgba(8,18,12,.55),rgba(8,18,12,0));filter:blur(6px)}
+.seal{position:absolute;width:120px;height:120px;left:180px;top:118px}
+.seal img,.sealh{position:absolute;left:0;top:0;width:120px;height:120px}
+.glint{position:absolute;inset:0;-webkit-mask:url(img/selo-k.png) center/100% 100%;mask:url(img/selo-k.png) center/100% 100%;background:linear-gradient(115deg,rgba(255,250,230,0) 35%,rgba(255,250,230,.75) 50%,rgba(255,250,230,0) 65%);background-size:300% 100%;mix-blend-mode:screen}
+.hl{position:absolute;left:0;top:0;width:480px;height:300px}
+#flap{height:200px;transform-origin:240px 0}
+.num{position:absolute;width:120px;margin-left:-60px;text-align:center;font:700 64px/1 Montserrat,sans-serif;color:var(--ouro)}
+/* carta */
+#lw{position:absolute;left:108px;top:350px;width:864px;height:1100px;transform-origin:432px 550px}
+#flip{position:absolute;inset:0;transform-origin:432px 550px}
+.face{position:absolute;left:0;top:0;width:864px;height:1100px}
+.letter{border-radius:10px;background:radial-gradient(ellipse 80% 60% at 50% 38%,#FDF8EE 0%,#F6EFE0 50%,#EDE2CB 100%);box-shadow:0 50px 90px -40px rgba(4,10,6,.75),0 14px 28px -14px rgba(4,10,6,.45),inset 0 0 60px rgba(127,97,24,.10);overflow:hidden}
+.letter .fr{position:absolute;left:0;top:0}
+.lhead{position:absolute;left:0;right:0;top:118px;text-align:center;font:600 30px/1.2 'Cormorant Garamond',serif;letter-spacing:.24em;color:var(--oa);text-transform:uppercase}
+.ldiv{position:absolute;left:282px;width:300px;top:178px;height:10px}
+.ldiv i{position:absolute;top:4px;height:1px;width:130px;background:linear-gradient(90deg,rgba(127,97,24,0),rgba(127,97,24,.7))}
+.ldiv i+b+i{transform:scaleX(-1)}
+.ldiv i:first-child{left:0}.ldiv i:last-child{right:0}
+.ldiv b{position:absolute;left:145px;top:0;width:9px;height:9px;background:var(--oa);transform:rotate(45deg)}
+.lmsg{position:absolute;left:78px;right:78px;top:240px;height:600px;display:flex;flex-direction:column;justify-content:center;gap:14px;text-align:center;font:italic 500 64px/1.16 'Cormorant Garamond',serif;color:var(--flo)}
+.lseal{position:absolute;left:377px;top:880px;width:110px;height:110px;filter:drop-shadow(0 6px 8px rgba(80,55,10,.3))}
+.spec{position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 40%,rgba(255,255,255,.22) 50%,rgba(255,255,255,0) 60%);background-size:300% 100%;mix-blend-mode:soft-light;pointer-events:none}
+.card{position:absolute;left:0;width:864px;border-radius:32px;background:linear-gradient(165deg,rgba(43,76,58,.80) 0%,rgba(29,56,43,.76) 55%,rgba(22,44,33,.80) 100%);box-shadow:inset 0 0 0 1px rgba(232,241,236,.24),inset 0 1px 0 rgba(255,255,255,.22),0 50px 100px -36px rgba(3,9,5,.8)}
+.card .spec{border-radius:32px;mix-blend-mode:screen;background:linear-gradient(105deg,rgba(255,255,255,0) 42%,rgba(255,255,255,.10) 50%,rgba(255,255,255,0) 58%);background-size:300% 100%}
+.cseal{position:absolute;left:384px;top:-48px;width:96px;height:96px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35)) drop-shadow(0 0 16px rgba(240,208,128,.35))}
+.cc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:20px;text-align:center}
+.cname{font:700 84px/1.02 Montserrat,sans-serif;color:var(--nev);letter-spacing:-.01em}
+.cdur{margin-top:36px;font:400 40px/1 Poppins,sans-serif;color:var(--n3)}
+.cline{margin:44px 0 40px;width:140px;height:2px;background:linear-gradient(90deg,rgba(212,175,55,0),#D4AF37,rgba(212,175,55,0))}
+.cprice{font:600 72px/1 Poppins,sans-serif;color:var(--ouro);font-variant-numeric:tabular-nums;letter-spacing:.005em}
+#lsh{position:absolute;left:0;top:0;width:800px;height:70px;margin:-35px 0 0 -400px;border-radius:50%;background:radial-gradient(closest-side,rgba(5,12,8,.6),rgba(5,12,8,0));filter:blur(10px)}
+#bloom1,#bloom2{position:absolute;left:0;top:0;border-radius:50%;mix-blend-mode:screen;background:radial-gradient(closest-side,rgba(255,236,170,.95),rgba(240,208,128,.45) 35%,rgba(212,175,55,0) 100%)}
+.gline{position:absolute;height:3px;background:linear-gradient(90deg,rgba(212,175,55,0),#D4AF37 18%,#F4D47D 50%,#D4AF37 82%,rgba(212,175,55,0));box-shadow:0 0 14px rgba(240,208,128,.45)}
+/* trio */
+.mini{position:absolute;left:0;top:0;width:864px;height:1100px;transform-origin:0 0}
+.tn{position:absolute;width:120px;margin-left:-60px;text-align:center;font:700 64px/1 Montserrat,sans-serif;color:var(--ouro)}
+/* marca / cta */
+#brand,#cta{overflow:hidden}
+.bbg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 55% at 50% 44%,#3b4e39 0%,#334432 60%,#2c3c2b 100%)}
+.logo{position:absolute;left:0;top:0}
+.sub{position:absolute;left:70px;right:70px;text-align:center;font:600 48px/1.2 Montserrat,sans-serif;color:var(--nev)}
+.tel{position:absolute;left:0;right:0;text-align:center;font:600 72px/1 Poppins,sans-serif;color:var(--ouro);font-variant-numeric:tabular-nums}
+.hand{position:absolute;left:0;right:0;text-align:center;font:400 40px/1.2 Poppins,sans-serif;color:var(--nev);letter-spacing:.01em}
+#ctaMask{position:absolute;left:0;top:0;width:1080px;height:1098px;overflow:hidden}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <filter id="duo" color-interpolation-filters="sRGB" x="0" y="0" width="100%" height="100%">
+   <feColorMatrix type="matrix" values=".30 .59 .11 0 0  .30 .59 .11 0 0  .30 .59 .11 0 0  0 0 0 1 0"/>
+   <feComponentTransfer>
+    <feFuncR type="table" tableValues=".03 .07 .15 .27 .55 .90"/>
+    <feFuncG type="table" tableValues=".06 .13 .23 .33 .52 .80"/>
+    <feFuncB type="table" tableValues=".045 .095 .16 .20 .22 .46"/>
+   </feComponentTransfer>
+  </filter>
+  <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9C9A8"/><stop offset="1" stop-color="#E8DCC2"/></linearGradient>
+  <linearGradient id="gF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F8F2E5"/><stop offset=".55" stop-color="#F1E8D5"/><stop offset="1" stop-color="#E5D8BE"/></linearGradient>
+  <linearGradient id="gL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCF8EF"/><stop offset="1" stop-color="#EEE4CF"/></linearGradient>
+  <linearGradient id="gI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D3B5"/><stop offset="1" stop-color="#D3C19C"/></linearGradient>
+  <linearGradient id="kkO" gradientUnits="userSpaceOnUse" x1="40.5" y1="0" x2="225.5" y2="0"><stop offset="0" stop-color="#BE9B47"/><stop offset=".24" stop-color="#CFAC58"/><stop offset=".68" stop-color="#F4D47D"/><stop offset="1" stop-color="#E9C877"/></linearGradient>
+  <radialGradient id="sunGlow"><stop offset="0" stop-color="#F4D47D" stop-opacity=".55"/><stop offset=".4" stop-color="#D4AF37" stop-opacity=".18"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+  <clipPath id="aboveLine"><rect x="-2000" y="-2000" width="5000" height="2101.4"/></clipPath>
+ </defs>
+</svg>
+<div id="wrap"><div id="stage">
+ <div id="bg" class="L"></div>
+ <div class="L" style="overflow:hidden"><div id="key"></div></div>
+ <div id="deep" class="L"></div>
+ <div id="pbg" class="L"></div>
+ <canvas id="parts" class="L" width="1080" height="1920"></canvas>
+ <div id="fan" class="L"></div>
+ <div id="hero" class="L"></div>
+ <div id="trio" class="L"></div>
+ <div id="m4" class="L"></div>
+ <div id="brand" class="L"></div>
+ <div id="p15" class="L"></div>
+ <div id="cta" class="L"></div>
+ <canvas id="fx" class="L" width="1080" height="1920"></canvas>
+ <div id="vig" class="L"></div>
+ <div id="txt" class="L"></div>
+ <div id="illus">Imagens ilustrativas</div>
+ <canvas id="grain" class="L" width="540" height="960" style="width:1080px;height:1920px"></canvas>
+</div></div>
+<script>
+'use strict';
+const FPS = 25, DUR = 34.72; window.DUR = DUR;
+const A = '../../../assets/', SEAL = 'img/selo-k.png', LOGO = A + 'kokarte/logotipo-kokarte.svg';
+const $ = s => document.querySelector(s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const P = (f, a, b) => clamp((f - a) / (b - a));
+const L = (a, b, t) => a + (b - a) * t;
+function bez(x1, y1, x2, y2) {
+  const X = t => ((1 - 3 * x2 + 3 * x1) * t + (3 * x2 - 6 * x1)) * t * t + 3 * x1 * t;
+  const Y = t => ((1 - 3 * y2 + 3 * y1) * t + (3 * y2 - 6 * y1)) * t * t + 3 * y1 * t;
+  return x => { if (x <= 0) return 0; if (x >= 1) return 1; let lo = 0, hi = 1, m = x; for (let i = 0; i < 28; i++) { m = (lo + hi) / 2; if (X(m) < x) lo = m; else hi = m; } return Y(m); };
+}
+const eOut = bez(.16, 1, .3, 1), eIn = bez(.7, 0, .84, 0), eIO = bez(.65, 0, .35, 1);
+function spring(ts, resp = .45, z = .86) { if (ts <= 0) return 0; const w = 2 * Math.PI / resp, wd = w * Math.sqrt(1 - z * z); return 1 - Math.exp(-z * w * ts) * (Math.cos(wd * ts) + z * w / wd * Math.sin(wd * ts)); }
+const bell = (f, a, m, b) => f < m ? eOut(P(f, a, m)) : 1 - eIO(P(f, m, b));
+function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function mk(parent, tag, cls, html, css) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; if (css) e.style.cssText = css; parent.appendChild(e); return e; }
+const vis = (e, v) => { e.style.visibility = v ? 'inherit' : 'hidden'; };
+// "palavra palavra|linha 2 *ouro*"
+const W = s => s.split('|').map(l => l.split(' ').map(w => { const g = /^\*(.*)\*$/.exec(w); return `<span class="w${g ? ' g' : ''}">${g ? g[1] : w}</span>`; }).join(' ')).join('<br>');
+function animWords(ws, f, t0, o = {}) {
+  const st = o.st ?? 2, du = o.du ?? 13, dy = o.dy ?? 40, bl = o.bl ?? 10;
+  ws.forEach((w, i) => { const q = eOut(P(f, t0 + i * st, t0 + i * st + du)); w.style.opacity = q; w.style.transform = `translateY(${(1 - q) * dy}px)`; w.style.filter = q < .999 ? `blur(${(1 - q) * bl}px)` : 'none'; });
+}
+
+/* ---------- envelope ---------- */
+const SVG_BACK = `<svg width="480" height="300" viewBox="0 0 480 300"><rect width="480" height="300" rx="12" fill="url(#gB)"/><path d="M4 10 L240 176 L476 10" fill="none" stroke="rgba(110,80,30,.14)" stroke-width="3"/></svg>`;
+const SVG_FRONT = `<svg width="480" height="300" viewBox="0 0 480 300">
+ <path d="M0 16 Q0 4 11 9 L240 172 L469 9 Q480 4 480 16 L480 288 Q480 300 468 300 L12 300 Q0 300 0 288 Z" fill="url(#gF)"/>
+ <path d="M0 16 L240 172 L0 300 Z" fill="rgba(90,65,20,.035)"/><path d="M480 16 L240 172 L480 300 Z" fill="rgba(255,255,255,.18)"/>
+ <path d="M5 296 L214 182 M475 296 L266 182" stroke="rgba(120,90,40,.2)" stroke-width="1.6" fill="none"/>
+ <path d="M6 298.5 L215 184.5 M474 298.5 L265 184.5" stroke="rgba(255,255,255,.55)" stroke-width="1" fill="none"/>
+ <path d="M2 11 L240 174 L478 11" stroke="rgba(255,255,255,.75)" stroke-width="1.4" fill="none"/>
+ <g transform="translate(240 262)" fill="none" stroke="#B8923A" stroke-width="1.6" opacity=".75" stroke-linecap="round"><path d="M-6 0 C-30 -2 -52 -10 -70 -24 M-20 -1 q-6 -10 -2 -18 M-36 -5 q-8 -9 -4 -18 M-52 -12 q-9 -7 -6 -16 M6 0 C30 -2 52 -10 70 -24 M20 -1 q6 -10 2 -18 M36 -5 q8 -9 4 -18 M52 -12 q9 -7 6 -16"/></g>
+ <rect x=".5" y=".5" width="479" height="299" rx="12" fill="none" stroke="rgba(255,255,255,.35)"/></svg>`;
+const FLAP_PATH = 'M0 12 Q0 0 12 0 L468 0 Q480 0 480 12 L262 172 Q240 188 218 172 Z';
+const SVG_FLAP = `<svg width="480" height="200" viewBox="0 0 480 200" style="filter:drop-shadow(0 7px 7px rgba(70,50,15,.22))"><path d="${FLAP_PATH}" fill="url(#gL)" stroke="rgba(130,100,50,.18)" stroke-width="1.2"/><path d="M8 3 L240 174 L472 3" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1"/></svg>`;
+const SVG_FLAPIN = `<svg width="480" height="200" viewBox="0 0 480 200"><path d="${FLAP_PATH}" fill="url(#gI)" stroke="rgba(130,100,50,.2)" stroke-width="1.2"/></svg>`;
+function envelope(parent) {
+  const e = mk(parent, 'div', 'env');
+  mk(e, 'div', 'csh'); e.insertAdjacentHTML('beforeend', SVG_BACK + SVG_FRONT);
+  mk(e, 'div', 'hl', SVG_FLAP);
+  const s = mk(e, 'div', 'seal', `<img src="${SEAL}"><div class="glint"></div>`);
+  return { e, s, img: s.querySelector('img'), gl: s.querySelector('.glint') };
+}
+
+/* ---------- conteúdos ---------- */
+const MSG = [
+  { b: ['Não confundas uma lição', 'com um lugar onde tens de permanecer.'], t: [14, 42] },
+  { b: ['Hoje faz uma pausa', 'e pergunta-te:', '‘O que é que eu preciso?’'], t: [14, 28, 42] },
+  { b: ['Nem tudo o que', 'te tira a paz', 'merece uma resposta.'], t: [14, 28, 42] },
+];
+const SRV = [
+  { n: 'Mapeamento|Energético', p: '45.000 Kz', img: A + 'stock/unsplash/kokarte/pendulo-cristal.jpg', pos: '42% 62%' },
+  { n: 'Massagem|Bioenergética|com Cristais', p: '38.000 Kz', img: A + 'stock/unsplash/kokarte/pedras-massagem.jpg', pos: '50% 50%' },
+  { n: 'Reiki|Tibetano', p: '59.000 Kz', img: A + 'stock/unsplash/velas-fundo-preto.jpg', pos: '60% 50%' },
+];
+const FRAME_SVG = `<svg class="fr" width="864" height="1100" viewBox="0 0 864 1100" fill="none" stroke="#7F6118">
+ <rect x="30" y="30" width="804" height="1040" rx="4" stroke-width="2" opacity=".62"/>
+ <rect x="42" y="42" width="780" height="1016" rx="2" stroke-width="1" opacity=".38"/>
+ ${[[42, 42, 1, 1], [822, 42, -1, 1], [42, 1058, 1, -1], [822, 1058, -1, -1]].map(([x, y, sx, sy]) => `<path transform="translate(${x} ${y}) scale(${sx} ${sy})" d="M10 34 Q10 10 34 10 M18 34 Q18 18 34 18 M34 10 L60 10" stroke-width="1.4" opacity=".7"/><path transform="translate(${x} ${y}) scale(${sx} ${sy})" d="M22 22 l4 -4 l4 4 l-4 4 z" fill="#7F6118" stroke="none" opacity=".7"/>`).join('')}
+</svg>`;
+const letterFront = (mi, anim) => `${FRAME_SVG}<div class="lhead">Uma mensagem para ti</div><div class="ldiv"><i></i><b></b><i></i></div>
+ ${(mi == null ? [0, 1, 2] : [mi]).map(m => `<div class="lmsg" data-m="${m}">${MSG[m].b.map(b => `<div class="blk">${anim ? W(b) : b}</div>`).join('')}</div>`).join('')}
+ <img class="lseal" src="${SEAL}"><div class="spec"></div>`;
+
+/* ---------- construção ---------- */
+const fanE = [{ x: 230, y: 790, r: -8 }, { x: 540, y: 760, r: 0 }, { x: 850, y: 790, r: 8 }].map(p => Object.assign(envelope($('#fan')), p));
+const fanN = [0, 1, 2].map(i => mk($('#fan'), 'div', 'num', String(i + 1)));
+// herói: camadas separadas para intercalar a carta
+const H = {};
+H.back = mk($('#hero'), 'div', 'hl', SVG_BACK, 'z-index:1');
+H.flap = mk($('#hero'), 'div', 'hl', SVG_FLAP + SVG_FLAPIN); H.flap.id = 'flap';
+H.flapF = H.flap.children[0]; H.flapI = H.flap.children[1];
+H.lsh = mk($('#hero'), 'div', '', '', 'z-index:3'); H.lsh.id = 'lsh';
+H.lw = mk($('#hero'), 'div', '', '', 'z-index:4'); H.lw.id = 'lw';
+H.flip = mk(H.lw, 'div'); H.flip.id = 'flip';
+H.front = mk(H.flip, 'div', 'face letter', letterFront(null, true));
+H.back2 = mk(H.flip, 'div', 'face');
+H.card = mk(H.back2, 'div', 'card', `<img class="cseal" src="${SEAL}">` + SRV.map((s, i) => `<div class="cc" data-s="${i}"><div class="cname">${W(s.n)}</div><div class="cdur">${W('60 min')}</div><div class="cline"></div><div class="cprice">${s.p}</div></div>`).join('') + '<div class="spec"></div>');
+H.front2 = mk($('#hero'), 'div', 'hl', SVG_FRONT, 'z-index:5');
+H.seal = mk($('#hero'), 'div', 'hl', `<img class="sealh" src="${SEAL}" style="left:180px;top:118px;clip-path:inset(0 50% 0 0)"><img class="sealh" src="${SEAL}" style="left:180px;top:118px;clip-path:inset(0 0 0 50%)">`, 'z-index:6');
+H.sealL = H.seal.children[0]; H.sealR = H.seal.children[1];
+H.bloom = mk($('#hero'), 'div', '', '', 'z-index:7;width:1100px;height:1100px'); H.bloom.id = 'bloom1';
+H.sweep = mk($('#hero'), 'div', 'gline', '', 'z-index:8;top:1440px;left:0');
+H.msgs = [...H.front.querySelectorAll('.lmsg')];
+H.blks = H.msgs.map(m => [...m.querySelectorAll('.blk')].map(b => ({ b, ws: [...b.querySelectorAll('.w')] })));
+H.ccs = [...H.card.querySelectorAll('.cc')].map(c => ({ c, name: [...c.querySelector('.cname').querySelectorAll('.w')], dur: [...c.querySelector('.cdur').querySelectorAll('.w')], line: c.querySelector('.cline'), price: c.querySelector('.cprice') }));
+H.cseal = H.card.querySelector('.cseal');
+H.specF = H.front.querySelector('.spec'); H.specB = H.card.querySelector('.spec');
+// foto de fundo dos cartões
+const PB = SRV.map(s => { const d = mk($('#pbg'), 'div', 'ph', `<img src="${s.img}" style="object-position:${s.pos}">`); return d; });
+// trio
+const TRIO = [0, 1, 2].map(i => mk($('#trio'), 'div', 'mini', `<div class="face letter">${letterFront(i, false)}</div>`));
+const TRN = [0, 1, 2].map(i => mk($('#trio'), 'div', 'tn', String(i + 1)));
+const plane = mk($('#trio'), 'div', 'abs', `<svg width="120" height="120" viewBox="-6 -6 112 112" fill="none" stroke="#D4AF37" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"><path pathLength="1" d="M96 6 L4 44 L40 58 L54 96 Z M96 6 L40 58"/></svg>`);
+const planeP = plane.querySelector('path');
+// mensagem 4 + nascer do sol
+const m4grp = mk($('#m4'), 'div', 'L');
+const m4line = mk(m4grp, 'div', 'gline', '', 'top:1179px');
+const SUNX = 132, SUNY = 101.4, SUNS = 2.6; // símbolo 264x110 -> sol centrado em (540,1180)
+const sunSvg = mk($('#m4'), 'div', 'L', `<svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;left:0;top:0;overflow:visible">
+ <g transform="translate(540 1180) scale(${SUNS}) translate(${-SUNX} ${-SUNY})">
+  <g clip-path="url(#aboveLine)"><g id="sunRise">
+   <circle cx="${SUNX}" cy="${SUNY}" r="120" fill="url(#sunGlow)" id="sunG"/>
+   ${window.SUN_PATHS.slice(0, 15).map((d, i) => `<path class="ray" d="${d}" fill="url(#kkO)"/>`).join('')}
+   <path d="${window.SUN_PATHS[15]}" fill="url(#kkO)"/>
+  </g></g>
+ </g></svg>`);
+const RAYS = [...sunSvg.querySelectorAll('.ray')];
+const sunRise = sunSvg.querySelector('#sunRise'), sunG = sunSvg.querySelector('#sunG');
+const ring = mk($('#stage'), 'div', 'abs', '', 'border-radius:50%;border:3px solid #F0D080;box-shadow:0 0 30px rgba(240,208,128,.6),inset 0 0 30px rgba(240,208,128,.4)'); $('#stage').insertBefore(ring, $('#p15'));
+// marca
+const bbg = mk($('#brand'), 'div', 'bbg');
+const blogo = mk($('#brand'), 'img', 'logo'); blogo.src = LOGO; blogo.style.width = '560px';
+const bloom2 = mk($('#brand'), 'div', '', '', 'width:1800px;height:1800px'); bloom2.id = 'bloom2';
+// fotos plano 15
+const P15 = [['ametista.jpg', '50% 45%'], ['incenso-fumo.jpg', '48% 40%'], ['japamala-contas.jpg', '45% 40%'], ['taca-tibetana.jpg', '50% 55%']]
+  .map(([f, pos]) => mk($('#p15'), 'div', 'ph', `<img src="${A}stock/unsplash/kokarte/${f}" style="object-position:${pos}">`));
+mk($('#p15'), 'div', 'shade');
+// CTA
+const cbg = mk($('#cta'), 'div', 'bbg');
+const clogo = mk($('#cta'), 'img', 'logo'); clogo.src = LOGO; clogo.style.width = '360px';
+const cline = mk($('#cta'), 'div', 'gline', '', 'top:1099px');
+const ctaMask = mk($('#cta'), 'div'); ctaMask.id = 'ctaMask';
+
+/* ---------- textos ---------- */
+const TX = [];
+function T(spec, cls, y, tin, tout, od, o = {}, parent = $('#txt')) {
+  const el = mk(parent, 'div', cls + ' vc', W(spec)); el.style.top = y + 'px';
+  const it = { el, ws: [...el.querySelectorAll('.w')], tin, tout, od, o }; TX.push(it); return it;
+}
+const NEVER = 1e9;
+T('KOKARTE', 'kick', 260, -99, 78, 6, { st: 0 });
+T('Uma destas mensagens|é *tua.*', 'h1', 1250, -99, 50, 6);
+T('Escolhe antes|de *abrir.*', 'h1', 1250, 56, 78, 6);
+[0, 1, 2].forEach(i => T(`Envelope ${i + 1}`, 'kick', 260, 84 + 140 * i, 84 + 140 * i + 133, 6, { st: 0 }));
+T('Qual te *saiu?*', 'h1', 1140, 504, 553, 6);
+T('*Envia* a quem precisa.', 'h2', 1410, 532, 553, 6, {}).el.style.fontSize = '72px';
+const M4 = [T('Talvez o momento|que tens esperado', 'orac', 640, 560, NEVER, 0, { st: 2, du: 16 }, m4grp),
+T('não esteja à tua frente.', 'orac', 830, 588, NEVER, 0, { st: 2, du: 16 }, m4grp),
+T('Talvez seja *este.*', 'orac', 985, 616, NEVER, 0, { st: 3, du: 16 }, m4grp)];
+M4[2].el.style.fontSize = '100px';
+T('Energia *&*|Espiritualidade', 'h2', 1235, 658, 700, 0, {}, $('#brand'));
+T('Loja e terapias.', 'sub', 1400, 672, 700, 0, {}, $('#brand'));
+T('Corimba · Luanda', 'kick', 260, 672, 700, 0, { st: 0 }, $('#brand'));
+T('Na loja', 'kick', 260, 700, 749, 6, { st: 0, du: 8 });
+[['Cristais.', 700], ['Incensos.', 714], ['Japamalas.', 728], ['Taças|tibetanas.', 742]].forEach(([s, a], i) => T(s, 'h1', i === 3 ? 1290 : 1340, a, i === 3 ? 749 : a + 14, i === 3 ? 6 : 0, { st: 1, du: 9, dy: 60, bl: 6 }));
+const CT1 = T('Marca pelo|*WhatsApp*', 'h1', 930, 756, NEVER, 0, {}, ctaMask); CT1.el.style.fontSize = '104px';
+const CT2 = T('+244 936 676 628', 'tel', 1196, 770, NEVER, 0, { st: 1 }, $('#cta'));
+const CT3 = T('@kok.arte · kokarte.com', 'hand', 1306, 784, NEVER, 0, { st: 2 }, $('#cta'));
+T('KOKARTE', 'kick', 260, 850, NEVER, 0, { st: 0, du: 12 });
+T('Uma destas mensagens|é *tua.*', 'h1', 1250, 853, NEVER, 0, { st: 1, du: 11 });
+
+/* ---------- partículas, fx e grão ---------- */
+const R0 = rng(7), PARTS = Array.from({ length: 34 }, () => ({ x: R0() * 1080, y: R0() * 1960, r: .8 + R0() * 2.4, a: .12 + R0() * .26, n: 1 + Math.floor(R0() * 2), k: 1 + Math.floor(R0() * 3), ph: R0(), sw: 8 + R0() * 22 }));
+const pc = $('#parts').getContext('2d'), fc = $('#fx').getContext('2d');
+function drawParts(t, alpha) {
+  pc.clearRect(0, 0, 1080, 1920); if (alpha <= 0) return;
+  for (const p of PARTS) {
+    const u = t / DUR, y = ((p.y - u * p.n * 1960) % 1960 + 1960) % 1960 - 20, x = p.x + p.sw * Math.sin(2 * Math.PI * (u * p.k + p.ph));
+    const tw = .6 + .4 * Math.sin(2 * Math.PI * (u * p.k * 3 + p.ph));
+    const g = pc.createRadialGradient(x, y, 0, x, y, p.r * 3.2); g.addColorStop(0, `rgba(244,212,125,${p.a * tw * alpha})`); g.addColorStop(1, 'rgba(244,212,125,0)');
+    pc.fillStyle = g; pc.beginPath(); pc.arc(x, y, p.r * 3.2, 0, 7); pc.fill();
+  }
+}
+function sparkle(x, y, f, f0, n, seed, rad = 90, size = 1) {
+  const q = P(f, f0, f0 + 14); if (q <= 0 || q >= 1) return; const r = rng(seed);
+  for (let i = 0; i < n; i++) {
+    const an = (i / n) * 6.283 + r() * .6, d = rad * (.5 + r() * .7) * eOut(q), s = (6 + r() * 7) * size * (1 - q * .6), a = (1 - eIn(q)) * .9;
+    const px = x + Math.cos(an) * d, py = y + Math.sin(an) * d;
+    fc.save(); fc.translate(px, py); fc.globalAlpha = a; fc.fillStyle = '#FFF1C4'; fc.shadowColor = 'rgba(240,208,128,.9)'; fc.shadowBlur = 10;
+    fc.beginPath(); fc.moveTo(0, -s); fc.quadraticCurveTo(0, 0, s, 0); fc.quadraticCurveTo(0, 0, 0, s); fc.quadraticCurveTo(0, 0, -s, 0); fc.quadraticCurveTo(0, 0, 0, -s); fc.fill(); fc.restore();
+  }
+}
+const GR = rng(99), gc = $('#grain').getContext('2d'), GT = Array.from({ length: 5 }, () => { const im = gc.createImageData(540, 960); for (let i = 0; i < im.data.length; i += 4) { const v = 128 + (GR() - .5) * 70; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; } return im; });
+
+/* ---------- render ---------- */
+function render(t) {
+  const f = Math.round(t * FPS * 1000) / 1000, fi = Math.round(t * FPS);
+  fc.clearRect(0, 0, 1080, 1920);
+  // luz-chave
+  let kx = 540, ky = 780, ka = 1;
+  if (f >= 84 && f < 504) { ky = 900; ka = 1.15; } else if (f >= 644 && f < 700) { ky = 800; ka = 1.35; } else if (f >= 756 && f < 850) { ky = 520; ka = 1.1; }
+  $('#key').style.transform = `translate(${kx}px,${ky}px)`; $('#key').style.opacity = ka;
+  $('#deep').style.opacity = f < 552 ? 0 : f < 662 ? .92 * eIO(P(f, 552, 566)) : .92 * (1 - eIO(P(f, 662, 674)));
+
+  /* --- leque de envelopes (planos 1, 2, 17) --- */
+  const fanOn = f < 84 || f >= 840; vis($('#fan'), fanOn);
+  if (fanOn) {
+    const loop = f >= 840, S = loop ? 1 : 1 + .03 * eIO(P(f, 0, 56));
+    fanE.forEach((E, i) => {
+      const tl = 14 * (i + 1), lit = loop ? 0 : eOut(P(f, tl - 2, tl + 5));
+      let dy = 0, sc = 1, op = 1, bl = 0;
+      if (!loop && f >= 56) dy = -6 * Math.sin(2 * Math.PI * (f - 56) / 28 + i * 1.1) * eIO(P(f, 56, 64));
+      if (!loop && i > 0) { const q = eIO(P(f, 77, 83)); sc = 1 - .14 * q; op = 1 - .55 * q; bl = 9 * q; }
+      if (loop) { const q = eOut(P(f, 847 + i * 2, 859 + i * 2)); op = q; dy = 90 * (1 - q); }
+      const x = 540 + (E.x - 540) * S, y = 760 + (E.y - 760) * S + dy;
+      E.e.style.transform = `translate(${x - 240}px,${y - 150}px) rotate(${E.r}deg) scale(${.625 * S * sc})`;
+      E.e.style.opacity = op; E.e.style.filter = bl > .05 ? `blur(${bl}px)` : 'none';
+      const pulse = (!loop && f >= 56) ? Math.exp(-(((f - 56) % 14) / 5)) * eOut(P(f, 56, 58)) : 0;
+      const bump = .12 * Math.sin(Math.PI * P(f, tl, tl + 7)) * (loop ? 0 : 1);
+      E.s.style.transform = `scale(${1 + bump + pulse * .03})`;
+      E.img.style.filter = `brightness(${.66 + .42 * lit + .08 * pulse}) saturate(${.6 + .45 * lit}) drop-shadow(0 0 ${2 + (18 + 10 * pulse) * lit}px rgba(244,212,125,${.7 * lit}))`;
+      E.gl.style.backgroundPosition = `${L(120, -20, eIO(P(f, tl, tl + 12)))}% 0`; E.gl.style.opacity = loop ? 0 : 1 - P(f, tl + 10, tl + 14);
+      // número
+      const nq = loop ? 0 : eOut(P(f, tl - 2, tl + 8)), nop = i > 0 ? 1 - .55 * eIO(P(f, 77, 83)) : 1;
+      fanN[i].style.left = x + 'px'; fanN[i].style.top = (760 + 175 * S + dy * .5) + 'px';
+      fanN[i].style.opacity = nq * nop; fanN[i].style.transform = `translateY(${(1 - nq) * 24}px) scale(${i > 0 ? 1 - .14 * eIO(P(f, 77, 83)) : 1})`;
+      if (!loop) { const r = E.r * Math.PI / 180, sx = x - 16 * S * Math.sin(r), sy = y + 16 * S * Math.cos(r); sparkle(sx, sy, f, tl, 9, 11 + i, 80); }
+    });
+  }
+
+  /* --- envelope herói + carta + cartão (planos 3–11) --- */
+  const heroOn = f >= 84 && f < 504; vis($('#hero'), heroOn);
+  let pbIdx = -1, pbOp = 0, pbG = 0;
+  if (heroOn) {
+    const seg = Math.min(2, Math.floor((f - 84) / 140)), g = f - 84 - 140 * seg;
+    // envelope
+    const envIn = seg === 0 ? 1000 : L(-300, 1000, eOut(P(g, 1, 7)));
+    const envY = envIn + 1200 * eIn(P(g, 13, 22)), envOn = g < 23;
+    [H.back, H.flap, H.front2, H.seal].forEach(e => vis(e, envOn));
+    const et = `translate(300px,${envY - 150}px)`;
+    H.back.style.transform = H.front2.style.transform = H.seal.style.transform = et;
+    const fa = 180 * eIO(P(g, 4, 13));
+    H.flap.style.transform = `${et} perspective(1200px) rotateX(${fa}deg)`;
+    H.flap.style.zIndex = fa < 90 ? 6 : 2; vis(H.flapF, envOn && fa < 90); vis(H.flapI, envOn && fa >= 90);
+    const sq = P(g, 1, 8), pre = .1 * Math.sin(Math.PI * P(g, 0, 2));
+    H.sealL.style.transform = `translate(${-34 * eOut(sq)}px,${60 * eIn(sq)}px) rotate(${-24 * sq}deg) scale(${1 + pre})`;
+    H.sealR.style.transform = `translate(${34 * eOut(sq)}px,${60 * eIn(sq)}px) rotate(${24 * sq}deg) scale(${1 + pre})`;
+    H.sealL.style.opacity = H.sealR.style.opacity = 1 - eIn(P(g, 3, 8));
+    if (g < 16) sparkle(540, envIn - 150 + 178, f, 84 + 140 * seg, 12, 30 + seg, 120, 1.2);
+    // carta / cartão
+    let cx = 540, cy, s, ang, h = 1100, mi = seg, si = seg, gc2 = g;
+    if (g < 7 && seg > 0) { // cartão anterior desce
+      si = seg - 1; gc2 = 139; cy = 900 + 1350 * eIn(P(g, 0, 5)); s = 1.02; ang = 180; h = 820;
+      pbIdx = seg - 1; pbOp = 1 - eIn(P(g, 0, 7)); pbG = 140 + g;
+    } else {
+      const rise = eOut(P(g, 7, 16)), grow = eOut(P(g, 14, 28));
+      const s0 = .486, cy0 = envIn - 150 + 14 + 550 * s0;
+      cy = L(L(cy0, cy0 - 215, rise), 900, grow); s = L(s0, 1, grow) * (1 + .02 * eIO(P(g, 28, 77)));
+      ang = 180 * eIO(P(g, 77, 93)); h = L(1100, 820, eIO(P(g, 88, 102)));
+      if (seg === 2 && g >= 133) { const q = eIO(P(g, 133, 139)); s = L(s, .3125, q); cx = L(540, 840, q); cy = L(cy, 820, q); }
+      pbIdx = seg; pbOp = eOut(P(g, 79, 92)) * (seg === 2 ? 1 - eIO(P(g, 133, 139)) : 1); pbG = g;
+    }
+    vis(H.lw, g >= 7 || seg > 0);
+    H.lw.style.transform = `translate(${cx - 540}px,${cy - 900}px) scale(${s})`;
+    const envBottom = envY + 150;
+    const clipB = envOn && !(g < 7 && seg > 0) ? Math.max(0, cy + 550 * s - envBottom) / s : 0;
+    H.lw.style.clipPath = clipB > 0 ? `inset(-200px -200px ${clipB}px -200px)` : 'none';
+    H.flip.style.transform = `perspective(2200px) rotateY(${ang}deg)`;
+    const showBack = ang >= 90; vis(H.front, !showBack); vis(H.back2, showBack);
+    H.back2.style.transform = 'rotateY(180deg)';
+    H.card.style.top = (1100 - h) / 2 + 'px'; H.card.style.height = h + 'px';
+    H.specF.style.backgroundPosition = H.specB.style.backgroundPosition = `${L(110, -10, ang / 180)}% 0`;
+    // sombra de contacto da carta
+    const shOn = g >= 16 || (seg > 0 && g < 7); vis(H.lsh, shOn && !(seg === 2 && g >= 136));
+    H.lsh.style.transform = `translate(${cx}px,${cy + 575 * s * (showBack ? h / 1100 : 1)}px) scaleX(${s * Math.max(.2, Math.abs(Math.cos(ang * Math.PI / 180)))})`;
+    H.lsh.style.opacity = .8 * eOut(P(g, 16, 26));
+    // mensagem
+    H.msgs.forEach((m, k) => vis(m, k === mi && !showBack));
+    const M = MSG[mi];
+    H.blks[mi].forEach((B, k) => { animWords(B.ws, g, M.t[k], { st: 2, du: 14 }); const nx = M.t[k + 1]; B.b.style.opacity = nx != null ? L(1, .55, eOut(P(g, nx, nx + 10))) : 1; });
+    // cartão
+    H.ccs.forEach((C, k) => { vis(C.c, k === si && showBack); });
+    const C = H.ccs[si];
+    animWords(C.name, gc2, 89, { st: 2, du: 13 }); animWords(C.dur, gc2, 95, { st: 1, du: 12, dy: 24, bl: 6 });
+    C.line.style.transform = `scaleX(${eOut(P(gc2, 97, 110))})`;
+    C.price.style.opacity = eOut(P(gc2, 99, 107)); C.price.style.transform = `scale(${.9 + .1 * spring((gc2 - 99) / FPS)})`;
+    H.cseal.style.opacity = P(gc2, 91, 93); H.cseal.style.transform = `scale(${spring((gc2 - 91) / FPS, .4, .8)})`;
+    if (showBack && gc2 >= 91 && gc2 < 105 && !(g < 7 && seg > 0)) sparkle(cx, cy - 410 * s, f, 84 + 140 * seg + 91, 8, 50 + seg, 70, .9);
+    // bloom da carta
+    const bo = .25 * bell(g, 6, 13, 26); vis(H.bloom, bo > .002); H.bloom.style.opacity = bo;
+    H.bloom.style.transform = `translate(${540 - 550}px,${envIn - 150 - 420}px)`;
+    // linha dourada de transição (f217 / f357)
+    const swq = seg < 2 ? P(g, 133, 139) : 0; vis(H.sweep, seg < 2 && g >= 133);
+    H.sweep.style.width = 1080 * eOut(swq) + 'px'; H.sweep.style.opacity = 1;
+  }
+  // foto de fundo
+  vis($('#pbg'), pbOp > 0.001);
+  PB.forEach((d, k) => { vis(d, k === pbIdx && pbOp > .001); d.style.opacity = pbOp; d.style.transform = `scale(${1.04 + .04 * eIO(P(pbG, 80, 146))})`; });
+
+  /* --- trio (plano 12) --- */
+  const trioOn = f >= 504 && f < 560; vis($('#trio'), trioOn);
+  if (trioOn) {
+    const S = 1 + .04 * eIO(P(f, 504, 559)), out = eIn(P(f, 553, 559));
+    TRIO.forEach((m, i) => {
+      const x0 = 240 + 300 * i, q = i === 2 ? 1 : eOut(P(f, 504 + i * 2, 516 + i * 2)), sp = i === 2 ? .97 + .03 * spring((f - 504) / FPS) : 1;
+      const x = 540 + (x0 - 540) * S, y = 820 + (1 - q) * 70 - out * 20, sc = .3125 * S * sp;
+      m.style.transform = `translate(${x - 432 * sc}px,${y - 550 * sc}px) scale(${sc})`; m.style.opacity = q * (1 - out);
+      const nq = eOut(P(f, 507 + i * 2, 518 + i * 2));
+      TRN[i].style.left = x + 'px'; TRN[i].style.top = (820 - 215 * S - 60) + 'px'; TRN[i].style.opacity = nq * (1 - out); TRN[i].style.transform = `translateY(${(1 - nq) * 24 - out * 20}px)`;
+      if (nq > 0 && nq < 1) sparkle(x, 820 - 215 * S - 30, f, 507 + i * 2, 6, 70 + i, 50, .7);
+    });
+    const dq = eOut(P(f, 532, 546)), nq = eOut(P(f, 544, 556));
+    planeP.style.strokeDasharray = '1'; planeP.style.strokeDashoffset = 1 - dq;
+    plane.style.transform = `translate(${480 + 10 * nq}px,${1232 - 10 * nq}px)`; plane.style.opacity = (dq > 0 ? 1 : 0) * (1 - out);
+  }
+
+  /* --- mensagem 4 + nascer do sol (planos 13–14) --- */
+  const m4On = f >= 556 && f < 662; vis($('#m4'), m4On);
+  if (m4On) {
+    m4grp.style.transformOrigin = '540px 1180px'; m4grp.style.transform = `scale(${1 + .02 * eIO(P(f, 560, 644))})`;
+    const lq = eOut(P(f, 560, 576)); m4line.style.left = (540 - 450 * lq) + 'px'; m4line.style.width = 900 * lq + 'px';
+    M4[0].el.style.opacity = L(1, .55, eOut(P(f, 588, 598))); M4[1].el.style.opacity = L(1, .55, eOut(P(f, 616, 626)));
+    const rq = eOut(P(f, 632, 650));
+    sunRise.setAttribute('transform', `translate(0 ${(1 - rq) * 60})`);
+    sunG.setAttribute('opacity', .4 + .6 * rq);
+    RAYS.forEach((r, i) => {
+      // raios: pares esquerda/direita, do centro para fora
+      const k = i === 0 ? 0 : Math.ceil(i / 2), side = i === 0 ? 0 : (i % 2 ? 1 : -1);
+      const p = eOut(P(f, 642 + k * .5, 652 + k * .5));
+      r.setAttribute('transform', `rotate(${side * 90 * (1 - p)} ${SUNX} ${SUNY}) translate(${SUNX} ${SUNY}) scale(${.3 + .7 * p}) translate(${-SUNX} ${-SUNY})`);
+      r.setAttribute('opacity', p);
+    });
+    const R = 1500 * eIO(P(f, 644, 661));
+    ring.style.width = ring.style.height = 2 * R + 'px'; ring.style.transform = `translate(${540 - R}px,${1180 - R}px)`; ring.style.opacity = .8 * (1 - P(f, 650, 661));
+  }
+  { const R = 1500 * eIO(P(f, 644, 661)); vis(ring, f >= 644 && f < 662 && R < 1500); }
+  /* --- marca --- */
+  const brOn = f >= 644 && f < 700; vis($('#brand'), brOn);
+  if (brOn) {
+    const R = 1500 * eIO(P(f, 644, 661));
+    $('#brand').style.clipPath = R < 1500 ? `circle(${R}px at 540px 1180px)` : 'none';
+    bbg.style.opacity = 1 - eIO(P(f, 662, 674));
+    const fl = -6 * Math.sin(2 * Math.PI * (f - 644) / 150), sc = .965 + .035 * eOut(P(f, 646, 674)), gl = 12 + 16 * (.5 + .5 * Math.sin(2 * Math.PI * (f - 644) / 150 - 1.5));
+    blogo.style.transform = `translate(${540 - 280}px,${820 - 150 + fl}px) scale(${sc})`;
+    blogo.style.filter = `drop-shadow(0 0 ${gl}px rgba(240,208,128,.32))`;
+    const bo = .25 * bell(f, 644, 652, 684); bloom2.style.opacity = bo; bloom2.style.transform = `translate(${540 - 900}px,${1180 - 900}px)`;
+  }
+  /* --- fotos plano 15 --- */
+  const p15On = f >= 700 && f < 756; vis($('#p15'), p15On);
+  if (p15On) { const k = Math.min(3, Math.floor((f - 700) / 14)); P15.forEach((d, i) => { vis(d, i === k); d.style.transform = `scale(${1 + .04 * eIO(P(f, 700, 756))})`; }); }
+  /* --- CTA --- */
+  const ctaOn = f >= 749 && f < 860; vis($('#cta'), ctaOn);
+  if (ctaOn) {
+    const q = eIO(P(f, 750, 756));
+    cbg.style.clipPath = `inset(${1100 * (1 - q)}px 0 ${820 * (1 - q)}px 0)`; cbg.style.opacity = f < 758 ? 1 : 1 - eIO(P(f, 758, 768));
+    const lq = eOut(P(f, 749, 754)) * (1 - eIn(P(f, 846, 858))); cline.style.left = (540 - 450 * lq) + 'px'; cline.style.width = 900 * lq + 'px';
+    const oq = eIn(P(f, 840, 848)), lgq = eOut(P(f, 756, 772)), fl = -6 * Math.sin(2 * Math.PI * (f - 756) / 150);
+    clogo.style.transform = `translate(${540 - 180}px,${420 - 96 + fl + 30 * oq + (1 - lgq) * 20}px) scale(${.96 + .04 * lgq})`;
+    clogo.style.opacity = lgq * (1 - oq);
+    clogo.style.filter = `drop-shadow(0 0 ${12 + 22 * bell(f, 756, 762, 780)}px rgba(240,208,128,${.3 + .25 * bell(f, 756, 762, 780)}))`;
+    if (f >= 756 && f < 772) sparkle(540, 360, f, 756, 10, 90, 150, 1);
+    CT1.el.style.transform = `translateY(calc(-50% + ${260 * oq}px))`;
+    [CT2, CT3].forEach(c => { c.el.style.transform = `translateY(calc(-50% + ${30 * oq}px))`; c.el.style.opacity = 1 - oq; });
+    CT2.el.style.transform += ` scale(${f >= 770 ? .92 + .08 * spring((f - 770) / FPS) : .92})`;
+  }
+  /* --- textos genéricos --- */
+  for (const it of TX) {
+    const on = f >= it.tin && f < it.tout + it.od; vis(it.el, on); if (!on) continue;
+    animWords(it.ws, f, it.tin, it.o);
+    if (it.od && f >= it.tout) { const q = eIn(P(f, it.tout, it.tout + it.od)); it.el.style.opacity = 1 - q; it.el.style.filter = `blur(${q * 6}px)`; it.el.style.transform = `translateY(calc(-50% - ${q * 20}px))`; }
+    else if (!it.el.closest('#cta')) { if (it !== M4[0] && it !== M4[1]) it.el.style.opacity = 1; it.el.style.filter = 'none'; if (it !== CT1) it.el.style.transform = 'translateY(-50%)'; }
+  }
+  // "Imagens ilustrativas"
+  const il = Math.max(pbOp, p15On ? 1 - eIn(P(f, 749, 755)) : 0); $('#illus').style.opacity = il; vis($('#illus'), il > .001);
+  // partículas (fora das fotos) e grão
+  drawParts(t, 1 - pbOp * .6);
+  gc.putImageData(GT[fi % GT.length], 0, 0);
+}
+window.__render = render;
+window.__ready = (async () => {
+  await document.fonts.ready;
+  await Promise.all(['700 50px Montserrat', '600 50px Montserrat', '400 50px Poppins', '600 50px Poppins', 'italic 500 50px "Cormorant Garamond"', '600 50px "Cormorant Garamond"'].map(s => document.fonts.load(s, 'AÁãçé')));
+  await Promise.all([...document.images].map(i => i.decode().catch(() => console.warn('img', i.src))));
+  render(0); return true;
+})();
+// pré-visualização (fora do export)
+function fit() { const s = Math.min(innerWidth / 1080, innerHeight / 1920); $('#wrap').style.transform = `translate(${(innerWidth - 1080 * s) / 2}px,${(innerHeight - 1920 * s) / 2}px) scale(${s})`; }
+if (!/export=1/.test(location.search)) {
+  fit(); addEventListener('resize', fit);
+  let t0 = null; const loop = now => { if (t0 == null) t0 = now; render(((now - t0) / 1000) % DUR); requestAnimationFrame(loop); };
+  const q = /t=([\d.]+)/.exec(location.search); if (q) render(+q[1]); else requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

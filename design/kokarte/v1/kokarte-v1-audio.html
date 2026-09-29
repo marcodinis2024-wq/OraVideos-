@@ -42,7 +42,8 @@
     if (!hits) { for (let i = 0; i < n; i++) { oL[i] = L[i] * g; oR[i] = R[i] * g; } return [oL, oR, 0]; }
     const g2 = new Float32Array(n); let acc = 0; for (let k = -h; k <= h; k++) acc += g1[(k + n) % n];
     for (let i = 0; i < n; i++) { g2[i] = acc / (2 * h + 1); acc += g1[(i + h + 1) % n] - g1[(i - h + n) % n]; }
-    let prev = 1, minG = 1; for (let lap = 0; lap < 2; lap++) for (let i = 0; i < n; i++) { const v = Math.min(g2[i], prev + (1 - prev) * rel); prev = v; if (lap) { oL[i] = L[i] * g * v; oR[i] = R[i] * g * v; if (v < minG) minG = v; } }
+    const grB = new Float32Array(Math.ceil(n / 4800)).fill(1); let prev = 1, minG = 1; for (let lap = 0; lap < 2; lap++) for (let i = 0; i < n; i++) { const v = Math.min(g2[i], prev + (1 - prev) * rel); prev = v; if (lap) { oL[i] = L[i] * g * v; oR[i] = R[i] * g * v; if (v < minG) minG = v; const bk = Math.floor(i / 4800); if (!(v >= grB[bk])) grB[bk] = v; } }
+    window.__grTop = Array.from(grB).map((v, i) => [+(i / 10).toFixed(1), +(20 * Math.log10(v)).toFixed(1)]).filter(x => x[1] < -1).sort((a, b) => a[1] - b[1]);
     return [oL, oR, 20 * Math.log10(minG)];
   }
   function wav24(L, R) {
