@@ -1,0 +1,195 @@
+{
+  "nome": "Kokarte",
+  "grafiasEmUso": {
+    "site": "KOKARTE (título de kokarte.kyte.site)",
+    "catalogo": "KOK'ARTE (kyte.site/kokarte, kokarte.catalog.kyte.site, títulos das páginas de produto)",
+    "instagram": "KO K A R T E (@kok.arte)",
+    "facebook": "Kokarte | Luanda (@kok.arte.ao)",
+    "recomendacao": "Usar 'Kokarte' em texto corrido e 'KOKARTE' espaçado no wordmark até a cliente definir a grafia oficial — A CONFIRMAR"
+  },
+  "assinatura": "Mais do que uma loja: um espaço de harmonia, espiritualidade e bem-estar (parafraseado da descrição do catálogo; assinatura curta oficial A CONFIRMAR)",
+  "assinaturaProposta": "Energia boa mora aqui. (proposta, A CONFIRMAR)",
+  "setor": "Loja de produtos esotéricos e naturais: cristais, japamalas, pulseiras, incensos, defumação, selenite, âmbar, óleos essenciais e aromáticos, velas, candeeiros, taças tibetanas, budas, livros e oráculos",
+  "local": "Estrada da Corimba, Luanda, Angola · levantamento em loja e entrega (levantamento em 48 h)",
+  "publico": "A CONFIRMAR — hipótese: mulheres e homens 22–45 anos em Luanda, interessados em bem-estar, meditação, energia da casa, presentes com significado; compram pelo Instagram/WhatsApp e querem entrega",
+  "contactos": {
+    "telefone": "+244 936 276 100 (aparece em várias páginas do catálogo)",
+    "telefoneAlternativo": "+244 936 676 628 (aparece em kyte.site/kokarte) — CONFLITO, A CONFIRMAR qual é o WhatsApp principal",
+    "email": "kok.arte@outlook.com",
+    "instagram": "https://www.instagram.com/kok.arte/",
+    "facebook": "https://www.facebook.com/kok.arte.ao/",
+    "loja": "https://kokarte.kyte.site/pt-BR (catálogo Kyte)",
+    "dominio": "kokarte.com (estado desconhecido, não foi possível abrir) — A CONFIRMAR",
+    "horario": "desconhecido — A CONFIRMAR"
+  },
+  "precos": {
+    "moeda": "AOA (Kz)",
+    "confirmado": "Japamalas entre 3.500 Kz e 18.900 Kz (índice de pesquisa do catálogo Kyte; pode estar desatualizado)",
+    "formato": "3.500 Kz · 18.900 Kz (ponto nos milhares, espaço antes de Kz)"
+  },
+  "cores": {
+    "estado": "TODAS ESTIMADAS — A CONFIRMAR. Não foi possível descarregar logótipo nem fotos (site, catálogo, Instagram e Facebook bloqueados pelo proxy). Paleta proposta a partir do catálogo de produtos (ametista, âmbar, selenite, sálvia de defumação).",
+    "primaria":    { "nome": "Ametista",       "hex": "#4B2A63", "rgb": [75, 42, 99],    "origem": "proposta (cristal ametista) — A CONFIRMAR", "papel": "identidade; fundo principal de vídeo e redes; títulos sobre claro" },
+    "acento":      { "nome": "Âmbar",          "hex": "#E3A33B", "rgb": [227, 163, 59],  "origem": "proposta (âmbar, chama de vela) — A CONFIRMAR", "papel": "luz/ação: CTA, preço, palavra-chave, brilho da transição. Só sobre escuro" },
+    "secundaria":  { "nome": "Sálvia",         "hex": "#5E6E55", "rgb": [94, 110, 85],   "origem": "proposta (defumação, produtos naturais) — A CONFIRMAR", "papel": "linha 'natural' (óleos, ervas, defumação); chips e ícones sobre claro" },
+    "fundoClaro":  { "nome": "Selenite",       "hex": "#F6F1EA", "papel": "fundo claro quente, cartões de produto, respiro" },
+    "branco":      { "nome": "Branco",         "hex": "#FFFFFF", "papel": "texto sobre ametista, sálvia e noite" },
+    "fundoEscuro": { "nome": "Noite de incenso","hex": "#1C1424", "papel": "fundo profundo, cenas de vela/fumo, letterbox" },
+    "texto":       { "nome": "Tinta",          "hex": "#241B2B", "papel": "texto corrido sobre selenite e sobre âmbar; caixa de legendas a 86 %" },
+    "ambarTexto":  { "nome": "Âmbar escuro",   "hex": "#9A5F12", "papel": "variante do âmbar para texto sobre claro (4,65:1)" },
+    "neutros": [
+      { "token": "neutro-100", "hex": "#EFE9F0", "papel": "fundos alternados, divisórias" },
+      { "token": "neutro-200", "hex": "#DDD3E0", "papel": "bordas, cartões secundários" },
+      { "token": "neutro-300", "hex": "#BFB1C6", "papel": "texto secundário sobre ametista (5,70:1) e noite (8,78:1)" },
+      { "token": "neutro-400", "hex": "#9A8AA3", "papel": "decorativo ou títulos grandes sobre ametista (3,61:1)" },
+      { "token": "neutro-500", "hex": "#6E5F78", "papel": "texto secundário sobre selenite (5,23:1)" },
+      { "token": "neutro-600", "hex": "#54465E", "papel": "texto de apoio e ícones sobre claro (7,74:1)" },
+      { "token": "neutro-700", "hex": "#3A2E45", "papel": "superfícies elevadas sobre noite" }
+    ],
+    "contrasteWCAG": [
+      { "frente": "#4B2A63", "fundo": "#FFFFFF", "racio": 11.60, "nivel": "AAA" },
+      { "frente": "#4B2A63", "fundo": "#F6F1EA", "racio": 10.32, "nivel": "AAA" },
+      { "frente": "#F6F1EA", "fundo": "#4B2A63", "racio": 10.32, "nivel": "AAA" },
+      { "frente": "#E3A33B", "fundo": "#4B2A63", "racio": 5.28,  "nivel": "AA" },
+      { "frente": "#4B2A63", "fundo": "#E3A33B", "racio": 5.28,  "nivel": "AA" },
+      { "frente": "#E3A33B", "fundo": "#1C1424", "racio": 8.14,  "nivel": "AAA" },
+      { "frente": "#241B2B", "fundo": "#E3A33B", "racio": 7.55,  "nivel": "AAA" },
+      { "frente": "#241B2B", "fundo": "#F6F1EA", "racio": 14.75, "nivel": "AAA" },
+      { "frente": "#FFFFFF", "fundo": "#1C1424", "racio": 17.87, "nivel": "AAA" },
+      { "frente": "#5E6E55", "fundo": "#F6F1EA", "racio": 4.87,  "nivel": "AA" },
+      { "frente": "#FFFFFF", "fundo": "#5E6E55", "racio": 5.47,  "nivel": "AA" },
+      { "frente": "#9A5F12", "fundo": "#F6F1EA", "racio": 4.65,  "nivel": "AA" },
+      { "frente": "#BFB1C6", "fundo": "#4B2A63", "racio": 5.70,  "nivel": "AA" },
+      { "frente": "#6E5F78", "fundo": "#F6F1EA", "racio": 5.23,  "nivel": "AA" },
+      { "frente": "#9A8AA3", "fundo": "#4B2A63", "racio": 3.61,  "nivel": "AA só títulos grandes" },
+      { "frente": "#E3A33B", "fundo": "#FFFFFF", "racio": 2.19,  "nivel": "PROIBIDO" },
+      { "frente": "#E3A33B", "fundo": "#F6F1EA", "racio": 1.95,  "nivel": "PROIBIDO" },
+      { "frente": "#5E6E55", "fundo": "#4B2A63", "racio": 2.12,  "nivel": "PROIBIDO" },
+      { "frente": "#4B2A63", "fundo": "#1C1424", "racio": 1.54,  "nivel": "PROIBIDO (só como camada de fundo, nunca texto)" }
+    ],
+    "proporcao": "50 % ametista/noite · 35 % selenite e fotografia de produto · 10 % âmbar · 5 % sálvia e neutros"
+  },
+  "tipografia": {
+    "estado": "PROPOSTA — nenhum ficheiro de fonte da cliente. Fonte do logótipo desconhecida — A CONFIRMAR",
+    "display": { "familia": "Fraunces (Google Fonts, SIL OFL)", "pesos": [600, 700], "nota": "serifa suave e orgânica, eixo SOFT a 100 e WONK ligado; transmite artesanal, místico sem ser gótico. Itálico 400 para palavras-alma ('energia', 'calma')" },
+    "texto":   { "familia": "Jost (Google Fonts, SIL OFL)", "pesos": [400, 500, 600], "nota": "geométrica limpa; em caixa alta com tracking +40 % reproduz o 'K O K A R T E' espaçado do Instagram" },
+    "ficheiros": [],
+    "fallback": "Georgia, serif (display) · system-ui, sans-serif (texto) — só em rascunhos",
+    "numeros": "font-variant-numeric: tabular-nums em preços; formato 3.500 Kz",
+    "escala1080x1920": [
+      { "nivel": "H1 · frase-âncora", "familia": "Fraunces", "peso": 700, "px": 120, "entrelinha": 0.95, "tracking": "-1 %", "uso": "máx. 6 palavras" },
+      { "nivel": "H2", "familia": "Fraunces", "peso": 600, "px": 92, "entrelinha": 1.0, "tracking": "-1 %", "uso": "nome do produto / título" },
+      { "nivel": "Palavra-alma", "familia": "Fraunces", "peso": "400 itálico", "px": 92, "entrelinha": 1.0, "tracking": "0", "uso": "1 palavra por título, a âmbar" },
+      { "nivel": "Kicker / wordmark", "familia": "Jost", "peso": 500, "px": 30, "entrelinha": 1.2, "tracking": "+40 %", "caixa": "alta", "uso": "categoria, 'KOKARTE · LUANDA'" },
+      { "nivel": "Preço", "familia": "Jost", "peso": 600, "px": 64, "entrelinha": 1.0, "tracking": "0", "uso": "3.500 Kz, sempre âmbar sobre escuro" },
+      { "nivel": "Corpo", "familia": "Jost", "peso": 400, "px": 40, "entrelinha": 1.35, "tracking": "0", "uso": "texto de apoio" },
+      { "nivel": "Legenda queimada", "familia": "Jost", "peso": 600, "px": 46, "entrelinha": 1.2, "tracking": "0", "uso": "palavra a palavra, caixa tinta 86 %" },
+      { "nivel": "Nota", "familia": "Jost", "peso": 400, "px": 28, "entrelinha": 1.35, "tracking": "+2 %", "uso": "contactos, avisos (mínimo 28 px)" }
+    ],
+    "grelha1080x1920": { "margemLateral": 90, "zonaSeguraTopo": 220, "zonaSeguraBase": 320, "raioCartao": 36, "raioChip": 999 }
+  },
+  "logo": {
+    "ficheiros": [],
+    "emFalta": "logótipo inexistente no repositório; não foi possível descarregar (Instagram, Facebook e Kyte bloqueados). Pedir vetorial (.svg/.ai/.pdf) + PNG transparente",
+    "provisorio": "até haver logótipo: wordmark tipográfico 'K O K A R T E' em Jost 500, caixa alta, tracking +40 %, sobre ametista ou noite — só em rascunhos internos",
+    "areaDeProtecao": "A CONFIRMAR com o logótipo real; regra provisória: x = altura do 'K', 1x livre em volta",
+    "tamanhoMinimoPx": 0,
+    "tamanhoMinimo": "A CONFIRMAR com o logótipo real (provisório: 200 px de largura digital)",
+    "versoes": ["positiva", "negativa", "monocromatica"],
+    "versoesDetalhe": {
+      "positiva": "ametista sobre selenite/branco",
+      "negativa": "selenite/branco sobre ametista ou noite",
+      "monocromatica": "preto ou branco 100 %"
+    },
+    "proibicoes": [
+      "esticar, inclinar, rodar ou recolorir fora da paleta",
+      "recriar o logótipo com outra fonte quando existir ficheiro oficial",
+      "âmbar sobre branco/selenite (< 2,2:1)",
+      "pousar sobre fotografia agitada sem véu noite a 50–60 %",
+      "sombras, brilhos 'místicos', gradientes arco-íris"
+    ]
+  },
+  "tom": {
+    "personalidade": ["acolhedor", "sereno", "luminoso", "próximo (de loja de bairro)", "com leveza e humor quando o formato é trend"],
+    "pessoa": "'nós' (a loja) — A CONFIRMAR se a cliente prefere falar na 1.ª pessoa ou mostrar a cara",
+    "tratamento": "A CONFIRMAR com a cliente: em Luanda são comuns 'tu' (próximo) e 'você' (cortês). Proposta: 'tu' nas redes e trends; 'você' em atendimento/WhatsApp formal",
+    "lingua": "Documento em PT-PT; comunicação em PT de Angola (grafia europeia, vocabulário local: 'kumbu', 'bué', 'mambo' com parcimónia e só se a cliente usar). Evitar brasileirismos do catálogo Kyte ('celular', 'frete')",
+    "fazemos": [
+      "frases curtas e calmas; uma ideia por ecrã",
+      "falar de rituais do dia a dia: acender, respirar, limpar a casa, oferecer",
+      "mostrar o produto nas mãos, com luz real (vela, janela)",
+      "preço claro em Kz e como encomendar (WhatsApp, entrega, levantamento em 48 h)",
+      "linguagem de intenção e bem-estar: 'para criar um momento de calma'",
+      "trends com humor leve e local (Luanda, trânsito, calor, 'energia pesada da semana')"
+    ],
+    "evitamos": [
+      "promessas de cura ou efeitos médicos ('cura a ansiedade', 'trata doenças')",
+      "garantias de sorte, dinheiro ou amor",
+      "tom de medo ('mau-olhado vai destruir-te')",
+      "misturar ou desrespeitar tradições religiosas",
+      "superlativos vazios ('a melhor loja de Angola')",
+      "excesso de emojis místicos (máx. 2 por legenda)"
+    ],
+    "exemplos": [
+      { "evitamos": "Esta pedra cura a ansiedade e atrai dinheiro!", "fazemos": "Ametista na mesa de cabeceira. Um lembrete para abrandar." },
+      { "evitamos": "A MELHOR loja esotérica de Luanda!!!", "fazemos": "Cristais, incensos e velas. Na Corimba, com entrega." },
+      { "evitamos": "Contacte-nos para mais informações.", "fazemos": "Manda mensagem. Separamos o teu e está pronto em 48 h." },
+      { "evitamos": "Proteja-se das energias negativas antes que seja tarde.", "fazemos": "Semana pesada? Acende, respira, recomeça." },
+      { "evitamos": "Japamala com 108 contas de poder infinito.", "fazemos": "Japamala de obsidiana. 108 contas para contar respirações." }
+    ]
+  },
+  "motion": {
+    "curvaEntrada": "cubic-bezier(0.16, 1, 0.3, 1) — expo-out suave (entradas lentas, como fumo)",
+    "curvaSaida": "cubic-bezier(0.7, 0, 0.84, 0) — ease-in",
+    "curvaTransicao": "cubic-bezier(0.65, 0, 0.35, 1)",
+    "ritmoBPM": 112,
+    "batida": "0,536 s ≈ 13 fotogramas a 25 fps; cortes na batida para trends, a cada 2 batidas nas cenas calmas",
+    "assinaturaVisual": "Brilho de cristal: um reflexo âmbar diagonal (gradiente linear 0 → #E3A33B 60 % → 0, 200 px de largura, rodado 30°) passa sobre o produto ou o wordmark em 0,7 s; partículas de pó dourado (8–14, opacidade ≤ 40 %) sobem devagar.",
+    "transicaoDaMarca": "Corte de cristal: a cena atual parte-se num hexágono facetado (clip-path de 6 faces) que se fecha para o centro enquanto a cena seguinte se revela por 3 facetas que deslizam em ângulos de 30°/90°/150°, com um fio de luz âmbar nas arestas; 0,6 s na curva de transição. Máx. 2 por peça.",
+    "outros": [
+      "fumo de incenso real (filmado sobre fundo noite) como camada em ecrã a 30–50 %",
+      "texto: subida de 40 px + blur 10 → 0, stagger 90 ms",
+      "fotografia com grão 2 % e luz quente (balanço ~3200 K)",
+      "trend: cortes secos na batida + zoom-punch 100 → 108 %"
+    ]
+  },
+  "som": {
+    "genero": "amapiano / afro-house leve e quente (log drum suave, shakers) com textura de taça tibetana; faixa licenciada para uso comercial ou áudio em tendência do Instagram",
+    "bpm": 112,
+    "sfxAssinatura": [
+      "Toque da taça (sonic logo, ~2 s): pancada de taça tibetana gravada (a loja vende taças; idealmente gravar uma da loja), fundamental ≈ Lá3 220 Hz com parciais naturais, + fósforo a acender (0,2 s) antes do toque; cauda natural 1,6 s. A CONFIRMAR com a cliente",
+      "Fósforo/isqueiro a acender na abertura",
+      "Tilintar de cristal (duas pedras a tocar) nos cortes de cristal",
+      "Sopro/fumo suave nas transições calmas"
+    ],
+    "voz": "PT de Angola, feminina e calorosa, calma mas sorridente; idealmente a própria cliente (A CONFIRMAR). Nunca voz de 'vidente' nem sussurro dramático",
+    "mistura": "música −18 LUFS sob voz com ducking 6 dB; taça 2–3 dB acima da música no fecho; master −14 LUFS, −1 dBTP"
+  },
+  "banners": {
+    "formatos": ["1080x1920", "1080x1350", "1080x1080", "1920x1080", "1584x396 (LinkedIn)", "820x312 (Facebook)"],
+    "receita": "fundo noite ou ametista · produto real com luz quente · kicker 'KOKARTE · LUANDA' em Jost espaçado · título Fraunces selenite com 1 palavra-alma em itálico âmbar · preço em Kz a âmbar · rodapé: @kok.arte · WhatsApp (A CONFIRMAR número)",
+    "nota": "LinkedIn provavelmente não se aplica (loja de retalho); prioridade: Instagram 9:16 e 4:5, capa Facebook 820x312"
+  },
+  "regras": [
+    "Nada de promessas de saúde, cura, sorte ou dinheiro: falamos de ritual, intenção e bem-estar.",
+    "Âmbar é luz: preço, CTA e 1 palavra-chave. Nunca âmbar sobre fundo claro (usar #9A5F12 se for texto).",
+    "Produto real sempre que possível; stock só para ambiente e marcado como tal.",
+    "Uma ideia por ecrã, máx. 6 palavras em 9:16.",
+    "Preços em Kz com o formato 3.500 Kz e só se confirmados pela cliente na data de publicação.",
+    "Fechar sempre com como comprar: @kok.arte · WhatsApp · entrega ou levantamento na Corimba.",
+    "Toda a transição nasce do cristal (corte facetado) ou do fumo; nada de wipes genéricos.",
+    "Nunca misturar identidades: materiais de outros clientes (ex.: velas de outros projetos) não entram em peças Kokarte.",
+    "Mostrar pessoas/cara da cliente só com autorização."
+  ],
+  "aConfirmar": [
+    "Grafia oficial do nome (KOKARTE / KOK'ARTE / KO K A R T E / Kokarte)",
+    "Logótipo (ficheiro, cores e fonte reais) — toda a paleta e tipografia são propostas",
+    "Número de WhatsApp principal (+244 936 276 100 vs +244 936 676 628)",
+    "Horário de funcionamento e morada exata/ponto de referência na Estrada da Corimba",
+    "Estado de kokarte.com",
+    "Se vende também cosmética/cuidado pessoal (a página de Facebook está na categoria 'Beleza, cosmética e cuidado pessoal')",
+    "Se oferece serviços (terapias, sessões com taças, workshops, leituras de oráculo) ou só produtos",
+    "Preços atuais",
+    "Tratamento tu/você e se a cliente quer dar a cara/voz"
+  ]
+}
