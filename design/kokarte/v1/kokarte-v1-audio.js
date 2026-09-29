@@ -108,8 +108,8 @@
     const mRevLP = BQ('lowpass', 5200, 0.6); mRev.connect(mRevLP); mRevLP.connect(G(0.55, introLP));
     // SFX
     const sfxOut = G(stem === 'music' ? 0 : 1, master);
-    const sfx = G(1, sfxOut);
-    const sRev = mkRev(2.2, 3.0, 0.012), sRevIn = G(1); sRevIn.connect(sRev);
+    const sfxRoot = G(1, sfxOut); let sfx = sfxRoot;
+    const sRev = mkRev(2.2, 3.0, 0.012), sRevRoot = G(1); sRevRoot.connect(sRev); let sRevIn = sRevRoot;
     const sRevHP = BQ('highpass', 280, 0.7); sRev.connect(sRevHP); sRevHP.connect(G(0.6, sfxOut));
 
     /* ================= MÚSICA ================= */
@@ -220,8 +220,8 @@
           } else if (sec === 'build' && beat >= 42) shaker(lt + sw, (0.08 + 0.42 * (beat - 42) / 4) * [1, 0.7, 0.9, 0.7][sb], 0.05, 0.15);
           // BOMBO
           if (sb === 0) {
-            if (sec === 'A') kick(lt, beat === 6 ? 0.65 : 0.5);
-            else if (sec === 'drop') kick(lt, beat === 46 ? 0.7 : 0.62, beat === 46 ? 55 : 52, beat === 46 ? 0.45 : 0.3);
+            if (sec === 'A') kick(lt, beat === 6 ? 0.45 : 0.5);
+            else if (sec === 'drop') kick(lt, beat === 46 ? 0.5 : 0.62, beat === 46 ? 55 : 52, beat === 46 ? 0.45 : 0.3);
           }
           // RIM (batidas 2 e 4 no drop; 4 na secção A)
           if ((sec === 'A' && s % 16 === 12) || (sec === 'drop' && s % 8 === 4)) rim(lt, sec === 'drop' ? 0.9 : 0.7);
@@ -231,7 +231,7 @@
           const root = CH[ch].bass;
           if (b0 === 50) { if (sb === 0) { const k = s / 4; logDrum(lt, [42, 45, 47, 49][k], [0.62, 0.58, 0.58, 0.62][k], 0.34, 1.35); } } // plano 15: um por corte
           else if (b0 === 58 && s >= 8) { const FILL = { 8: [40, 0.45], 10: [42, 0.55], 11: [45, 0.6], 12: [45, 0.68], 13: [47, 0.75], 14: [49, 0.82], 15: [52, 0.9] }; if (FILL[s]) logDrum(lt, FILL[s][0], FILL[s][1], 0.15, 1.25); }
-          else if ((sec === 'A' && beat > 6) || sec === 'drop') { const p = LD[s % 16]; if (p) logDrum(lt + sw, root + p[0], p[1] * vary(lt, 4, 0.06) * (sec === 'A' ? 0.85 : 1), p[2]); }
+          else if ((sec === 'A' && beat > 6) || sec === 'drop') { const p = LD[s % 16]; if (p) logDrum(lt + sw, root + p[0], p[1] * vary(lt, 4, 0.06) * (sec === "A" ? 0.85 : 1) * (beat === 46 ? 0.6 : 1), p[2]); }
           // KEYS
           if (sec === 'intro' || sec === 'A') { const k = KA[s % 16] || (bi % 2 && s % 16 === 13 ? [0.45, 3] : null); if (k) keysChord(lt + sw, ch, k[1] * S16 - 0.02, k[0] * (sec === 'intro' ? 1.05 : 0.9)); }
           else if (sec === 'break') { if (s % 2 === 0) { const ks = CH[ch].keys, i = (s / 2) % 4; rhodes(lt, ks[i] + (s >= 8 ? 12 : 0), 0.5, 0.5 * vary(lt, 5, 0.08), (i - 1.5) * 0.3); } }
@@ -241,11 +241,11 @@
         }
       });
       // entrada do log drum no f84 (b6): nota com glide largo
-      logDrum(B(6), CH[chordAt(6)].bass, 0.8, 0.45, 1.9);
+      logDrum(B(6), CH[chordAt(6)].bass, 0.6, 0.45, 1.9);
       // downbeat f0: bombo afinado em Lá1 + prato suave (passa pelo filtro da intro)
       kick(0, 0.9, 55, 0.5); crash(0, 0.7, musicIn);
       // drop f644: prato suave (fora do filtro)
-      crash(B(46), 0.8, musicNF);
+      crash(B(46), 0.5, musicNF);
       // swell para o breakdown (cartão encolhe f497–503) e para o loop (anacruse f840–867)
       reverseCym(F(490), B(36), 0.10, musicNF);
       reverseCym(B(60), DUR, 0.16, musicNF);
@@ -356,7 +356,9 @@
       const n = noise(lt, d, WN), b1 = BQ('bandpass', 596, 9), b2 = BQ('bandpass', 1400, 3); n.connect(b1); n.connect(b2); b1.connect(G(0.12, tr)); b2.connect(G(0.025, tr));
     }
     const FX = { selo, texto, brilhoQuente, lacre, papel, virar, pop, linha, enviar, sopro, toqueDoSol, tinido, fumo, contas, raspar };
-    const scheduleSfx = () => SFX.forEach(([f, name, o]) => FX[name](F(f), o));
+    // nível por tipo de cue (dB, afinado por medição de loudness momentânea música vs SFX)
+    const LEV = { selo: 3, texto: 4, brilhoQuente: 6, lacre: 4, papel: 4, virar: 5, pop: 6, linha: -1, enviar: 1, sopro: 1, toqueDoSol: 0, tinido: 5, fumo: 6, contas: 12, raspar: -3 };
+    const scheduleSfx = () => SFX.forEach(([f, name, o]) => { const k = db(LEV[name] || 0); sfx = G(k, sfxRoot); sRevIn = G(k, sRevRoot); FX[name](F(f), o); });
 
     for (let k = 0; k < cycles; k++) { O = k * DUR; scheduleMusic(); scheduleSfx(); }
     return { DUR };
