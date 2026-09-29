@@ -70,12 +70,14 @@
     { let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0; for (let i = 0; i < pd.length; i++) { const w = prng() * 2 - 1; b0 = .99886 * b0 + w * .0555179; b1 = .99332 * b1 + w * .0750759; b2 = .969 * b2 + w * .153852; b3 = .8665 * b3 + w * .3104856; b4 = .55 * b4 + w * .5329522; b5 = -.7616 * b5 - w * .016898; pd[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * .5362) * .11; b6 = w * .115926; } }
     const mkRev = (secs, decay, pre = 0) => { const r = ctx.createConvolver(); const ir = ctx.createBuffer(2, Math.ceil(sr * secs), sr); for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); const p = Math.floor(pre * sr); for (let i = p; i < d.length; i++) d[i] = (prng() * 2 - 1) * Math.pow(1 - i / d.length, decay); } r.buffer = ir; return r; };
 
-    /* master: HPF 28 Hz → compressor suave → tanh suave */
-    const master = ctx.createGain(); master.gain.value = 0.9;
+    /* master: HPF 28 Hz → compressor suave → limitador → tanh suave */
+    const master = ctx.createGain(); master.gain.value = 0.72;
     const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 28; hp.Q.value = 0.7;
-    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 8; comp.ratio.value = 3; comp.attack.value = 0.006; comp.release.value = 0.18;
-    const clip = ctx.createWaveShaper(); { const cv = new Float32Array(2048); for (let i = 0; i < 2048; i++) { const x = i / 1024 - 1; cv[i] = Math.tanh(1.2 * x) / Math.tanh(1.2); } clip.curve = cv; }
-    master.connect(hp); hp.connect(comp); comp.connect(clip); clip.connect(dest);
+    // cola (compressor lento, suave) → limitador de picos (ataque 1 ms; o Chromium tem 6 ms de look-ahead)
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -20; comp.knee.value = 10; comp.ratio.value = 3; comp.attack.value = 0.012; comp.release.value = 0.22;
+    const lim = ctx.createDynamicsCompressor(); lim.threshold.value = -9; lim.knee.value = 2; lim.ratio.value = 20; lim.attack.value = 0.001; lim.release.value = 0.09;
+    const clip = ctx.createWaveShaper(); { const cv = new Float32Array(2049); for (let i = 0; i < 2049; i++) { const x = i / 1024 - 1; cv[i] = Math.tanh(1.2 * x) / Math.tanh(1.2); } clip.curve = cv; }
+    master.connect(hp); hp.connect(comp); comp.connect(lim); lim.connect(clip); clip.connect(dest);
 
     /* barramentos */
     const duck = ctx.createGain(); duck.connect(master);
@@ -88,6 +90,7 @@
     const sfx = ctx.createGain(); sfx.gain.value = 0.5; sfx.connect(master);
     const roomS = mkRev(0.6, 4, 0.006), roomSG = ctx.createGain(); roomSG.gain.value = 0.32; roomS.connect(roomSG); roomSG.connect(master);
     const revS = mkRev(2.6, 3, 0.015), revSG = ctx.createGain(); revSG.gain.value = 0.34; revS.connect(revSG); revSG.connect(master);
+    const revL = mkRev(2.4, 2.6, 0.018), revLG = ctx.createGain(); revLG.gain.value = 0.42; revL.connect(revLG); revLG.connect(master); // cauda 2,4 s do Toque ORA
     const send = (node, to, g) => { const s = ctx.createGain(); s.gain.value = g; node.connect(s); s.connect(to); };
 
     /* ducking −6 dB sob a voz */
@@ -104,17 +107,20 @@
     /* ---------- primitivas ---------- */
     const panner = (p0, p1, t, dur) => { const p = ctx.createStereoPanner(); p.pan.setValueAtTime(p0, at(t)); if (p1 !== p0) p.pan.linearRampToValueAtTime(p1, at(t + dur)); return p; };
     // oscilador com envelope (ataque ~5 ms, queda exponencial)
+    const q = t => Math.round(t * sr) / sr; // tempos na grelha de amostras (evita picos de 1 amostra nas rampas exponenciais)
     const tone = (t, type, f0, f1, dur, g, out, atk = 0.005, pan = 0) => {
+      t = q(t); atk = Math.max(0.002, atk); dur = q(Math.max(dur, atk + 0.012));
       const o = ctx.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, at(t)); if (f1 !== f0) o.frequency.exponentialRampToValueAtTime(f1, at(t + dur));
       const e = ctx.createGain(); e.gain.setValueAtTime(0.0001, at(t)); e.gain.exponentialRampToValueAtTime(g, at(t + atk)); e.gain.exponentialRampToValueAtTime(0.0001, at(t + dur));
       const p = ctx.createStereoPanner(); p.pan.value = pan;
       o.connect(e); e.connect(p); p.connect(out); o.start(at(t)); o.stop(at(t + dur + 0.05)); return p;
     };
     // ruído filtrado com envelope e pan em movimento
-    const noise = (t, dur, type, f0, f1, g, out, q = 1, pan0 = 0, pan1 = pan0, shape = 0.5, pink = false) => {
+    const noise = (t, dur, type, f0, f1, g, out, Q = 1, pan0 = 0, pan1 = pan0, shape = 0.5, pink = false) => {
+      t = q(t); dur = q(Math.max(dur, 0.016));
       const s = ctx.createBufferSource(); s.buffer = pink ? pb : nb; s.loop = true;
-      const f = ctx.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, at(t)); f.frequency.exponentialRampToValueAtTime(f1, at(t + dur));
-      const e = ctx.createGain(); e.gain.setValueAtTime(0.0001, at(t)); e.gain.exponentialRampToValueAtTime(g, at(t + Math.max(0.004, dur * shape))); e.gain.exponentialRampToValueAtTime(0.0001, at(t + dur));
+      const f = ctx.createBiquadFilter(); f.type = type; f.Q.value = Q; f.frequency.setValueAtTime(f0, at(t)); f.frequency.exponentialRampToValueAtTime(f1, at(t + dur));
+      const e = ctx.createGain(); e.gain.setValueAtTime(0.0001, at(t)); e.gain.exponentialRampToValueAtTime(g, at(t + q(Math.max(0.004, dur * shape)))); e.gain.exponentialRampToValueAtTime(0.0001, at(t + dur));
       const p = panner(pan0, pan1, t, dur);
       s.connect(f); f.connect(e); e.connect(p); p.connect(out); s.start(at(t), rnd(t, 9) * 1.5); s.stop(at(t + dur + 0.05)); return p;
     };
@@ -131,13 +137,13 @@
     const X = {
       air: (t, d, f0, f1, g, p0 = -0.6, p1 = 0.6, q = 0.9) => { if (on(t)) send(noise(t, d, 'bandpass', f0, f1, g, sfx, q, p0, p1, 0.5, true), roomS, 0.4); },
       whoosh: (t, d, up, g, p0 = -0.8, p1 = 0.8) => { if (on(t)) send(noise(t, d, 'bandpass', up ? 350 : 3800, up ? 3800 : 350, g, sfx, 1.2, p0, p1, 0.55, true), roomS, 0.5); },
-      lowAir: (t, d, g) => { if (!on(t)) return; noise(t, d, 'lowpass', 900, 90, g, sfx, 0.8, -0.3, 0.3, 0.12, true); tone(t, 'sine', 90, 38, d, g * 0.5, sfx, 0.01); },
+      lowAir: (t, d, g) => { if (!on(t)) return; noise(t, d, 'lowpass', 900, 120, g * 0.45, sfx, 0.7, -0.3, 0.3, 0.12, true); tone(t, 'sine', 90, 38, d, g * 0.4, sfx, 0.01); },
       tick: (t, f = 2400, g = 0.12, pan = 0) => { if (!on(t)) return; const v = vary(t, 1); glass(t, f * v, g, 0.05, sfx, pan, 0.003); noise(t, 0.012, 'highpass', 5000, 7000, g * 0.5, sfx, 0.7, pan, pan, 0.2); },
-      click: (t, g = 0.2, pan = 0, detune = 0.03) => { if (!on(t)) return; const v = vary(t, 2, detune); noise(t, 0.014, 'highpass', 3200 * v, 5200 * v, g, sfx, 0.8, pan, pan, 0.2); send(tone(t, 'sine', 2300 * v, 1750 * v, 0.02, g * 0.5, sfx, 0.002, pan), roomS, 0.6); },
+      click: (t, g = 0.2, pan = 0, detune = 0.03) => { if (!on(t)) return; const v = vary(t, 2, detune); noise(t, 0.016, 'highpass', 3200 * v, 5200 * v, g * 0.45, sfx, 0.8, pan, pan, 0.2); send(tone(t, 'sine', 2300 * v, 1750 * v, 0.02, g * 0.5, sfx, 0.002, pan), roomS, 0.6); },
       pop: (t, f = 620, g = 0.3, pan = 0) => { if (!on(t)) return; const v = vary(t, 3); send(tone(t, 'sine', f * 1.7 * v, f * v, 0.09, g, sfx, 0.005, pan), roomS, 0.7); tone(t, 'sine', f * 3.4 * v, f * 2 * v, 0.035, g * 0.2, sfx, 0.003, pan); },
       tap: (t, f = 1760, g = 0.18, pan = 0) => { if (!on(t)) return; const v = vary(t, 4); send(glass(t, f * v, g, 0.22, sfx, pan), roomS, 0.8); noise(t, 0.01, 'bandpass', 3000, 3500, g * 0.6, sfx, 2, pan, pan, 0.2); },
       note: (t, f, g = 0.18, dur = 0.8, pan = 0, tail = revS) => { if (!on(t)) return; const v = vary(t, 5, 0.006); send(glass(t, f * v, g, dur, sfx, pan), tail, 0.9); },
-      tink: (t) => { if (!on(t)) return; send(glass(t, 2637.02, 0.3, 0.9, sfx, 0), revS, 1); send(glass(t + 0.004, 3951.07, 0.08, 0.5, sfx, 0.1), revS, 1); tone(t, 'sine', 72, 40, 0.8, 0.35, sfx, 0.008); },
+      tink: (t) => { if (!on(t)) return; send(glass(t, 2637.02, 0.3, 0.9, sfx, 0), revS, 1); send(glass(t + 0.004, 3951.07, 0.08, 0.5, sfx, 0.1), revS, 1); tone(t, 'sine', 72, 40, 0.8, 0.2, sfx, 0.008); },
       sub: (t, g = 0.55, d = 1.4) => { if (on(t)) tone(t, 'sine', 68, 32, d, g, sfx, 0.012); },
       scroll: (t, d, g = 0.08) => { if (!on(t)) return; noise(t, d, 'bandpass', 900, 1600, g, sfx, 1.4, 0.2, -0.2, 0.3, true); for (let k = 0, u = t + 0.05; u < t + d - 0.1; k++, u += 0.11 + k * 0.012) X.tick(u, 3200, 0.03, 0.2); },
       swoosh: (t, d, g = 0.14) => { if (!on(t)) return; const p = noise(t, d, 'bandpass', 1200, 4200, g, sfx, 3, -0.7, 0.7, 0.6, true); p.pan.setValueAtTime(-0.7, at(t)); p.pan.linearRampToValueAtTime(0.7, at(t + d * 0.5)); p.pan.linearRampToValueAtTime(-0.4, at(t + d)); send(p, roomS, 0.6); },
@@ -147,13 +153,21 @@
       riser: (t, d, g = 0.1) => { if (!on(t)) return; send(noise(t, d, 'bandpass', 380, 5200, g, sfx, 1.6, -0.3, 0.3, 0.96, true), revS, 0.4); },
       hit: (t) => {
         if (!on(t)) return;
-        tone(t, 'sine', 130, 34, 1.5, 0.95, sfx, 0.006);                                   // sub 130 → 34 Hz
+        tone(t, 'sine', 130, 34, 1.5, 0.75, sfx, 0.006);                                   // sub 130 → 34 Hz
         tone(t, 'triangle', 260, 70, 0.14, 0.22, sfx, 0.003);                              // corpo
         send(noise(t, 2.0, 'highpass', 3500, 8000, 0.12, sfx, 0.7, -0.5, 0.5, 0.05), revS, 1); // ar agudo
         [329.63, 415.30, 493.88, 622.25, 739.99].forEach((f, i) => send(glass(t + i * 0.012, f, 0.07, 2.2, sfx, (i - 2) * 0.25), revS, 0.9)); // Emaj9 em vidro
-        // toque ORA: "O" Mi5 → "RA" Si5 meia batida depois (quinta ascendente = positivo)
-        send(glass(t, 659.25, 0.2, 1.6, sfx, -0.1), revS, 1); tone(t, 'triangle', 659.25, 659.25, 0.5, 0.02, sfx);
-        send(glass(t + 0.24, 987.77, 0.2, 1.9, sfx, 0.1), revS, 1); tone(t + 0.24, 'triangle', 987.77, 987.77, 0.5, 0.02, sfx);
+        X.toqueORA(t, 1);
+      },
+      // Toque ORA (som-assinatura aprovado, brand.json → som): "O" Mi5 (seno + 10 % triângulo) →
+      // "RA" Si5 meia batida depois (0,24 s) → cauda de reverb 2,4 s. O sub 130 → 34 Hz e o sopro vêm do hit.
+      toqueORA: (t, g = 1) => {
+        if (!on(t)) return;
+        [[0, 659.25, 1.5, -0.1], [BT / 2, 987.77, 1.9, 0.1]].forEach(([d, f, len, pan]) => {
+          send(tone(t + d, 'sine', f, f, len, 0.22 * g, sfx, 0.005, pan), revL, 1);
+          send(tone(t + d, 'triangle', f, f, len, 0.022 * g, sfx, 0.005, pan), revL, 1);
+          tone(t + d, 'sine', f * 2, f * 2, 0.25, 0.03 * g, sfx, 0.005, pan);        // harmónico curto (vidro)
+        });
       },
     };
 
@@ -171,8 +185,8 @@
       if (!on(t)) return;
       noise(t, 0.008, 'highpass', 4500, 8000, g * 0.16, drums, 0.7, 0, 0, 0.15);
       tone(t, 'triangle', 240, 95, 0.045, g * 0.22, drums, 0.002);
-      tone(t, 'sine', 155, 50, 0.3, g, drums, 0.003);
-      tone(t + 0.004, 'sine', 50, 44, 0.42, g * 0.35, drums, 0.012);
+      tone(t, 'sine', 155, 50, 0.3, g * 0.66, drums, 0.004);
+      tone(t + 0.004, 'sine', 50, 44, 0.42, g * 0.28, drums, 0.012);
       pump(t);
     };
     const snap = (t, g = 0.22) => { if (!on(t)) return; const p = noise(t, 0.13, 'bandpass', 2100, 1500, g, drums, 1.1, 0, 0, 0.06); send(p, roomM, 1); noise(t, 0.05, 'highpass', 5500, 7000, g * 0.35, drums, 0.7, 0.1, 0.1, 0.1); tone(t, 'sine', 200, 150, 0.06, g * 0.35, drums, 0.003); };
@@ -232,9 +246,9 @@
 
     // compasso de abertura (c1) e de fecho (c30) são idênticos → loop perfeito
     const loopBar = (t0, fin, fout) => {
-      air(t0, BAR, 0.1, 900, 2400, -0.5, 0.5, fin, fout);
-      pad(t0, BAR, CH.E.pad, 520, 760, 0.0075, fin, fout);
-      shimmer(t0, t0 + BAR, 9, 0.024, 1);
+      air(t0, BAR, 0.24, 900, 2400, -0.5, 0.5, fin, fout);
+      pad(t0, BAR, CH.E.pad, 560, 820, 0.017, fin, fout);
+      shimmer(t0, t0 + BAR, 9, 0.055, 1);
     };
 
     for (let i = 0; i < 30; i++) {
@@ -245,12 +259,12 @@
 
       if (bar <= 4) { // intro: ar + shimmer, pad filtrado a abrir
         const cut = [0, 520, 760, 700, 820][bar];
-        air(t0 - 0.04, BAR + 0.08, bar === 2 ? 0.11 : 0.08, bar === 2 ? 1100 : 800, bar === 2 ? 3200 : 2000, bar % 2 ? 0.5 : -0.5, bar % 2 ? -0.5 : 0.5);
-        pad(t0 - 0.04, BAR + 0.08, c.pad, cut, bar === 4 ? 2400 : cut * 1.4, bar === 4 ? 0.0085 : 0.0075);
-        if (bar === 2) shimmer(t0, t0 + 1.44, 16, 0.026, 2, 1);           // partículas convergem → tink em 3,36
-        if (bar === 2) shimmer(t0 + 1.5, t0 + BAR, 5, 0.014, 3);
-        if (bar === 3) shimmer(t0, t0 + BAR, 5, 0.012, 4);
-        if (bar === 4) { shimmer(t0, t0 + BAR, 7, 0.014, 5); hat(beats[2] + BT * 0.5, 0.02); hat(beats[3], 0.028); hat(beats[3] + BT * 0.25 + 0.022, 0.032); hat(beats[3] + BT * 0.5, 0.036); hat(beats[3] + BT * 0.75 + 0.022, 0.04); }
+        air(t0 - 0.04, BAR + 0.08, bar === 2 ? 0.24 : 0.2, bar === 2 ? 1100 : 800, bar === 2 ? 3200 : 2000, bar % 2 ? 0.5 : -0.5, bar % 2 ? -0.5 : 0.5);
+        pad(t0 - 0.04, BAR + 0.08, c.pad, cut, bar === 4 ? 2400 : cut * 1.4, bar === 4 ? 0.019 : 0.017);
+        if (bar === 2) shimmer(t0, t0 + 1.44, 16, 0.045, 2, 1);           // partículas convergem → tink em 3,36
+        if (bar === 2) shimmer(t0 + 1.5, t0 + BAR, 5, 0.025, 3);
+        if (bar === 3) shimmer(t0, t0 + BAR, 5, 0.022, 4);
+        if (bar === 4) { shimmer(t0, t0 + BAR, 7, 0.025, 5); hat(beats[2] + BT * 0.5, 0.02); hat(beats[3], 0.028); hat(beats[3] + BT * 0.25 + 0.022, 0.032); hat(beats[3] + BT * 0.5, 0.036); hat(beats[3] + BT * 0.75 + 0.022, 0.04); }
         continue;
       }
 
@@ -259,10 +273,10 @@
 
       if (breakdown) { // sem percussão; pad a abrir; baixo sustentado; sinos esparsos
         const k = bar - 21; const c0 = 700 * Math.pow(1.45, k), c1 = c0 * 1.45;
-        pad(t0 - 0.04, BAR + 0.08, c.pad, c0, c1, 0.0105);
-        if (on(t0)) { const e = tone(t0, 'sine', c.bass, c.bass, BAR + 0.05, 0.12, music, 0.25); }
-        [0, 1, 2, 3].forEach(b => { if (b % 2 === 0 || bar >= 23) pluck(beats[b] + (b % 2 ? 0.02 : 0), c.arp[(b + k) % 4] * (b === 3 ? 2 : 1), 0.028, (b % 2 ? 0.4 : -0.4), 0.9); });
-        shimmer(t0, t0 + BAR, 3 + k, 0.01, 20 + bar);
+        pad(t0 - 0.04, BAR + 0.08, c.pad, c0, c1, 0.019);
+        if (on(t0)) { const e = tone(t0, 'sine', c.bass, c.bass, BAR + 0.05, 0.16, music, 0.25); }
+        [0, 1, 2, 3].forEach(b => { if (b % 2 === 0 || bar >= 23) pluck(beats[b] + (b % 2 ? 0.02 : 0), c.arp[(b + k) % 4] * (b === 3 ? 2 : 1), 0.045, (b % 2 ? 0.4 : -0.4), 0.9); });
+        shimmer(t0, t0 + BAR, 3 + k, 0.022, 20 + bar);
         continue;
       }
       if (pre) { // c25: reentrada com kick nas batidas 1–3, vazio na 4 (prepara o hit)
@@ -359,7 +373,7 @@
     X.reverse(30.95, 1.25, 0.1);                               // whoosh invertido: a barra encolhe
     X.note(32.24, 1318.51, 0.1, 0.6, 0.2, roomS);              // a medida acende a amarelo
     // c18 · −62 %
-    X.sub(32.64, 0.45, 1.5); X.air(32.64, 1.6, 500, 1500, 0.05, -0.3, 0.3);
+    X.sub(32.64, 0.3, 1.5); X.air(32.64, 1.6, 500, 1500, 0.05, -0.3, 0.3);
     // c19 · conversão
     X.air(34.56, 0.7, 500, 2200, 0.05, 0, 0);                  // barras sobem
     X.note(34.80, 987.77, 0.1, 0.4, -0.1, roomS); X.note(34.92, 1318.51, 0.13, 1.1, 0.1); // nota ascendente
@@ -376,12 +390,12 @@
     // c25–c26 · assinatura
     { if (on(46.08)) { X.pop(46.08, 520, 0.2, 0); } X.tap(46.36, 1100, 0.07, 0.1); X.tap(46.50, 1200, 0.04, 0.15); } // o "h" cai e ressalta
     X.air(46.30, 1.5, 900, 5000, 0.05, -0.8, 0.8);             // light sweep durante a rotação do "ORA"
-    X.air(47.70, 0.3, 500, 3000, 0.1, 0, 0);                   // sopro ascendente → íris
+    X.air(47.70, 0.3, 500, 3000, 0.12, 0, 0);                  // sopro ascendente 0,3 s → íris (Toque ORA)
     X.hit(48.00);                                              // HIT + toque ORA (Mi5 → Si5)
     // c27–c29 · CTA
     X.air(49.92, 1.2, 400, 1200, 0.04, 0, 0);                  // push-in
     X.pop(50.40, 600, 0.14, 0);                                // botão pill aparece
-    X.click(51.84, 0.18, 0, 0.01); X.tap(51.86, 1760, 0.08, 0); X.whoosh(51.9, 0.35, true, 0.04, -0.3, 0.3); // click de vidro + morph → URL
+    X.click(51.84, 0.18, 0, 0.01); X.toqueORA(51.86, 0.35); X.whoosh(51.9, 0.35, true, 0.04, -0.3, 0.3); // click de vidro + morph → URL
     // c30 · o "O" dissolve-se (o shimmer da música é igual ao de 0,0 s)
     X.whoosh(55.68, 0.7, false, 0.05, 0, 0);
   };
