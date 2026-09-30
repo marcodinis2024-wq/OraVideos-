@@ -628,7 +628,7 @@
     // c38 · faixa a 18° (2.ª e última) + o "cheiro" (linha ondulante) sai do telemóvel
     X.stripe(73.6, 0.55, 0.14);
     if (on(74.3)) { const p = noise(74.3, 1.6, 'bandpass', 700, 1500, 0.05, sfx, 0.9, 0.5, -0.5, 0.5, true); p.pan.setValueAtTime(0.5, at(74.3)); for (let k = 1; k <= 4; k++) p.pan.linearRampToValueAtTime(k % 2 ? -0.5 : 0.5, at(74.3 + k * 0.4)); send(p, roomS, 0.5); } // ar ondulante
-    X.swipe(75.2, 0.05, -0.2, 0.3, 0.2);                                        // as cabeças viram
+    X.swipe(75.2, 0.09, -0.2, 0.3, 0.2);                                        // as cabeças viram
     // c39 · as pessoas escrevem e entram pela porta em pill
     X.swipe(76.0, 0.12, -0.5, 0.5, 0.25); X.typing(76.3, 5, 0.08, 0.04, 0); X.click(76.9, 0.2, 0.2);
     // c40 · split 12.000 × 5.000; o cheiro desaparece, a pesquisa esvazia; riser 78–80
@@ -639,7 +639,7 @@
     // c42 · 945 €: o único cha-ching completo
     X.chaChing(82.0, true, 0.09);
     // c43 · o "0" vira o "O" da ORA; íris para a sala navy; o chip sai
-    X.air(84.0, 0.6, 400, 2600, 0.08, 0, 0); X.air(84.6, 0.6, 2000, 600, 0.04, -0.3, 0.3); X.swipe(85.3, 0.05, 0.5, 0.9, 0.16);
+    X.air(84.0, 0.6, 400, 2600, 0.14, 0, 0); X.air(84.6, 0.6, 2000, 600, 0.04, -0.3, 0.3); X.swipe(85.3, 0.05, 0.5, 0.9, 0.16);
     // c44 · painel com 9 métricas em onda → "Está na hORA"; riser; sopro ascendente 0,3 s (íris do Toque)
     for (let k = 0; k < 9; k++) X.tick(86.1 + k * 0.1, 1975.53 * Math.pow(1.02, 4 - Math.abs(k - 4)), 0.03, -0.64 + k * 0.16);
     X.riser(86.4, 1.3, 0.06, false);
@@ -651,6 +651,6 @@
     X.click(90.1, 0.18, 0, 0.01); X.whoosh(90.15, 0.35, true, 0.04, -0.3, 0.3); X.air(90.4, 1.2, 400, 1100, 0.03, 0, 0);
     // c47 · "META OU GOOGLE?"; a faixa a 18° volta a 93,5 s; ar invertido → loop (0,00 = impacto)
     X.swipe(92.0, 0.05, 0, 0, 0.16);
-    X.revAir(93.2, 0.8, 0.1, 0, 0); X.whoosh(93.5, 0.45, true, 0.05, -0.8, 0.8);
+    X.revAir(93.2, 0.8, 0.14, 0, 0); X.whoosh(93.5, 0.45, true, 0.08, -0.8, 0.8);
   };
 })();

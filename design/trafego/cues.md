@@ -126,7 +126,7 @@
 | 72,55–73,40 | O 3,5× parte-se | Vidro a estalar + 14 estilhaços a cair (pitch a descer, pan espalhado) | −7 |
 | 73,60–74,15 | **Faixa a 18° (2.ª e última)** | Whoosh da faixa, pan L→R | −7 |
 | 74,30–75,90 | O "cheiro" ondula para fora do telemóvel | Ar ondulante (pan +0,5 ↔ −0,5, 4 ondas) | −16 |
-| 75,20 | As pessoas viram a cabeça | Swipe leve | −16 |
+| 75,20 | As pessoas viram a cabeça | Swipe leve | −13 |
 | 76,00 | As pessoas vão à pesquisa | Swipe, pan L→R | −10 |
 | 76,30–76,70 | Escrevem | 5 teclas | −19 |
 | 76,90 | Entram pela porta em pill | Click | −9 |
@@ -135,7 +135,7 @@
 | **80,00** | Os 2 funis fundem-se num só | **Impacto grave #2** + crash | +1 |
 | 80,20–80,90 | Orbit −20 → 0 | Whoosh ascendente, pan +0,6 → −0,1 | −13 |
 | **82,00** | 945 € a amarelo | **Cha-ching completo, o único**: roquete + gaveta + "cha" + chuva de 9 moedas + Mi7/Sol#7 com cauda longa | −3 |
-| 84,00–84,60 | O "0" de 3,15 vira o "O" da ORA | Sopro ascendente 400 → 2600 Hz | −9 |
+| 84,00–84,60 | O "0" de 3,15 vira o "O" da ORA | Sopro ascendente 400 → 2600 Hz | −6 |
 | 84,60–85,20 | Íris para a sala navy | Ar descendente | −16 |
 | 85,30 | O chip sai | Swipe para a direita | −16 |
 | 86,10–86,90 | 9 métricas em onda | 9 tiques: pitch sobe e desce, pan L→R | −18 |
@@ -147,5 +147,5 @@
 | 90,15–90,50 | Morph | Whoosh curto | −17 |
 | 90,40–91,60 | Push-in 1 → 1,04 | Ar grave (cauda) | −20 |
 | 92,00 | "META OU GOOGLE?" volta | Swipe | −16 |
-| 93,20–94,00 | → loop | Ar invertido (cresce até ao impacto de 0,00) | −12 |
-| 93,50–93,95 | A faixa a 18° volta a partir o ecrã | Whoosh, pan −0,8 → +0,8 | −15 |
+| 93,20–94,00 | → loop | Ar invertido (cresce até ao impacto de 0,00) | −9 |
+| 93,50–93,95 | A faixa a 18° volta a partir o ecrã | Whoosh, pan −0,8 → +0,8 | −11 |
