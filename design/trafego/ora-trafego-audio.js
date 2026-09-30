@@ -112,7 +112,7 @@
     const mkRev = (secs, decay, pre = 0) => { const r = ctx.createConvolver(); const ir = ctx.createBuffer(2, Math.ceil(sr * secs), sr); for (let c = 0; c < 2; c++) { const d = ir.getChannelData(c); const p = Math.floor(pre * sr); for (let i = p; i < d.length; i++) d[i] = (prng() * 2 - 1) * Math.pow(1 - i / d.length, decay); } r.buffer = ir; return r; };
 
     /* master: HPF 28 Hz → compressor suave → limitador → tanh suave */
-    const master = ctx.createGain(); master.gain.value = 0.72;
+    const master = ctx.createGain(); master.gain.value = 0.9;
     const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 28; hp.Q.value = 0.7;
     const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -20; comp.knee.value = 10; comp.ratio.value = 3; comp.attack.value = 0.012; comp.release.value = 0.22;
     const lim = ctx.createDynamicsCompressor(); lim.threshold.value = -9; lim.knee.value = 2; lim.ratio.value = 20; lim.attack.value = 0.001; lim.release.value = 0.09;
@@ -125,7 +125,8 @@
     const duck = ctx.createGain(); duck.connect(master);
     const mlpf = ctx.createBiquadFilter(); mlpf.type = 'lowpass'; mlpf.Q.value = 0.9; mlpf.connect(duck);
     const gate = ctx.createGain(); gate.connect(mlpf);
-    const music = ctx.createGain(); music.gain.value = 0.5; music.connect(gate);
+    const lvl = ctx.createGain(); lvl.connect(gate);                          // nível por secção (intro/cauda filtradas +4 dB)
+    const music = ctx.createGain(); music.gain.value = 0.5; music.connect(lvl);
     const drums = ctx.createGain(); drums.gain.value = 1; drums.connect(music);
     const pumpB = ctx.createGain(); pumpB.connect(music);  // sidechain do baixo
     const pumpP = ctx.createGain(); pumpP.connect(music);  // sidechain do pad e das teclas (mais leve)
@@ -152,6 +153,7 @@
     // filtro global da música: intro filtrada · drop aberto · tape-stop fecha · glitch fecha · half-time reabre · cauda = intro
     autom(mlpf.frequency, [[0, 650], [4, 650], [6, 1000], [7.88, 4200], [8, 20000, 's'], [24, 20000], [24.75, 280], [25.98, 280], [26, 20000, 's'],
       [72, 20000], [73.9, 360], [74, 700, 's'], [78, 2600], [79.9, 16000], [80, 20000, 's'], [89.55, 20000], [90, 650], [94, 650]]);
+    autom(lvl.gain, [[0, 1.6], [4, 1.6], [7.9, 1.15], [8, 1, 's'], [89.55, 1], [90, 1.6], [94, 1.6]]);
     autom(mlpf.Q, [[0, 0.9], [72, 0.9], [73.9, 5.5], [74, 0.9, 's'], [78, 0.9], [79.9, 2.5], [80, 0.9, 's'], [94, 0.9]]);
     // gate: stutter do glitch (2,50 s: 4 fotogramas; 72,0 s: fatias de fusa) — rampas de 2 ms para não estalar
     { const steps = [[2.5, 0.25], [2.567, 1]];
@@ -193,8 +195,8 @@
     const glass = (t, f, g, dur, out, pan = 0, atk = 0.005) => {
       const a = tone(t, 'sine', f, f, dur, g, out, atk, pan);
       tone(t, 'sine', f * 2, f * 2, dur * 0.35, g * 0.22, out, atk, pan);
-      tone(t, 'sine', f * 3.01, f * 3.01, dur * 0.12, g * 0.1, out, atk, pan);
-      tone(t, 'sine', f * 5.4, f * 5.4, 0.04, g * 0.06, out, 0.003, pan);
+      if (f * 3.01 < sr * 0.45) tone(t, 'sine', f * 3.01, f * 3.01, dur * 0.12, g * 0.1, out, atk, pan);
+      if (f * 5.4 < sr * 0.45) tone(t, 'sine', f * 5.4, f * 5.4, 0.04, g * 0.06, out, 0.003, pan);
       return a;
     };
     // bitcrusher (degraus) para o glitch
@@ -203,27 +205,27 @@
 
     /* ---------- SFX ---------- */
     const X = {
-      air: (t, d, f0, f1, g, p0 = -0.6, p1 = 0.6, Q = 0.9) => { if (on(t)) send(noise(t, d, 'bandpass', f0, f1, g, sfx, Q, p0, p1, 0.5, true), roomS, 0.4); },
+      air: (t, d, f0, f1, g, p0 = -0.6, p1 = 0.6, Q = 0.9) => { if (on(t)) send(noise(t, d, 'bandpass', f0, f1, g * 2.5, sfx, Q, p0, p1, 0.5, true), roomS, 0.4); },
       // whoosh: pan acompanha a direção do movimento (p0 → p1)
-      whoosh: (t, d, up, g, p0 = -0.8, p1 = 0.8) => { if (!on(t)) return; const v = vary(t, 14, 0.03); send(noise(t, d, 'bandpass', (up ? 350 : 3800) * v, (up ? 3800 : 350) * v, g, sfx, 1.2, p0, p1, 0.55, true), roomS, 0.5); },
+      whoosh: (t, d, up, g, p0 = -0.8, p1 = 0.8) => { if (!on(t)) return; const v = vary(t, 14, 0.03); send(noise(t, d, 'bandpass', (up ? 350 : 3800) * v, (up ? 3800 : 350) * v, g * 3, sfx, 1.2, p0, p1, 0.55, true), roomS, 0.5); },
       // whoosh da faixa amarela (brand.json): passa-banda 300 → 4000 Hz, pan L→R com a faixa + corpo grave
-      stripe: (t, d, g) => { if (!on(t)) return; send(noise(t, d, 'bandpass', 300, 4000, g, sfx, 1.1, -0.9, 0.9, 0.62, true), roomS, 0.6); noise(t + d * 0.3, d * 0.7, 'lowpass', 500, 140, g * 0.7, sfx, 0.7, -0.5, 0.5, 0.4, true); },
+      stripe: (t, d, g) => { if (!on(t)) return; g *= 2; send(noise(t, d, 'bandpass', 300, 4000, g, sfx, 1.1, -0.9, 0.9, 0.62, true), roomS, 0.6); noise(t + d * 0.3, d * 0.7, 'lowpass', 500, 140, g * 0.7, sfx, 0.7, -0.5, 0.5, 0.4, true); },
       // swipe: curto e agudo (dedo/cartão), mais seco que o whoosh
-      swipe: (t, g = 0.12, p0 = -0.5, p1 = 0.5, d = 0.22) => { if (!on(t)) return; const v = vary(t, 15); send(noise(t, d, 'bandpass', 1400 * v, 5200 * v, g, sfx, 1.8, p0, p1, 0.35), roomS, 0.4); noise(t + d * 0.5, 0.012, 'highpass', 6000, 8000, g * 0.3, sfx, 0.7, p1, p1, 0.2); },
-      reverse: (t, d, g = 0.2, p0 = 0.5, p1 = -0.3) => { if (on(t)) send(noise(t, d, 'bandpass', 3200, 380, g, sfx, 1.6, p0, p1, 0.92, true), roomS, 0.5); },
-      revAir: (t, d, g = 0.12, p0 = 0, p1 = 0) => { if (on(t)) send(noise(t, d, 'bandpass', 500, 3600, g, sfx, 1.1, p0, p1, 0.95, true), revS, 0.5); }, // "ar invertido" (cresce e corta)
-      tick: (t, f = 2400, g = 0.12, pan = 0) => { if (!on(t)) return; const v = vary(t, 1); glass(t, f * v, g, 0.05, sfx, pan, 0.003); noise(t, 0.012, 'highpass', 5000, 7000, g * 0.5, sfx, 0.7, pan, pan, 0.2); },
-      click: (t, g = 0.2, pan = 0, detune = 0.03) => { if (!on(t)) return; const v = vary(t, 2, detune); noise(t, 0.016, 'highpass', 3200 * v, 5200 * v, g * 0.45, sfx, 0.8, pan, pan, 0.2); send(tone(t, 'sine', 2300 * v, 1750 * v, 0.02, g * 0.5, sfx, 0.002, pan), roomS, 0.6); },
-      pop: (t, f = 620, g = 0.3, pan = 0) => { if (!on(t)) return; const v = vary(t, 3); send(tone(t, 'sine', f * 1.7 * v, f * v, 0.09, g, sfx, 0.005, pan), roomS, 0.7); tone(t, 'sine', f * 3.4 * v, f * 2 * v, 0.035, g * 0.2, sfx, 0.003, pan); },
+      swipe: (t, g = 0.12, p0 = -0.5, p1 = 0.5, d = 0.22) => { if (!on(t)) return; g *= 3; const v = vary(t, 15); send(noise(t, d, 'bandpass', 1400 * v, 5200 * v, g, sfx, 1.8, p0, p1, 0.35), roomS, 0.4); noise(t + d * 0.5, 0.012, 'highpass', 6000, 8000, g * 0.3, sfx, 0.7, p1, p1, 0.2); },
+      reverse: (t, d, g = 0.2, p0 = 0.5, p1 = -0.3) => { if (on(t)) send(noise(t, d, 'bandpass', 3200, 380, g * 2, sfx, 1.6, p0, p1, 0.92, true), roomS, 0.5); },
+      revAir: (t, d, g = 0.12, p0 = 0, p1 = 0) => { if (on(t)) send(noise(t, d, 'bandpass', 500, 3600, g * 2, sfx, 1.1, p0, p1, 0.95, true), revS, 0.5); }, // "ar invertido" (cresce e corta)
+      tick: (t, f = 2400, g = 0.12, pan = 0) => { if (!on(t)) return; g *= 2; const v = vary(t, 1); glass(t, f * v, g, 0.05, sfx, pan, 0.003); noise(t, 0.012, 'highpass', 5000, 7000, g * 0.5, sfx, 0.7, pan, pan, 0.2); },
+      click: (t, g = 0.2, pan = 0, detune = 0.03) => { if (!on(t)) return; g *= 1.8; const v = vary(t, 2, detune); noise(t, 0.016, 'highpass', 3200 * v, 5200 * v, g * 0.45, sfx, 0.8, pan, pan, 0.2); send(tone(t, 'sine', 2300 * v, 1750 * v, 0.02, g * 0.5, sfx, 0.002, pan), roomS, 0.6); },
+      pop: (t, f = 620, g = 0.3, pan = 0) => { if (!on(t)) return; g *= 1.5; const v = vary(t, 3); send(tone(t, 'sine', f * 1.7 * v, f * v, 0.09, g, sfx, 0.005, pan), roomS, 0.7); tone(t, 'sine', f * 3.4 * v, f * 2 * v, 0.035, g * 0.2, sfx, 0.003, pan); },
       tap: (t, f = 1760, g = 0.18, pan = 0) => { if (!on(t)) return; const v = vary(t, 4); send(glass(t, f * v, g, 0.22, sfx, pan), roomS, 0.8); noise(t, 0.01, 'bandpass', 3000, 3500, g * 0.6, sfx, 2, pan, pan, 0.2); },
       // nota/ding: afinada (só ±0,6 % para não desafinar)
       note: (t, f, g = 0.18, dur = 0.8, pan = 0, tail = revS) => { if (!on(t)) return; const v = vary(t, 5, 0.006); send(glass(t, f * v, g, dur, sfx, pan), tail, 0.9); },
       sub: (t, g = 0.3, d = 0.9) => { if (on(t)) tone(t, 'sine', 72, 38, d, g, sfx, 0.012); },
       breath: (t, d, g = 0.06, p0 = -0.2, p1 = 0.2) => { if (on(t)) noise(t, d, 'bandpass', 700, 1900, g, sfx, 0.7, p0, p1, 0.7, true); },
       // riser: ruído em banda a subir + seno a subir uma oitava e meia (Si2 → Mi4), corta seco no fim
-      riser: (t, d, g = 0.1, tonal = true) => { if (!on(t)) return; send(noise(t, d, 'bandpass', 380, 6200, g, sfx, 1.6, -0.3, 0.3, 0.96, true), revS, 0.4); if (tonal) { tone(t, 'sawtooth', 123.47, 329.63, d, g * 0.12, sfx, d * 0.9, -0.2); tone(t, 'sawtooth', 123.47 * 1.006, 329.63 * 1.006, d, g * 0.12, sfx, d * 0.9, 0.2); } },
+      riser: (t, d, g = 0.1, tonal = true) => { if (!on(t)) return; g *= 1.6; send(noise(t, d, 'bandpass', 380, 6200, g, sfx, 1.6, -0.3, 0.3, 0.96, true), revS, 0.4); if (tonal) { tone(t, 'sawtooth', 123.47, 329.63, d, g * 0.12, sfx, d * 0.9, -0.2); tone(t, 'sawtooth', 123.47 * 1.006, 329.63 * 1.006, d, g * 0.12, sfx, d * 0.9, 0.2); } },
       // teclado: tecla (clique agudo + "thock" grave + retorno da tecla), ±3 %
-      key: (t, g = 0.08, pan = 0) => { if (!on(t)) return; const v = vary(t, 6); noise(t, 0.009, 'bandpass', 4200 * v, 3600 * v, g, sfx, 1.5, pan, pan, 0.15); tone(t, 'triangle', 190 * v, 120 * v, 0.03, g * 0.55, sfx, 0.001, pan); noise(t + 0.035 + 0.01 * rnd(t, 7), 0.008, 'bandpass', 2600 * v, 2400 * v, g * 0.3, sfx, 1.5, pan, pan, 0.2); },
+      key: (t, g = 0.08, pan = 0) => { if (!on(t)) return; g *= 2.5; const v = vary(t, 6); noise(t, 0.009, 'bandpass', 4200 * v, 3600 * v, g, sfx, 1.5, pan, pan, 0.15); tone(t, 'triangle', 190 * v, 120 * v, 0.03, g * 0.55, sfx, 0.001, pan); noise(t + 0.035 + 0.01 * rnd(t, 7), 0.008, 'bandpass', 2600 * v, 2400 * v, g * 0.3, sfx, 1.5, pan, pan, 0.2); },
       typing: (t0, n, step, g = 0.07, pan = 0) => { for (let k = 0, u = t0; k < n; k++) { X.key(u, g * (0.8 + 0.4 * rnd(u, 8)), pan + (rnd(u, 10) - 0.5) * 0.2); u += step * (0.7 + 0.6 * rnd(u, 11)); } },
       // glitch digital: grãos quadrados/serra de 12–34 ms em alturas aleatórias (fixas por hash) → bitcrusher
       glitch: (t, d, g = 0.12) => {
@@ -441,7 +443,7 @@
         const t = t0;
         if (on(t)) {
           const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(5000, at(t)); lp.frequency.exponentialRampToValueAtTime(180, at(t + 0.75)); lp.connect(music);
-          [[c.bass, 'triangle', 0.14], [c.bass * 2, 'sine', 0.06], ...c.stab.map(f => [f, 'sawtooth', 0.012]), [659.25, 'square', 0.012], [150, 'sine', 0.25]].forEach(([f, ty, g], k) => {
+          [[c.bass, 'triangle', 0.14], [c.bass * 2, 'sine', 0.06], ...c.stab.map(f => [f, 'sawtooth', 0.012]), [659.25, 'square', 0.012], [150, 'sine', 0.16]].forEach(([f, ty, g], k) => {
             const o = ctx.createOscillator(); o.type = ty; o.frequency.setValueAtTime(f, at(t)); o.frequency.linearRampToValueAtTime(f * 0.04, at(t + 0.75));
             const e = ctx.createGain(); e.gain.setValueAtTime(0.0001, at(t)); e.gain.exponentialRampToValueAtTime(g, at(t + 0.006)); e.gain.setValueAtTime(g, at(t + 0.45)); e.gain.linearRampToValueAtTime(0.0001, at(t + 0.75));
             const p = ctx.createStereoPanner(); p.pan.value = k > 1 && k < 5 ? (k - 3) * 0.4 : 0; o.connect(e); e.connect(p); p.connect(lp); o.start(at(t)); o.stop(at(t + 0.8));
@@ -449,7 +451,7 @@
           noise(t, 0.75, 'bandpass', 1200, 90, 0.05, music, 1.2, 0, 0, 0.1);                        // "arrasto" da fita
         }
         // sala noite: drone escuro (Mi1 + Mi2) e ar grave, até a música voltar a 26,0
-        if (on(t0 + 0.7)) { tone(t0 + 0.7, 'sine', 41.2, 41.2, 1.28, 0.14, music, 0.4); tone(t0 + 0.7, 'triangle', 82.41, 82.41, 1.28, 0.03, music, 0.5); }
+        if (on(t0 + 0.7)) { tone(t0 + 0.7, 'sine', 41.2, 41.2, 1.28, 0.035, music, 0.4); tone(t0 + 0.7, 'triangle', 82.41, 82.41, 1.28, 0.018, music, 0.5); }
         air(t0 + 0.6, 1.4, 0.05, 250, 500, 0.3, -0.3, 0.4, 0.1);
         revCym(t0 + 1.5, 0.5, 0.05);
         continue;
@@ -461,7 +463,7 @@
         const dens = [2, 4, 8, 16][k], arp = c.stab.concat(c.stab.map(f => f * 2));
         for (let s2 = 0; s2 < dens; s2++) {
           const t = t0 + s2 * BAR / dens; if (bar === 24 && t >= t0 + 1.75) break;                 // vazio antes do drop 2
-          pluck(t + (s2 % 2 ? 0.012 : 0), arp[(s2 * 2 + k) % arp.length] * (k >= 2 ? 1 : 2) / (k >= 2 ? 1 : 1), 0.035 + 0.01 * k, s2 % 2 ? 0.4 : -0.4, k === 3 ? 0.25 : 0.7);
+          pluck(t + (s2 % 2 ? 0.012 : 0), arp[(s2 * 2 + k) % arp.length] * (k >= 2 ? 1 : 2), 0.035 + 0.01 * k, s2 % 2 ? 0.4 : -0.4, k === 3 ? 0.25 : 0.7);
         }
         air(t0, BAR, 0.06 + 0.02 * k, 800, 2400, -0.5, 0.5);
         if (bar === 24) revCym(t0 + 0.8, 0.95, 0.06);
@@ -514,7 +516,6 @@
         if (bar !== 25 && bar !== 37) hook(t0, cn, 'ep', bar >= 41 ? 1.1 : 1);
       }
       if (bar === 12) revCym(t0 + 1.0, 0.98, 0.04);                         // prepara o tape-stop
-      if (bar === 40 - 1) { /* half-time tratado acima */ }
     }
 
     /* ---------- SFX cues (ver design/trafego/cues.md) ---------- */
@@ -573,7 +574,7 @@
     X.air(29.0, 0.6, 1600, 600, 0.04, 0, 0); X.tick(29.25, 2960, 0.05, 0);
     // c16 · CPC: moedas de 0,50 € na ranhura
     X.whoosh(29.98, 0.3, false, 0.04, 0, 0);
-    [30.3, 30.7, 31.1, 31.5].forEach((t, i) => X.coin(t, 0.1, -0.15 + i * 0.1));
+    [30.3, 30.7, 31.1, 31.5].forEach((t, i) => X.coin(t, 0.07, -0.15 + i * 0.1));
     // c17 · funil 3D: entram 300 pontos (whoosh descendente), saem 12 caixas (12 pops)
     X.whoosh(32.0, 0.6, false, 0.08, 0, 0);
     X.pops(32.9, 12, 0.8, 520, 0.1, -0.5, 0.5, 1.015);
@@ -585,9 +586,9 @@
     X.counter(36.2, 0.8, 14, 2200, 0.028, 0, false); X.chaChing(37.0, false, 0.08);
     // c20 · ROAS 2,8: halo e push-in; 2 notas ascendentes
     X.air(38.0, 1.5, 400, 1200, 0.035, 0, 0);
-    X.note(38.10, 987.77, 0.1, 0.7, -0.15); X.note(38.35, 1318.51, 0.11, 1.2, 0.15);
+    X.note(38.10, 987.77, 0.08, 0.7, -0.15); X.note(38.35, 1318.51, 0.085, 1.2, 0.15);
     // c21–c22 · breakdown: balança de vidro; ding grave; linhas 2× e 2,8×
-    X.note(40.0, 329.63, 0.16, 2.6, 0); X.sub(40.0, 0.12, 1.2);                 // ding grave
+    X.note(40.0, 329.63, 0.11, 2.6, 0); X.sub(40.0, 0.05, 1.2);                 // ding grave
     X.air(40.4, 1.1, 500, 1100, 0.035, -0.4, 0.4);                              // a balança inclina
     X.tick(42.0, 1975.53, 0.04, -0.3); X.tick(42.6, 2349.32, 0.04, 0.3);       // linhas tracejadas 2× e 2,8×
     // c23–c24 · pixel: ponto de luz segue as encomendas; acendem pessoas parecidas; riser 46–48
@@ -611,11 +612,11 @@
     for (let k = 0; k < 4; k++) X.tick(58.1 + k * 0.13, 1318.51 * Math.pow(1.06, k), 0.04, -0.45);
     for (let k = 0; k < 8; k++) X.tick(58.75 + k * 0.11, 1318.51 * Math.pow(1.06, k), 0.04, 0.45);
     // c31 · Bolacha Azul sobe para o 1.º lugar com mola: ding + sub
-    X.whoosh(60.0, 0.3, true, 0.06, 0.3, 0.3); X.note(60.3, 1318.51, 0.12, 1.2, 0.2); X.note(60.305, 1975.53, 0.05, 0.9, 0.25); X.sub(60.3, 0.18, 0.8);
+    X.whoosh(60.0, 0.3, true, 0.06, 0.3, 0.3); X.note(60.3, 1318.51, 0.09, 1.2, 0.2); X.note(60.305, 1975.53, 0.04, 0.9, 0.25); X.sub(60.3, 0.07, 0.8);
     // c32 · CTR: 5.000 cartões a fugir em z; 250 acendem
     X.whoosh(62.0, 0.5, false, 0.07, 0, 0); X.counter(62.6, 0.8, 14, 2000, 0.03, -0.2);
     // c33 · CPC: moeda de 0,60 € na ranhura
-    X.swipe(64.0, 0.06, 0.3, -0.3, 0.16); X.coin(64.4, 0.12, 0);
+    X.swipe(64.0, 0.06, 0.3, -0.3, 0.16); X.coin(64.4, 0.08, 0);
     // c34 · o mesmo funil, mais largo: whoosh + 15 pops
     X.whoosh(66.0, 0.6, false, 0.08, 0, 0); X.pops(66.8, 15, 0.95, 520, 0.09, -0.6, 0.6, 1.012);
     // c35 · CPA: caixa roda, etiqueta 10 €
@@ -623,7 +624,7 @@
     // c36 · contador a amarelo 525 € → 3,5×; cha-ching discreto
     X.counter(70.1, 0.8, 14, 2200, 0.028, 0, false); X.chaChing(70.95, false, 0.08);
     // c37 · LOOP 2: o 3,5× cresce, dá glitch e parte-se (filtro da música a fechar)
-    X.riser(71.6, 0.4, 0.04, false); X.glitch(72.0, 0.5, 0.12); X.crack(72.55, 0.16, 14, 0.8);
+    X.riser(71.6, 0.4, 0.04, false); X.glitch(72.0, 0.5, 0.12); X.crack(72.55, 0.12, 14, 0.8);
     // c38 · faixa a 18° (2.ª e última) + o "cheiro" (linha ondulante) sai do telemóvel
     X.stripe(73.6, 0.55, 0.14);
     if (on(74.3)) { const p = noise(74.3, 1.6, 'bandpass', 700, 1500, 0.05, sfx, 0.9, 0.5, -0.5, 0.5, true); p.pan.setValueAtTime(0.5, at(74.3)); for (let k = 1; k <= 4; k++) p.pan.linearRampToValueAtTime(k % 2 ? -0.5 : 0.5, at(74.3 + k * 0.4)); send(p, roomS, 0.5); } // ar ondulante
@@ -636,7 +637,7 @@
     // c41 · os 2 funis fundem-se num só (orbit −20 → 0): impacto grave #2
     X.impactH(80.0, 0.85); X.whoosh(80.2, 0.7, true, 0.06, 0.6, -0.1);
     // c42 · 945 €: o único cha-ching completo
-    X.chaChing(82.0, true, 0.12);
+    X.chaChing(82.0, true, 0.09);
     // c43 · o "0" vira o "O" da ORA; íris para a sala navy; o chip sai
     X.air(84.0, 0.6, 400, 2600, 0.08, 0, 0); X.air(84.6, 0.6, 2000, 600, 0.04, -0.3, 0.3); X.swipe(85.3, 0.05, 0.5, 0.9, 0.16);
     // c44 · painel com 9 métricas em onda → "Está na hORA"; riser; sopro ascendente 0,3 s (íris do Toque)
